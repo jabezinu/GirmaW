@@ -26,8 +26,41 @@ export const LanguageProvider = ({ children }) => {
     localStorage.setItem('language', language);
   }, [language]);
 
+  const translations = {
+    am: {
+      // Navigation
+      brandName: "ጳዝዮን",
+      home: "መነሻ",
+      gemstones: "መአድኖች",
+      services: "አገልግሎት",
+      courses: "ትምህርቶች",
+      machines: "ሜሻዎች",
+      gemstoneTesting: "የማዕድን ምርመራ",
+      buyingSelling: "መአድን ግዥና ሽያጭ",
+      about: "ስለኛ",
+      contact: "አድራሻ",
+      languageButton: "English"
+    },
+    en: {
+      // Navigation
+      brandName: "Pazion",
+      home: "Home",
+      gemstones: "Gemstones",
+      services: "Services",
+      courses: "Courses",
+      machines: "Machines",
+      gemstoneTesting: "Gemstone Testing",
+      buyingSelling: "Buying and Selling Gemstones",
+      about: "About",
+      contact: "Contact",
+      languageButton: "አማርኛ"
+    }
+  };
+
+  const t = translations[language];
+
   return (
-    <LanguageContext.Provider value={{ language, toggleLanguage }}>
+    <LanguageContext.Provider value={{ language, toggleLanguage, translations: t }}>
       {children}
     </LanguageContext.Provider>
   );
