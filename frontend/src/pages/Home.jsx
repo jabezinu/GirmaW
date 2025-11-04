@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Menu, X, ChevronRight, Star, Award, Globe, Users, ShoppingBag, TestTube, Wrench, GraduationCap, MessageCircle, Phone, Mail, MapPin, Facebook, Instagram, Linkedin, Youtube } from 'lucide-react';
 
 export default function GemstonHomepage() {
@@ -48,12 +49,12 @@ export default function GemstonHomepage() {
   }, []);
 
   const services = [
-    { icon: ShoppingBag, title: "Buy Gemstones", desc: "Premium quality stones for retail & wholesale" },
-    { icon: Award, title: "Sell Your Gemstones", desc: "Fair prices, quick evaluation" },
-    { icon: TestTube, title: "Gemstone Testing", desc: "Professional authentication & grading" },
-    { icon: Wrench, title: "Equipment & Tools", desc: "Professional machinery for your business" },
-    { icon: GraduationCap, title: "Training Courses", desc: "Learn from industry experts" },
-    { icon: MessageCircle, title: "Consultation", desc: "Expert guidance for your business" }
+    { icon: ShoppingBag, title: "Buy Gemstones", desc: "Premium quality stones for retail & wholesale", link: "/services/buying-selling" },
+    { icon: Award, title: "Sell Your Gemstones", desc: "Fair prices, quick evaluation", link: "/services/buying-selling" },
+    { icon: TestTube, title: "Gemstone Testing", desc: "Professional authentication & grading", link: "/services/gemstone-testing" },
+    { icon: Wrench, title: "Equipment & Tools", desc: "Professional machinery for your business", link: "/services/machines" },
+    { icon: GraduationCap, title: "Training Courses", desc: "Learn from industry experts", link: "/services/courses" },
+    { icon: MessageCircle, title: "Consultation", desc: "Expert guidance for your business", link: "/contact" }
   ];
 
   const featuredGems = [
@@ -107,9 +108,11 @@ export default function GemstonHomepage() {
                 Buying, Selling, Testing & Training - Serving Local & International Markets Since 2009
               </p>
               <div className="flex flex-wrap gap-4">
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 shadow-xl">
-                  Browse Gemstones
-                </button>
+                <Link to="/gemstones">
+                  <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 shadow-xl">
+                    Browse Gemstones
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -138,17 +141,16 @@ export default function GemstonHomepage() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, idx) => (
-              <div
-                key={idx}
-                className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 cursor-pointer group"
-              >
-                <service.icon className="w-12 h-12 text-blue-600 mb-4 group-hover:scale-110 transition" />
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{service.title}</h3>
-                <p className="text-gray-600 mb-4">{service.desc}</p>
-                <div className="flex items-center text-blue-600 font-semibold group-hover:gap-2 transition-all">
-                  Learn More <ChevronRight className="w-5 h-5" />
+              <Link key={idx} to={service.link}>
+                <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 cursor-pointer group">
+                  <service.icon className="w-12 h-12 text-blue-600 mb-4 group-hover:scale-110 transition" />
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{service.title}</h3>
+                  <p className="text-gray-600 mb-4">{service.desc}</p>
+                  <div className="flex items-center text-blue-600 font-semibold group-hover:gap-2 transition-all">
+                    Learn More <ChevronRight className="w-5 h-5" />
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
