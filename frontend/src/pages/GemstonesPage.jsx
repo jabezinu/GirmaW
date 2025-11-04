@@ -323,16 +323,8 @@ export default function GemstonesPage() {
         </button>
       </div>
 
-      {/* Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">{t.pageTitle}</h1>
-          <p className="text-xl text-blue-100">{t.pageSubtitle}</p>
-        </div>
-      </div>
-
       {/* Search and Filters Bar */}
-      <div className="bg-white shadow-md sticky top-0 z-40">
+      <div className="bg-white shadow-md sticky top-16 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             {/* Search */}
@@ -375,137 +367,8 @@ export default function GemstonesPage() {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-col md:flex-row gap-8">
-          {/* Sidebar Filters */}
-          <aside className={`${showFilters ? 'block' : 'hidden'} md:block w-full md:w-64 space-y-6`}>
-            <div className="bg-white p-6 rounded-2xl shadow-md">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-bold text-gray-900">{t.filters}</h3>
-                <button
-                  onClick={clearAllFilters}
-                  className="text-sm text-blue-600 hover:text-blue-700 font-semibold"
-                >
-                  {t.clearFilters}
-                </button>
-              </div>
-
-              {/* Category Filter */}
-              <div className="mb-6">
-                <h4 className="font-semibold text-gray-900 mb-3">{t.category}</h4>
-                <div className="space-y-2">
-                  <label className="flex items-center">
-                    <input
-                      type="radio"
-                      name="category"
-                      checked={selectedCategory === 'all'}
-                      onChange={() => setSelectedCategory('all')}
-                      className="w-4 h-4 text-blue-600"
-                    />
-                    <span className="ml-2 text-gray-700">{t.allCategories}</span>
-                  </label>
-                  <label className="flex items-center">
-                    <input
-                      type="radio"
-                      name="category"
-                      checked={selectedCategory === 'precious'}
-                      onChange={() => setSelectedCategory('precious')}
-                      className="w-4 h-4 text-blue-600"
-                    />
-                    <span className="ml-2 text-gray-700">{t.precious}</span>
-                  </label>
-                  <label className="flex items-center">
-                    <input
-                      type="radio"
-                      name="category"
-                      checked={selectedCategory === 'semi-precious'}
-                      onChange={() => setSelectedCategory('semi-precious')}
-                      className="w-4 h-4 text-blue-600"
-                    />
-                    <span className="ml-2 text-gray-700">{t.semiPrecious}</span>
-                  </label>
-                </div>
-              </div>
-
-              {/* Origin Filter */}
-              <div className="mb-6">
-                <h4 className="font-semibold text-gray-900 mb-3">{t.origin}</h4>
-                <select
-                  value={selectedOrigin}
-                  onChange={(e) => setSelectedOrigin(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <option value="all">{t.allOrigins}</option>
-                  <option value={t.ceylon}>{t.ceylon}</option>
-                  <option value={t.burma}>{t.burma}</option>
-                  <option value={t.colombia}>{t.colombia}</option>
-                  <option value={t.brazil}>{t.brazil}</option>
-                  <option value={t.pakistan}>{t.pakistan}</option>
-                  <option value={t.tanzania}>{t.tanzania}</option>
-                  <option value={t.madagascar}>{t.madagascar}</option>
-                </select>
-              </div>
-
-              {/* Price Range Filter */}
-              <div className="mb-6">
-                <h4 className="font-semibold text-gray-900 mb-3">{t.priceRange}</h4>
-                <div className="space-y-2">
-                  <label className="flex items-center">
-                    <input
-                      type="radio"
-                      name="price"
-                      checked={priceRange === 'all'}
-                      onChange={() => setPriceRange('all')}
-                      className="w-4 h-4 text-blue-600"
-                    />
-                    <span className="ml-2 text-gray-700">{t.allPrices}</span>
-                  </label>
-                  <label className="flex items-center">
-                    <input
-                      type="radio"
-                      name="price"
-                      checked={priceRange === 'under1000'}
-                      onChange={() => setPriceRange('under1000')}
-                      className="w-4 h-4 text-blue-600"
-                    />
-                    <span className="ml-2 text-gray-700">{t.under1000}</span>
-                  </label>
-                  <label className="flex items-center">
-                    <input
-                      type="radio"
-                      name="price"
-                      checked={priceRange === '1000-3000'}
-                      onChange={() => setPriceRange('1000-3000')}
-                      className="w-4 h-4 text-blue-600"
-                    />
-                    <span className="ml-2 text-gray-700">{t.range1000to3000}</span>
-                  </label>
-                  <label className="flex items-center">
-                    <input
-                      type="radio"
-                      name="price"
-                      checked={priceRange === '3000-5000'}
-                      onChange={() => setPriceRange('3000-5000')}
-                      className="w-4 h-4 text-blue-600"
-                    />
-                    <span className="ml-2 text-gray-700">{t.range3000to5000}</span>
-                  </label>
-                  <label className="flex items-center">
-                    <input
-                      type="radio"
-                      name="price"
-                      checked={priceRange === 'above5000'}
-                      onChange={() => setPriceRange('above5000')}
-                      className="w-4 h-4 text-blue-600"
-                    />
-                    <span className="ml-2 text-gray-700">{t.above5000}</span>
-                  </label>
-                </div>
-              </div>
-            </div>
-          </aside>
-
-          {/* Products Grid */}
-          <main className="flex-1">
+        {/* Products Grid */}
+        <main className="w-full">
             <div className="mb-6">
               <p className="text-gray-600">
                 <span className="font-bold text-gray-900">{sortedGemstones.length}</span> {t.resultsFound}
@@ -524,20 +387,6 @@ export default function GemstonesPage() {
                       alt={gem.name}
                       className="w-full h-64 object-cover group-hover:scale-110 transition duration-500"
                     />
-
-                    {/* Badges */}
-                    <div className="absolute top-4 left-4 flex flex-col gap-2">
-                      {gem.isNew && (
-                        <span className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                          {t.new}
-                        </span>
-                      )}
-                      {gem.certified && (
-                        <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                          {t.certified}
-                        </span>
-                      )}
-                    </div>
 
                     {/* Favorite Button */}
                     <button
@@ -578,16 +427,6 @@ export default function GemstonesPage() {
 
                     <div className="flex justify-between text-sm text-gray-600 mb-4">
                       <span>{gem.carat}</span>
-                      <span>{gem.origin}</span>
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <span className="text-2xl font-bold text-blue-600">
-                        ${gem.price.toLocaleString()}
-                      </span>
-                      <button className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full transition">
-                        <ShoppingCart className="w-5 h-5" />
-                      </button>
                     </div>
                   </div>
                 </div>
@@ -618,7 +457,6 @@ export default function GemstonesPage() {
             )}
           </main>
         </div>
-      </div>
     </div>
   );
 }
