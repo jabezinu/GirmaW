@@ -197,9 +197,11 @@ export default function GemstonHomepage() {
           </div>
           
           <div className="text-center mt-12">
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-lg text-white px-10 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105">
-              View All Gemstones
-            </button>
+            <Link to="/gemstones">
+              <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-lg text-white px-10 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105">
+                View All Gemstones
+              </button>
+            </Link>
           </div>
         </div>
       </section>
