@@ -1,11 +1,33 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Languages } from 'lucide-react';
 
 export default function Header() {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const timeoutRef = useRef(null);
   const { toggleLanguage, translations } = useLanguage();
+
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    setIsServicesOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setIsServicesOpen(false);
+    }, 150); // 150ms delay
+  };
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <header className="fixed w-full bg-white/95 backdrop-blur-sm shadow-md z-50">
@@ -17,7 +39,7 @@ export default function Header() {
           <ul className="hidden md:flex space-x-6">
             <li><Link to="/" className="text-gray-700 hover:text-blue-600">{translations.home}</Link></li>
             <li><Link to="/gemstones" className="text-gray-700 hover:text-blue-600">{translations.gemstones}</Link></li>
-            <li className="relative" onMouseEnter={() => setIsServicesOpen(true)} onMouseLeave={() => setIsServicesOpen(false)}>
+            <li className="relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
               <button
                 className="text-gray-700 hover:text-blue-600 flex items-center"
               >
