@@ -30,10 +30,10 @@ export default function Header() {
               </button>
               {isServicesOpen && (
                 <ul className="absolute top-full left-0 bg-white shadow-lg rounded-md py-2 mt-1 w-48">
-                  <li><Link to="/services/courses" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">{translations.courses}</Link></li>
-                  <li><Link to="/services/machines" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">{translations.machines}</Link></li>
-                  <li><Link to="/services/gemstone-testing" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">{translations.gemstoneTesting}</Link></li>
-                  <li><Link to="/services/buying-selling" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">{translations.buyingSelling}</Link></li>
+                  <li><Link to="/services#courses" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">{translations.courses}</Link></li>
+                  <li><Link to="/services#machines" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">{translations.machines}</Link></li>
+                  <li><Link to="/services#gemstone-testing" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">{translations.gemstoneTesting}</Link></li>
+                  <li><Link to="/services#buying-selling" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">{translations.buyingSelling}</Link></li>
                 </ul>
               )}
             </li>
