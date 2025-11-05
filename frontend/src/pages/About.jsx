@@ -122,6 +122,47 @@ export default function About() {
             ))}
           </div>
 
+          {/* Staff Members Section */}
+          <div className="mb-20">
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Our Team</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                {
+                  name: 'David Thompson',
+                  role: 'Training Director',
+                  image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
+                  description: 'Leads our certification programs and professional development.'
+                },
+                {
+                  name: 'Lisa Park',
+                  role: 'Client Relations Manager',
+                  image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face',
+                  description: 'Dedicated to providing exceptional service to our clients worldwide.'
+                },
+                {
+                  name: 'Robert Kim',
+                  role: 'Technical Specialist',
+                  image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face',
+                  description: 'Manages our state-of-the-art equipment and laboratory operations.'
+                }
+              ].map((member, index) => (
+                <div key={index} className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 hover:transform hover:scale-105 text-center">
+                  <div className="relative mb-6">
+                    <img src={member.image} alt={member.name} className="w-24 h-24 rounded-full object-cover mx-auto shadow-lg border-4 border-blue-100" />
+                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center">
+                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">{member.name}</h3>
+                  <p className="text-blue-600 font-semibold mb-4 text-sm">{member.role}</p>
+                  <p className="text-gray-600 text-sm leading-relaxed">{member.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* CTA Section */}
           <div className="bg-gradient-to-r from-slate-900 to-slate-800 rounded-3xl shadow-2xl p-12 text-center text-white">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Start Your Journey?</h2>
