@@ -96,8 +96,8 @@ export default function Services() {
       icon: GraduationCap,
       title: "Training Courses",
       description: "Comprehensive courses for gemstone enthusiasts and professionals, from beginner to advanced levels. Learn from industry experts with decades of experience. Our curriculum combines theoretical knowledge with hands-on training using real gemstones and professional equipment.",
-      price: "$299 - $1,299",
-      priceNote: "Beginner courses from $299 | Advanced certification from $1,299 | Payment plans available",
+      // price: "$299 - $1,299",
+      // priceNote: "Beginner courses from $299 | Advanced certification from $1,299 | Payment plans available",
       features: [
         "Structured curriculum from beginner to expert levels",
         "Flexible online and in-person class options", 
@@ -115,7 +115,7 @@ export default function Services() {
           { name: "Professional Gemologist Certification", duration: "16 weeks", price: "$1,299", level: "Advanced", desc: "Comprehensive professional training with industry certification" },
           { name: "Gem Business & Marketing", duration: "6 weeks", price: "$499", level: "All Levels", desc: "Learn to start and grow your gemstone business" }
         ],
-        benefits: "Small class sizes • Real gemstone specimens library • Professional equipment access • Career networking events • Alumni community access",
+        benefits: "Small class sizes • Professional equipment access • Career networking events",
         instructors: "All courses taught by GIA or FGA certified gemologists with 15+ years of industry experience"
       },
       testimonials: [
@@ -129,7 +129,7 @@ export default function Services() {
       title: "Equipment Sales",
       description: "High-quality tools and machinery for gemstone testing, cutting, and processing. We supply professional-grade equipment for gemologists, jewelers, lapidaries, and educational institutions. From precision loupes to advanced cutting machines, we stock everything you need with expert guidance and full support.",
       price: "Varies",
-      priceNote: "Loupes from $45 | Professional microscopes from $2,500 | Cutting machines from $5,000 | Financing available",
+      // priceNote: "Loupes from $45 | Professional microscopes from $2,500 | Cutting machines from $5,000 | Financing available",
       features: [
         "Professional-grade precision loupes and microscopes", 
         "Advanced testing and analysis equipment",
@@ -145,22 +145,22 @@ export default function Services() {
           { 
             name: "Testing & Analysis Equipment", 
             items: "Refractometers • Spectrometers • UV Lamps • Dichroscopes • Polariscopes • Thermal Conductivity Meters",
-            priceRange: "From $350"
+            // priceRange: "From $350"
           },
           { 
             name: "Magnification & Observation", 
             items: "10x Triplet Loupes • Binocular Microscopes • LED Illuminators • Darkfield Systems",
-            priceRange: "From $45"
+            // priceRange: "From $45"
           },
           { 
             name: "Cutting & Faceting Tools", 
             items: "Faceting Machines • Cabbing Equipment • Polishing Wheels • Diamond Discs • Lap Systems",
-            priceRange: "From $1,200"
+            // priceRange: "From $1,200"
           },
           { 
             name: "Processing Machinery", 
             items: "Rock Tumblers • Ultrasonic Cleaners • Vacuum Chambers • Trim Saws • Grinding Equipment",
-            priceRange: "From $450"
+            // priceRange: "From $450"
           }
         ],
         brands: "We carry top brands including Zeiss • Presidium • GemOro • Ultra Tec • Grobet • Kassoy • Foredom • Crystalite",
@@ -205,10 +205,10 @@ export default function Services() {
               {/* Pricing Banner */}
               <div className="bg-gradient-to-r from-gray-50 to-blue-50 px-8 md:px-12 py-6 border-b border-gray-200">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                  <div>
-                    <p className="text-sm text-gray-600 mb-1 font-medium uppercase tracking-wide">Pricing</p>
-                    <p className="text-3xl md:text-4xl font-bold text-blue-600">{service.price}</p>
-                  </div>
+                  {/* <div> */}
+                    {/* <p className="text-sm text-gray-600 mb-1 font-medium uppercase tracking-wide">Pricing</p> */}
+                    {/* <p className="text-3xl md:text-4xl font-bold text-blue-600">{service.price}</p> */}
+                  {/* </div> */}
                   <div className="text-sm text-gray-600 max-w-2xl">
                     {service.priceNote}
                   </div>
@@ -289,12 +289,12 @@ export default function Services() {
                   </div>
                 )}
 
-                {service.detailedInfo.instructors && (
+                {/* {service.detailedInfo.instructors && (
                   <div className="bg-amber-50 p-6 rounded-2xl mb-8 border border-amber-200">
                     <h4 className="text-xl font-bold text-gray-900 mb-4">Expert Instructors</h4>
                     <p className="text-gray-700 leading-relaxed">{service.detailedInfo.instructors}</p>
                   </div>
-                )}
+                )} */}
 
                 {/* Courses List */}
                 {service.detailedInfo.courses && (
