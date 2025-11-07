@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function Contact() {
-  const [language, setLanguage] = useState('en');
+  const { language } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,7 +22,7 @@ export default function Contact() {
       email: 'Email',
       emailValue: 'info@gemstonepro.com',
       businessHours: 'Business Hours',
-      businessHoursValue: 'Mon - Fri: 9:00 AM - 6:00 PM',
+      businessHoursValue: 'Monday - Sunday: 9:00 AM - 6:00 PM',
       name: 'Name',
       subject: 'Subject',
       message: 'Message',
@@ -31,7 +32,7 @@ export default function Contact() {
     am: {
       title: 'ያግኙን',
       getInTouch: 'ተገናኝ',
-      description: 'ስለ አገልግሎታችን ጥያቄዎች አሉዎት ወይም ስለ ሊሆን የሚችል ሽርክና መወያየት ይፈልጋሉ? ከእርስዎ መስማት እንፈልጋለን። መልእክት ይላኩልን እና በተቻለ ፍጥነት እንመልሳለን።',
+      description: 'ስለ አገልግሎታችን ጥያቄዎች አሉዎት ወይም ከእኛ ጋር መወያየት ይፈልጋሉ? ከእርስዎ መስማት እንፈልጋለን። መልእክት ይላኩልን እና በተቻለ ፍጥነት እንመልሳለን።',
       address: 'አድራሻ',
       addressValue: '123 የጌም ጎዳና፣ ዳይመንድ ከተማ፣ ዲሲ 12345',
       phone: 'ስልክ',
@@ -39,7 +40,7 @@ export default function Contact() {
       email: 'ኢሜይል',
       emailValue: 'info@gemstonepro.com',
       businessHours: 'የስራ ሰዓት',
-      businessHoursValue: 'ሰኞ - አርብ፡ ከጠዋቱ 9:00 - ከምሽቱ 6:00',
+      businessHoursValue: 'ሰኞ - እሁድ፡ ከጠዋቱ 9:00 - ከምሽቱ 6:00',
       name: 'ስም',
       subject: 'ርዕሰ ጉዳይ',
       message: 'መልእክት',
@@ -66,15 +67,6 @@ export default function Contact() {
 
   return (
     <div className="container mx-auto px-4 py-16">
-      <div className="flex justify-end mb-6">
-        <button
-          onClick={() => setLanguage(language === 'en' ? 'am' : 'en')}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 font-semibold"
-        >
-          {language === 'en' ? 'አማርኛ' : 'English'}
-        </button>
-      </div>
-
       <h1 className="text-4xl font-bold text-center mb-12 text-gray-800">{t.title}</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
