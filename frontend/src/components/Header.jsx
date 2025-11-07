@@ -40,14 +40,12 @@ export default function Header() {
             <li><Link to="/" className="text-gray-700 hover:text-blue-600">{translations.home}</Link></li>
             <li><Link to="/gemstones" className="text-gray-700 hover:text-blue-600">{translations.gemstones}</Link></li>
             <li className="relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-              <button
-                className="text-gray-700 hover:text-blue-600 flex items-center"
-              >
+              <Link to="/services" className="text-gray-700 hover:text-blue-600 flex items-center">
                 {translations.services}
                 <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
-              </button>
+              </Link>
               {isServicesOpen && (
                 <ul className="absolute top-full left-0 bg-white shadow-lg rounded-md py-2 mt-1 w-48">
                   <li><Link to="/services#gemstone-testing" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">{translations.gemstoneTesting}</Link></li>
