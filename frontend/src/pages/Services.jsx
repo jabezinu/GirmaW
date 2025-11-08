@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 
 export default function Services() {
-  const { language, toggleLanguage } = useLanguage();
+  const { language } = useLanguage();
   const location = useLocation();
 
   useEffect(() => {
@@ -35,6 +35,15 @@ export default function Services() {
       clientTestimonials: "Client Testimonials",
       callUsButton: "Call Us or Come to Our Office",
       findLocationButton: "Find Our Location",
+      getInTouch: "Get In Touch",
+      getInTouchSubtitle: "Ready to get started? Contact us today for all your gemstone needs.",
+      callUs: "Call Us",
+      speakDirectly: "Speak directly with our experts",
+      visitUs: "Visit Us",
+      comeToOffice: "Come to our office for in-person service",
+      equipmentUsed: "Equipment Used",
+      priceLabel: "Price:",
+      levelLabel: "Level:",
       services: [
         {
           id: "gemstone-testing",
@@ -252,14 +261,6 @@ export default function Services() {
 
   return (
     <div className="container mx-auto px-4 py-16 max-w-7xl">
-      <div className="flex justify-end mb-6">
-        <button
-          onClick={toggleLanguage}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 font-semibold"
-        >
-          {language === 'en' ? 'አማርኛ' : 'English'}
-        </button>
-      </div>
 
       <div className="text-center mb-16">
         <h1 className="text-5xl md:text-6xl font-bold mb-4 text-gray-900 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -356,7 +357,7 @@ export default function Services() {
                   <div className="mb-12">
                     <div className="flex items-center mb-6">
                       <Wrench className="w-6 h-6 text-orange-600 mr-3" />
-                      <h3 className="text-2xl font-bold text-gray-900">Equipment Used</h3>
+                      <h3 className="text-2xl font-bold text-gray-900">{t.equipmentUsed}</h3>
                     </div>
                     <div className="bg-orange-50 rounded-lg p-6">
                       <p className="text-orange-800">{service.equipment}</p>
@@ -405,8 +406,8 @@ export default function Services() {
                             <h4 className="font-bold text-teal-900 mb-2">{course.name}</h4>
                             <div className="space-y-1 text-sm text-teal-800">
                               <p><strong>{t.duration}:</strong> {course.duration}</p>
-                              <p><strong>Price:</strong> {course.price}</p>
-                              <p><strong>Level:</strong> {course.level}</p>
+                              <p><strong>{t.priceLabel}</strong> {course.price}</p>
+                              <p><strong>{t.levelLabel}</strong> {course.level}</p>
                             </div>
                             <p className="text-teal-700 mt-3">{course.desc}</p>
                           </div>
@@ -478,22 +479,22 @@ export default function Services() {
       {/* Contact Section */}
       <section className="bg-gray-50 rounded-3xl p-8 md:p-12">
         <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
-          <p className="text-xl text-gray-600">Ready to get started? Contact us today for all your gemstone needs.</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{t.getInTouch}</h2>
+          <p className="text-xl text-gray-600">{t.getInTouchSubtitle}</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="flex flex-col items-center text-center">
             <Phone className="w-12 h-12 text-blue-600 mb-4" />
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Call Us</h3>
-            <p className="text-gray-600 mb-4">Speak directly with our experts</p>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">{t.callUs}</h3>
+            <p className="text-gray-600 mb-4">{t.speakDirectly}</p>
             <Link to="/contact" className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300 font-semibold inline-block">
               {t.callUsButton}
             </Link>
           </div>
           <div className="flex flex-col items-center text-center">
             <MapPin className="w-12 h-12 text-green-600 mb-4" />
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Visit Us</h3>
-            <p className="text-gray-600 mb-4">Come to our office for in-person service</p>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">{t.visitUs}</h3>
+            <p className="text-gray-600 mb-4">{t.comeToOffice}</p>
             <Link to="/contact" className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition duration-300 font-semibold inline-block">
               {t.findLocationButton}
             </Link>
