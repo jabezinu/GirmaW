@@ -64,10 +64,10 @@ const Navbar = ({ children }) => {
           {!isCollapsed && (
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 rounded-lg overflow-hidden">
-                <img src="/images.png" alt="Logo" className="w-full h-full object-cover" />
+                <img src="/images.jpg" alt="Logo" className="w-full h-full object-cover" />
               </div>
               <h1 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              ጣእም ጠጅ እና ጠላ
+              Pazion
               </h1>
             </div>
           )}

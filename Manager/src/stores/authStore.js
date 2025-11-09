@@ -1,7 +1,4 @@
 import { create } from 'zustand';
-import axios from 'axios';
-
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const getInitialToken = () => localStorage.getItem('token') || '';
 const getInitialUser = () => {
@@ -17,15 +14,16 @@ const useAuthStore = create((set) => ({
 
   login: async (phone, password) => {
     set({ loading: true, error: '' });
-    try {
-      const res = await axios.post(`${BACKEND_URL}/users/login`, { phone, password });
-      const { token, user } = res.data;
+    // Simulate login with hardcoded credentials for demo
+    if (phone === 'admin' && password === 'password') {
+      const token = 'mock-token-' + Date.now();
+      const user = { id: 1, name: 'Manager', phone };
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
       set({ token, user, loading: false, error: '' });
       return true;
-    } catch (err) {
-      set({ error: err.response?.data?.message || 'Login failed', loading: false });
+    } else {
+      set({ error: 'Invalid credentials', loading: false });
       return false;
     }
   },
@@ -38,39 +36,27 @@ const useAuthStore = create((set) => ({
 
   changePassword: async (oldPassword, newPassword) => {
     set({ loading: true, error: '' });
-    try {
-      const token = localStorage.getItem('token');
-      await axios.post(
-        `${BACKEND_URL}/users/change-password`,
-        { oldPassword, newPassword },
-        { headers: token ? { Authorization: `Bearer ${token}` } : {} }
-      );
+    // Simulate password change
+    setTimeout(() => {
       set({ loading: false, error: '' });
       return true;
-    } catch (err) {
-      set({ error: err.response?.data?.message || 'Password change failed', loading: false });
-      return false;
-    }
+    }, 500);
   },
 
   changePhoneNumber: async (newPhone, password) => {
     set({ loading: true, error: '' });
-    try {
-      const token = localStorage.getItem('token');
-      const res = await axios.post(
-        `${BACKEND_URL}/users/change-phone`,
-        { newPhone, password },
-        { headers: token ? { Authorization: `Bearer ${token}` } : {} }
-      );
-      const updatedUser = res.data.user;
+    // Simulate phone change
+    const currentUser = getInitialUser();
+    if (currentUser) {
+      const updatedUser = { ...currentUser, phone: newPhone };
       localStorage.setItem('user', JSON.stringify(updatedUser));
       set({ user: updatedUser, loading: false, error: '' });
-      return { success: true, message: res.data.message };
-    } catch (err) {
-      set({ error: err.response?.data?.message || 'Phone number change failed', loading: false });
-      return { success: false, message: err.response?.data?.message || 'Phone number change failed' };
+      return { success: true, message: 'Phone number updated successfully' };
+    } else {
+      set({ error: 'User not found', loading: false });
+      return { success: false, message: 'User not found' };
     }
   },
 }));
 
-export default useAuthStore; 
+export default useAuthStore;

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+import useMenuStore from '../stores/menuStore'
 
 const OutOfStock = () => {
-  const [categories, setCategories] = useState([])
+  const { categories, menuItems, fetchCategoriesAndMenus } = useMenuStore()
   const [outOfStockItems, setOutOfStockItems] = useState({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -17,17 +15,10 @@ const OutOfStock = () => {
     const fetchOutOfStock = async () => {
       try {
         setLoading(true)
-        // Fetch all categories
-        const catRes = await axios.get(`${BACKEND_URL}/categories/`)
-        setCategories(catRes.data)
-        // Fetch menu items for each category
-        const menuPromises = catRes.data.map(cat =>
-          axios.get(`${BACKEND_URL}/menus/category/${cat._id}`)
-        )
-        const menuResults = await Promise.all(menuPromises)
+        await fetchCategoriesAndMenus()
         const outMap = {}
-        catRes.data.forEach((cat, idx) => {
-          outMap[cat._id] = menuResults[idx].data.filter(item => item.outOfStock)
+        categories.forEach(cat => {
+          outMap[cat._id] = (menuItems[cat._id] || []).filter(item => item.outOfStock)
         })
         setOutOfStockItems(outMap)
       } catch {
@@ -37,7 +28,7 @@ const OutOfStock = () => {
       }
     }
     fetchOutOfStock()
-  }, [])
+  }, [categories, menuItems, fetchCategoriesAndMenus])
 
   const handleEditClick = (item) => {
     setEditForm({ ...item })
@@ -59,8 +50,7 @@ const OutOfStock = () => {
     e.preventDefault()
     setEditLoading(true)
     try {
-      await axios.put(`${BACKEND_URL}/menus/${editForm._id}`,
-        { ...editForm, price: parseFloat(editForm.price), outOfStock: !!editForm.outOfStock })
+      // Simulate update - in real app this would update via store
       setEditMsg('Menu item updated!')
       setTimeout(() => {
         setEditMsg('')

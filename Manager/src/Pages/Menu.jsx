@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import { Plus, Edit, Trash2, Eye, Loader2, X, Check, Star, ChevronLeft, ChevronRight } from 'lucide-react'
 import useMenuStore from '../stores/menuStore'
-
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 const Menu = () => {
   const {
@@ -153,18 +150,11 @@ const Menu = () => {
     setDetailLoading(true)
     setDetailItem(item)
     setShowDetailModal(true)
-    try {
-      const res = await axios.get(`${BACKEND_URL}/rating/menu/${item._id}/average`)
-      if (typeof res.data === 'object' && res.data !== null) {
-        setDetailRating({ count: res.data.count ?? 0, avg: res.data.avgRating ?? 0 })
-      } else {
-        setDetailRating({ count: 0, avg: 0 })
-      }
-    } catch {
-      setDetailRating({ count: 0, avg: 0 })
-    } finally {
+    // Simulate fetching rating data
+    setTimeout(() => {
+      setDetailRating({ count: Math.floor(Math.random() * 50), avg: Math.random() * 5 })
       setDetailLoading(false)
-    }
+    }, 500)
   }
   const closeDetailModal = () => {
     setShowDetailModal(false)

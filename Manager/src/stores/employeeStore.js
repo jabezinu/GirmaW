@@ -1,8 +1,4 @@
 import { create } from 'zustand'
-import axios from 'axios'
-import useAuthStore from './authStore'
-
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 const initialForm = {
   name: '',
@@ -15,8 +11,40 @@ const initialForm = {
   status: 'active',
 }
 
+const getInitialEmployees = () => {
+  const stored = localStorage.getItem('employees');
+  return stored ? JSON.parse(stored) : [
+    {
+      _id: '1',
+      name: 'John Doe',
+      phone: '1234567890',
+      position: 'waiter',
+      salary: '1500',
+      description: 'Experienced waiter',
+      workingHour: '9-5',
+      tableAssigned: 'Table 1',
+      status: 'active',
+      image: '',
+      dateHired: new Date().toISOString()
+    },
+    {
+      _id: '2',
+      name: 'Jane Smith',
+      phone: '0987654321',
+      position: 'cashier',
+      salary: '1600',
+      description: 'Reliable cashier',
+      workingHour: '10-6',
+      tableAssigned: '',
+      status: 'active',
+      image: '',
+      dateHired: new Date().toISOString()
+    }
+  ];
+};
+
 export const useEmployeeStore = create((set, get) => ({
-  employees: [],
+  employees: getInitialEmployees(),
   loading: false,
   error: null,
   actionLoading: false,
@@ -33,22 +61,15 @@ export const useEmployeeStore = create((set, get) => ({
   resetForm: () => set({ form: initialForm, editId: null }),
 
   fetchEmployees: async () => {
-    set({ loading: true })
-    try {
-      const { token } = useAuthStore.getState();
-      const res = await axios.get(`${BACKEND_URL}/employees/`, {
-        headers: token ? { Authorization: `Bearer ${token}` } : {}
-      })
-      set({ employees: res.data, error: null })
-    } catch {
-      set({ error: 'Failed to fetch employees' })
-    } finally {
-      set({ loading: false })
-    }
+    set({ loading: true });
+    setTimeout(() => {
+      const employees = getInitialEmployees();
+      set({ employees, error: null, loading: false });
+    }, 500);
   },
 
   openCreate: () => {
-    set({ form: initialForm, editId: null, showForm: true })
+    set({ form: initialForm, editId: null, showForm: true });
   },
 
   openEdit: (emp) => {
@@ -66,57 +87,53 @@ export const useEmployeeStore = create((set, get) => ({
       },
       editId: emp._id,
       showForm: true,
-    })
+    });
   },
 
   handleSubmit: async (e) => {
-    e.preventDefault()
-    set({ actionLoading: true })
-    const { form, editId, fetchEmployees, setShowForm } = get()
+    e.preventDefault();
+    set({ actionLoading: true });
+    const { form, editId, fetchEmployees, setShowForm } = get();
     try {
-      const { token } = useAuthStore.getState();
-      const formData = new FormData()
-      Object.entries(form).forEach(([key, value]) => {
-        if (value !== undefined && value !== null) formData.append(key, value)
-      })
+      const employees = get().employees;
       if (editId) {
-        await axios.put(`${BACKEND_URL}/employees/${editId}`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            ...(token ? { Authorization: `Bearer ${token}` } : {})
-          }
-        })
+        // Update existing employee
+        const updatedEmployees = employees.map(emp =>
+          emp._id === editId ? { ...emp, ...form, _id: editId } : emp
+        );
+        localStorage.setItem('employees', JSON.stringify(updatedEmployees));
+        set({ employees: updatedEmployees });
       } else {
-        await axios.post(`${BACKEND_URL}/employees/`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            ...(token ? { Authorization: `Bearer ${token}` } : {})
-          }
-        })
+        // Add new employee
+        const newEmployee = {
+          ...form,
+          _id: Date.now().toString(),
+          dateHired: new Date().toISOString()
+        };
+        const updatedEmployees = [...employees, newEmployee];
+        localStorage.setItem('employees', JSON.stringify(updatedEmployees));
+        set({ employees: updatedEmployees });
       }
-      setShowForm(false)
-      fetchEmployees()
+      setShowForm(false);
+      fetchEmployees();
     } catch {
-      alert('Failed to save employee')
+      alert('Failed to save employee');
     } finally {
-      set({ actionLoading: false })
+      set({ actionLoading: false });
     }
   },
 
   handleDelete: async (id) => {
-    if (!window.confirm('Delete this employee?')) return
-    set({ actionLoading: true })
-    const { fetchEmployees } = get()
+    if (!window.confirm('Delete this employee?')) return;
+    set({ actionLoading: true });
     try {
-      const { token } = useAuthStore.getState();
-      await axios.delete(`${BACKEND_URL}/employees/${id}`, {
-        headers: token ? { Authorization: `Bearer ${token}` } : {}
-      })
-      fetchEmployees()
+      const employees = get().employees.filter(emp => emp._id !== id);
+      localStorage.setItem('employees', JSON.stringify(employees));
+      set({ employees });
     } catch {
-      alert('Failed to delete employee')
+      alert('Failed to delete employee');
     } finally {
-      set({ actionLoading: false })
+      set({ actionLoading: false });
     }
   },
 }))

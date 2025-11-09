@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
-
 const Comment = () => {
   const [comments, setComments] = useState([])
   const [loading, setLoading] = useState(true)
@@ -10,10 +8,32 @@ const Comment = () => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const res = await fetch(`${BACKEND_URL}/comments`)
-        const data = await res.json()
-        setComments(data.comments)
-      } catch (err) {
+        // Mock comments data
+        const mockComments = [
+          {
+            _id: '1',
+            name: 'John Doe',
+            comment: 'Great food and excellent service!',
+            createdAt: new Date().toISOString(),
+            anonymous: false
+          },
+          {
+            _id: '2',
+            name: null,
+            comment: 'The menu looks amazing. Can\'t wait to try it!',
+            createdAt: new Date(Date.now() - 86400000).toISOString(),
+            anonymous: true
+          },
+          {
+            _id: '3',
+            name: 'Jane Smith',
+            comment: 'Love the new dishes. Keep up the good work!',
+            createdAt: new Date(Date.now() - 172800000).toISOString(),
+            anonymous: false
+          }
+        ]
+        setComments(mockComments)
+      } catch {
         setError('Failed to fetch comments')
       } finally {
         setLoading(false)
