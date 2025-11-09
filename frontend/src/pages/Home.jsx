@@ -31,7 +31,7 @@ export default function GemstonHomepage() {
       trainingDesc: "ከኢንዱስትሪ ባለሙያዎች ይማሩ",
       consultation: "ምክክር",
       consultationDesc: "ለንግድዎ የባለሙያ መመሪያ",
-      learnMore: "ተጨማሪ ይወቁ",
+      learnMore: "ለተጨማሪ መረጃ",
       
       // Featured Gemstones
       featuredGemstones: "የተመረጡ እንቁዎች",
@@ -55,7 +55,7 @@ export default function GemstonHomepage() {
       // Stats
       gemstonesSold: "የተሸጡ እንቁዎች",
       businessesServed: "ግብይቶች",
-      countriesReached: "የደረሱባቸው አገሮች",
+      countriesReached: "የምንገበያይባቸው አገሮች",
       studentsTrained: "የሰለጠኑ ተማሪዎች",
       
       // Testimonials
@@ -75,8 +75,8 @@ export default function GemstonHomepage() {
       ourProcess: "የእኛ ሂደት",
       processSubtitle: "ቀላል፣ ግልጽ እና ደህንነቱ የተጠበቀ",
       step1Title: "ያስሱ/ያግኙን",
-      step1Desc: "ስብስባችንን ያስሱ ወይም ከፍላጎትዎ ጋር ያግኙን",
-      step2Title: "ምክክር",
+      step1Desc: "ስብስባችንን ያስሱ እና የፈለጉትን ይምረጡ",
+      step2Title: "እናማክራለን",
       step2Desc: "በምርጫ እና ዝርዝሮች ላይ የባለሙያ መመሪያ",
       step3Title: "ምርመራ",
       step3Desc: "ፕሮፌሽናል ማረጋገጫ እና የምስክር ወረቀት",
@@ -204,12 +204,12 @@ export default function GemstonHomepage() {
   }, []);
 
   const services = [
-    { icon: ShoppingBag, title: t.buyGemstones, desc: t.buyDesc },
-    { icon: Award, title: t.sellGemstones, desc: t.sellDesc },
-    { icon: TestTube, title: t.gemstoneTesting, desc: t.testingDesc },
-    { icon: Wrench, title: t.equipmentTools, desc: t.equipmentDesc },
-    { icon: GraduationCap, title: t.trainingCourses, desc: t.trainingDesc },
-    { icon: MessageCircle, title: t.consultation, desc: t.consultationDesc }
+    { id: "buying-selling", icon: ShoppingBag, title: t.buyGemstones, desc: t.buyDesc },
+    { id: "buying-selling", icon: Award, title: t.sellGemstones, desc: t.sellDesc },
+    { id: "gemstone-testing", icon: TestTube, title: t.gemstoneTesting, desc: t.testingDesc },
+    { id: "machines", icon: Wrench, title: t.equipmentTools, desc: t.equipmentDesc },
+    { id: "courses", icon: GraduationCap, title: t.trainingCourses, desc: t.trainingDesc },
+    { id: "buying-selling", icon: MessageCircle, title: t.consultation, desc: t.consultationDesc }
   ];
 
   const featuredGems = [
@@ -292,14 +292,14 @@ export default function GemstonHomepage() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, idx) => (
-              <div key={idx} className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 cursor-pointer group">
+              <Link key={idx} to={`/services#${service.id}`} className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 cursor-pointer group">
                 <service.icon className="w-12 h-12 text-blue-600 mb-4 group-hover:scale-110 transition" />
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{service.title}</h3>
                 <p className="text-gray-600 mb-4">{service.desc}</p>
                 <div className="flex items-center text-blue-600 font-semibold group-hover:gap-2 transition-all">
                   {t.learnMore} <ChevronRight className="w-5 h-5" />
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
