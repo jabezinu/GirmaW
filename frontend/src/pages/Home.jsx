@@ -222,7 +222,7 @@ export default function GemstonHomepage() {
   ];
 
   const stats = [
-    { number: "10,000+", label: t.gemstonesSold },
+    // { number: "10,000+", label: t.gemstonesSold },
     { number: "500+", label: t.businessesServed },
     { number: "50+", label: t.countriesReached },
     { number: "2,000+", label: t.studentsTrained }
