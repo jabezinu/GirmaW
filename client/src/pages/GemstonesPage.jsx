@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Search, Filter, X, ChevronDown, Star, Heart, ShoppingCart, Eye, Languages } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import gemstonesData from '../data/gemstonesData';
 
 export default function GemstonesPage() {
   const { language } = useLanguage();
@@ -125,164 +126,12 @@ export default function GemstonesPage() {
 
   const t = translations[language];
 
-  const gemstones = [
-    {
-      id: 1,
-      name: t.blueSapphire,
-      category: "precious",
-      quality: "luxury",
-      hardness: "9",
-      origin: t.ceylon,
-      price: 2500,
-      image: "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&q=80",
-      certified: true,
-      isNew: true,
-      rating: 5
-    },
-    {
-      id: 2,
-      name: t.ruby,
-      category: "precious",
-      quality: "luxury",
-      hardness: "9",
-      origin: t.burma,
-      price: 3200,
-      image: "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=600&q=80",
-      certified: true,
-      isNew: true,
-      rating: 5
-    },
-    {
-      id: 3,
-      name: t.emerald,
-      category: "precious",
-      quality: "luxury",
-      hardness: "7.5-8",
-      origin: t.colombia,
-      price: 2800,
-      image: "https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?w=600&q=80",
-      certified: true,
-      isNew: false,
-      rating: 5
-    },
-    {
-      id: 4,
-      name: t.pinkTourmaline,
-      category: "semi-precious",
-      quality: "commercial",
-      hardness: "7-7.5",
-      origin: t.brazil,
-      price: 1500,
-      image: "https://images.unsplash.com/photo-1583937443569-f14e8aaaebc3?w=600&q=80",
-      certified: true,
-      isNew: false,
-      rating: 4
-    },
-    {
-      id: 5,
-      name: t.aquamarine,
-      category: "semi-precious",
-      quality: "commercial",
-      hardness: "7.5-8",
-      origin: t.pakistan,
-      price: 1800,
-      image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&q=80",
-      certified: true,
-      isNew: true,
-      rating: 5
-    },
-    {
-      id: 6,
-      name: t.amethyst,
-      category: "semi-precious",
-      quality: "affordable",
-      hardness: "7",
-      origin: t.uruguay,
-      price: 950,
-      image: "https://images.unsplash.com/photo-1611095564854-f84fe1b949ef?w=600&q=80",
-      certified: true,
-      isNew: false,
-      rating: 4
-    },
-    {
-      id: 7,
-      name: t.yellowSapphire,
-      category: "precious",
-      quality: "luxury",
-      hardness: "9",
-      origin: t.ceylon,
-      price: 2200,
-      image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&q=80",
-      certified: true,
-      isNew: false,
-      rating: 5
-    },
-    {
-      id: 8,
-      name: t.tanzanite,
-      category: "semi-precious",
-      quality: "commercial",
-      hardness: "6.5-7",
-      origin: t.tanzania,
-      price: 1900,
-      image: "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=600&q=80",
-      certified: true,
-      isNew: true,
-      rating: 5
-    },
-    {
-      id: 9,
-      name: t.garnet,
-      category: "semi-precious",
-      quality: "affordable",
-      hardness: "6.5-7.5",
-      origin: t.madagascar,
-      price: 850,
-      image: "https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=600&q=80",
-      certified: false,
-      isNew: false,
-      rating: 4
-    },
-    {
-      id: 10,
-      name: t.citrine,
-      category: "semi-precious",
-      quality: "affordable",
-      hardness: "7",
-      origin: t.brazil,
-      price: 680,
-      image: "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&q=80",
-      certified: true,
-      isNew: false,
-      rating: 4
-    },
-    {
-      id: 11,
-      name: t.topaz,
-      category: "semi-precious",
-      quality: "commercial",
-      hardness: "8",
-      origin: t.brazil,
-      price: 1200,
-      image: "https://images.unsplash.com/photo-1589674781759-c25c9e0eb43d?w=600&q=80",
-      certified: true,
-      isNew: false,
-      rating: 4
-    },
-    {
-      id: 12,
-      name: t.peridot,
-      category: "semi-precious",
-      quality: "affordable",
-      hardness: "6.5-7",
-      origin: t.pakistan,
-      price: 750,
-      image: "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&q=80",
-      certified: false,
-      isNew: false,
-      rating: 4
-    }
-  ];
+  // Map gemstone data with translations
+  const gemstones = gemstonesData.map(gem => ({
+    ...gem,
+    name: t[gem.nameKey],
+    origin: t[gem.originKey]
+  }));
 
   const toggleFavorite = (id) => {
     setFavorites(prev =>
@@ -375,6 +224,10 @@ export default function GemstonesPage() {
                       src={gem.image}
                       alt={gem.name}
                       className="w-full h-64 object-cover group-hover:scale-110 transition duration-500"
+                      onError={(e) => {
+                        // Fallback to a placeholder if image not found
+                        e.target.src = `https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&q=80`;
+                      }}
                     />
 
                     {/* Favorite Button */}
