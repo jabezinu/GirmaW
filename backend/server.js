@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import 'dotenv/config';
 import gemstonesRouter from './routes/gemstones.js';
+import commentsRouter from './routes/comments.js';
 import { v2 as cloudinary } from 'cloudinary';
 
 // Configure Cloudinary
@@ -29,6 +30,7 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // Routes
 app.use('/api/gemstones', gemstonesRouter);
+app.use('/api/comments', commentsRouter);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

@@ -10,6 +10,8 @@ import emeraldImg from '../assets/kal_asset/gemstones/Emerald.jpg';
 export default function GemstonHomepage() {
    const [currentHeroImage, setCurrentHeroImage] = useState(0);
    const [currentTestimonial, setCurrentTestimonial] = useState(0);
+   const [testimonials, setTestimonials] = useState([]);
+   const [testimonialsLoading, setTestimonialsLoading] = useState(true);
    const { language } = useLanguage();
 
   const translations = {
@@ -167,26 +169,22 @@ export default function GemstonHomepage() {
     'https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?w=1920&q=80'
   ];
 
-  const testimonials = [
-    {
-      name: t.testimonial1Name,
-      location: t.testimonial1Location,
-      text: t.testimonial1Text,
-      rating: 5
-    },
-    {
-      name: t.testimonial2Name,
-      location: t.testimonial2Location,
-      text: t.testimonial2Text,
-      rating: 5
-    },
-    {
-      name: t.testimonial3Name,
-      location: t.testimonial3Location,
-      text: t.testimonial3Text,
-      rating: 5
-    }
-  ];
+
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const response = await fetch('http://localhost:5001/api/comments');
+        const data = await response.json();
+        setTestimonials(data);
+      } catch (error) {
+        console.error('Error fetching testimonials:', error);
+      } finally {
+        setTestimonialsLoading(false);
+      }
+    };
+
+    fetchTestimonials();
+  }, []);
 
   useEffect(() => {
     const heroTimer = setInterval(() => {
@@ -194,14 +192,16 @@ export default function GemstonHomepage() {
     }, 5000);
 
     const testimonialTimer = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+      if (testimonials.length > 0) {
+        setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+      }
     }, 6000);
 
     return () => {
       clearInterval(heroTimer);
       clearInterval(testimonialTimer);
     };
-  }, []);
+  }, [testimonials.length]);
 
   const services = [
     { id: "buying-selling", icon: ShoppingBag, title: t.buyGemstones, desc: t.buyDesc },
@@ -373,44 +373,54 @@ export default function GemstonHomepage() {
             <h2 className="text-4xl font-bold text-gray-900 mb-4">{t.testimonialTitle}</h2>
             <p className="text-xl text-gray-600">{t.testimonialSubtitle}</p>
           </div>
-          
-          <div className="relative">
-            {testimonials.map((testimonial, idx) => (
-              <div
-                key={idx}
-                className={`transition-opacity duration-500 ${
-                  idx === currentTestimonial ? 'opacity-100' : 'opacity-0 absolute inset-0'
-                }`}
-              >
-                <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-12 rounded-3xl shadow-xl">
-                  <div className="flex justify-center mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-xl text-gray-700 text-center mb-6 italic">
-                    "{testimonial.text}"
-                  </p>
-                  <div className="text-center">
-                    <p className="font-bold text-gray-900">{testimonial.name}</p>
-                    <p className="text-gray-600">{testimonial.location}</p>
+
+          {testimonialsLoading ? (
+            <div className="flex justify-center items-center h-64">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+            </div>
+          ) : testimonials.length > 0 ? (
+            <div className="relative">
+              {testimonials.map((testimonial, idx) => (
+                <div
+                  key={testimonial._id || idx}
+                  className={`transition-opacity duration-500 ${
+                    idx === currentTestimonial ? 'opacity-100' : 'opacity-0 absolute inset-0'
+                  }`}
+                >
+                  <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-12 rounded-3xl shadow-xl">
+                    <div className="flex justify-center mb-4">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
+                      ))}
+                    </div>
+                    <p className="text-xl text-gray-700 text-center mb-6 italic">
+                      "{testimonial.text}"
+                    </p>
+                    <div className="text-center">
+                      <p className="font-bold text-gray-900">{testimonial.author}</p>
+                      <p className="text-gray-600">{testimonial.location}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-            
-            <div className="flex justify-center mt-8 space-x-2">
-              {testimonials.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentTestimonial(idx)}
-                  className={`w-3 h-3 rounded-full transition ${
-                    idx === currentTestimonial ? 'bg-blue-600 w-8' : 'bg-gray-300'
-                  }`}
-                />
               ))}
+
+              <div className="flex justify-center mt-8 space-x-2">
+                {testimonials.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentTestimonial(idx)}
+                    className={`w-3 h-3 rounded-full transition ${
+                      idx === currentTestimonial ? 'bg-blue-600 w-8' : 'bg-gray-300'
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-gray-500">No testimonials available.</p>
+            </div>
+          )}
         </div>
       </section>
 
