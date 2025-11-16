@@ -16,12 +16,7 @@ export default function GemstoneForm() {
     category: 'precious',
     quality: 'affordable',
     hardness: '',
-    originKey: '',
-    price: '',
-    image: '',
-    certified: false,
-    isNew: false,
-    rating: 4
+    image: ''
   })
 
   const [loading, setLoading] = useState(false)
@@ -37,12 +32,7 @@ export default function GemstoneForm() {
         category: gemstone.category || 'precious',
         quality: gemstone.quality || 'affordable',
         hardness: gemstone.hardness || '',
-        originKey: gemstone.originKey || '',
-        price: gemstone.price || '',
-        image: gemstone.image || '',
-        certified: gemstone.certified || false,
-        isNew: gemstone.isNew || false,
-        rating: gemstone.rating || 4
+        image: gemstone.image || ''
       })
     } catch (err) {
       setError('Failed to fetch gemstone')
@@ -192,38 +182,6 @@ export default function GemstoneForm() {
             />
           </div>
 
-          <div>
-            <label htmlFor="originKey" className="block text-sm font-medium text-gray-700">
-              Origin Key *
-            </label>
-            <input
-              type="text"
-              name="originKey"
-              id="originKey"
-              required
-              value={formData.originKey}
-              onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="price" className="block text-sm font-medium text-gray-700">
-              Price *
-            </label>
-            <input
-              type="number"
-              name="price"
-              id="price"
-              required
-              min="0"
-              step="0.01"
-              value={formData.price}
-              onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
-          </div>
-
           <div className="sm:col-span-2">
             <label htmlFor="image" className="block text-sm font-medium text-gray-700">
               Image URL *
@@ -237,52 +195,6 @@ export default function GemstoneForm() {
               onChange={handleChange}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
             />
-          </div>
-
-          <div>
-            <label htmlFor="rating" className="block text-sm font-medium text-gray-700">
-              Rating
-            </label>
-            <input
-              type="number"
-              name="rating"
-              id="rating"
-              min="1"
-              max="5"
-              value={formData.rating}
-              onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <div className="flex items-center">
-            <input
-              id="certified"
-              name="certified"
-              type="checkbox"
-              checked={formData.certified}
-              onChange={handleChange}
-              className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-            />
-            <label htmlFor="certified" className="ml-2 block text-sm text-gray-900">
-              Certified
-            </label>
-          </div>
-
-          <div className="flex items-center">
-            <input
-              id="isNew"
-              name="isNew"
-              type="checkbox"
-              checked={formData.isNew}
-              onChange={handleChange}
-              className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-            />
-            <label htmlFor="isNew" className="ml-2 block text-sm text-gray-900">
-              Is New
-            </label>
           </div>
         </div>
 

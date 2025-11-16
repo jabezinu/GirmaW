@@ -80,108 +80,61 @@ export default function GemstonesList() {
         </div>
       </div>
 
-      <div className="mt-8 flow-root">
-        <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-            <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-              <table className="min-w-full divide-y divide-gray-300">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                      Image
-                    </th>
-                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                      Name
-                    </th>
-                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                      Category
-                    </th>
-                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                      Quality
-                    </th>
-                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                      Price
-                    </th>
-                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                      Certified
-                    </th>
-                    <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                      <span className="sr-only">Actions</span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200 bg-white">
-                  {gemstones.map((gemstone) => (
-                    <tr key={gemstone._id}>
-                      <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
-                        <img
-                          src={gemstone.image}
-                          alt={gemstone.nameKey}
-                          className="h-12 w-12 rounded-lg object-cover"
-                        />
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
-                        {gemstone.nameKey}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                          gemstone.category === 'precious'
-                            ? 'bg-yellow-100 text-yellow-800'
-                            : gemstone.category === 'semi-precious'
-                            ? 'bg-blue-100 text-blue-800'
-                            : 'bg-green-100 text-green-800'
-                        }`}>
-                          {gemstone.category}
-                        </span>
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                          gemstone.quality === 'luxury'
-                            ? 'bg-purple-100 text-purple-800'
-                            : gemstone.quality === 'commercial'
-                            ? 'bg-indigo-100 text-indigo-800'
-                            : 'bg-gray-100 text-gray-800'
-                        }`}>
-                          {gemstone.quality}
-                        </span>
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
-                        ${gemstone.price}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {gemstone.certified ? (
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                            Yes
-                          </span>
-                        ) : (
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                            No
-                          </span>
-                        )}
-                      </td>
-                      <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                        <Link
-                          to={`/gemstones/${gemstone._id}/edit`}
-                          className="text-indigo-600 hover:text-indigo-900 mr-4"
-                        >
-                          <FaEdit className="inline" />
-                          <span className="sr-only">Edit {gemstone.nameKey}</span>
-                        </Link>
-                        <button
-                          onClick={() => handleDelete(gemstone._id)}
-                          className="text-red-600 hover:text-red-900"
-                        >
-                          <FaTrash className="inline" />
-                          <span className="sr-only">Delete {gemstone.nameKey}</span>
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {gemstones.map((gemstone) => (
+          <div key={gemstone._id} className="bg-white overflow-hidden shadow-lg rounded-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+            <div className="p-6">
+              <img
+                src={gemstone.image}
+                alt={gemstone.nameKey}
+                className="w-full h-48 object-cover rounded-md mb-4"
+              />
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">{gemstone.nameKey}</h3>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm font-medium text-gray-500">Category:</span>
+                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                    gemstone.category === 'precious'
+                      ? 'bg-yellow-100 text-yellow-800'
+                      : gemstone.category === 'semi-precious'
+                      ? 'bg-blue-100 text-blue-800'
+                      : 'bg-green-100 text-green-800'
+                  }`}>
+                    {gemstone.category}
+                  </span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm font-medium text-gray-500">Quality:</span>
+                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                    gemstone.quality === 'luxury'
+                      ? 'bg-purple-100 text-purple-800'
+                      : gemstone.quality === 'commercial'
+                      ? 'bg-indigo-100 text-indigo-800'
+                      : 'bg-gray-100 text-gray-800'
+                  }`}>
+                    {gemstone.quality}
+                  </span>
+                </div>
+              </div>
+              <div className="mt-6 flex justify-end space-x-3">
+                <Link
+                  to={`/gemstones/${gemstone._id}/edit`}
+                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200"
+                >
+                  <FaEdit className="mr-2" />
+                  Edit
+                </Link>
+                <button
+                  onClick={() => handleDelete(gemstone._id)}
+                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200"
+                >
+                  <FaTrash className="mr-2" />
+                  Delete
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        ))}
       </div>
 
       {gemstones.length === 0 && (

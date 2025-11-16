@@ -19,31 +19,9 @@ const gemstoneSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  originKey: {
-    type: String,
-    required: true
-  },
-  price: {
-    type: Number,
-    required: true
-  },
   image: {
     type: String,
     required: true
-  },
-  certified: {
-    type: Boolean,
-    default: false
-  },
-  isNew: {
-    type: Boolean,
-    default: false
-  },
-  rating: {
-    type: Number,
-    min: 1,
-    max: 5,
-    default: 4
   }
 }, {
   timestamps: true,
