@@ -1,5 +1,6 @@
 import { useLanguage } from '../contexts/LanguageContext';
 import { Trophy, Handshake, Sparkles } from 'lucide-react';
+import kalImage from '../assets/kal_asset/exprerts/kal.jpg';
 
 export default function About() {
   const { language } = useLanguage();
@@ -58,7 +59,7 @@ export default function About() {
             name: 'David Thompson',
             role: 'Training Director',
             description: 'Leads our certification programs and professional development.',
-            expertise: ['Gemology', 'Education', 'Certification']
+            expertise: ['Gemology', 'Marketing', 'Certification']
           },
           {
             name: 'Lisa Park',
@@ -128,7 +129,7 @@ export default function About() {
         // subtitle: 'የእኛ የተወደዱ ባለሙያዎች ቡድን በውድ እንቁ ኢንዱስትሪ ውስጥ በአሥርተ ዓመታት ልምድ አንድ ላይ ያመጣል።',
         members: [
           {
-            name: 'ዴቪድ ቶምፕሰን',
+            name: 'ቃል',
             role: 'የሥልጠና ዳይሬክተር',
             description: 'የምስክር ወረቀት ፕሮግራሞቻችንን እና ሙያዊ እድገትን ይመራል።',
             expertise: ['ጂሞሎጂ', 'ትምህርት', 'የምስክር ወረቀት']
@@ -157,7 +158,7 @@ export default function About() {
   const t = content[language];
 
   const teamImages = [
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
+    kalImage,
     'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=face',
     'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face'
   ];
