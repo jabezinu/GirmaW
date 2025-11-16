@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, Star, Award, Globe, Users, ShoppingBag, TestTube, Wrench, GraduationCap, MessageCircle } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import diamondImg from '../assets/kal_asset/gemstones/Diamond.jpg';
+import rubyImg from '../assets/kal_asset/gemstones/ruby.jpg';
+import sapphireImg from '../assets/kal_asset/gemstones/Sapphire.jpg';
+import emeraldImg from '../assets/kal_asset/gemstones/Emerald.jpg';
 
 export default function GemstonHomepage() {
    const [currentHeroImage, setCurrentHeroImage] = useState(0);
@@ -36,12 +40,10 @@ export default function GemstonHomepage() {
       // Featured Gemstones
       featuredGemstones: "የተመረጡ እንቁዎች",
       featuredSubtitle: "ከእኛ ፕሪሚየም ስብስብ በእጅ የተመረጡ ምርጫዎች",
-      blueSapphire: "ሰማያዊ ሰፋየር",
+      diamond: "ዲያማንድ",
       ruby: "ሩቢ",
+      sapphire: "ሰፋየር",
       emerald: "ኤመራልድ",
-      pinkTourmaline: "ሮዝ ቱርማሊን",
-      aquamarine: "አኳማሪን",
-      amethyst: "አሜቲስት",
       ceylon: "ሲላን",
       burma: "በርማ",
       colombia: "ኮሎምቢያ",
@@ -110,12 +112,10 @@ export default function GemstonHomepage() {
       // Featured Gemstones
       featuredGemstones: "Featured Gemstones",
       featuredSubtitle: "Handpicked selections from our premium collection",
-      blueSapphire: "Blue Sapphire",
+      diamond: "Diamond",
       ruby: "Ruby",
+      sapphire: "Sapphire",
       emerald: "Emerald",
-      pinkTourmaline: "Pink Tourmaline",
-      aquamarine: "Aquamarine",
-      amethyst: "Amethyst",
       ceylon: "Ceylon",
       burma: "Burma",
       colombia: "Colombia",
@@ -213,12 +213,10 @@ export default function GemstonHomepage() {
   ];
 
   const featuredGems = [
-    { name: t.blueSapphire, carat: "3.5ct", origin: t.ceylon, price: "$2,500", image: "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=400&q=80" },
-    { name: t.ruby, carat: "2.8ct", origin: t.burma, price: "$3,200", image: "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=400&q=80" },
-    { name: t.emerald, carat: "4.2ct", origin: t.colombia, price: "$2,800", image: "https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?w=400&q=80" },
-    { name: t.pinkTourmaline, carat: "5.1ct", origin: t.brazil, price: "$1,500", image: "https://images.unsplash.com/photo-1583937443569-f14e8aaaebc3?w=400&q=80" },
-    { name: t.aquamarine, carat: "6.3ct", origin: t.pakistan, price: "$1,800", image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&q=80" },
-    { name: t.amethyst, carat: "8.5ct", origin: t.uruguay, price: "$950", image: "https://images.unsplash.com/photo-1611095564854-f84fe1b949ef?w=400&q=80" }
+    { name: t.diamond, carat: "3.0ct", origin: "Botswana", price: "$3,500", image: diamondImg },
+    { name: t.ruby, carat: "2.8ct", origin: t.burma, price: "$3,200", image: rubyImg },
+    { name: t.sapphire, carat: "3.5ct", origin: t.ceylon, price: "$2,500", image: sapphireImg },
+    { name: t.emerald, carat: "4.2ct", origin: t.colombia, price: "$2,800", image: emeraldImg }
   ];
 
   const stats = [
@@ -330,17 +328,14 @@ export default function GemstonHomepage() {
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{gem.name}</h3>
-                  <div className="flex justify-between text-gray-600 mb-4">
-                    <span>{gem.carat}</span>
-                    <span>{gem.origin}</span>
-                  </div>
-                  <div className="flex justify-center">
-                    <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full text-sm font-semibold transition">
-                      {t.viewDetails}
-                    </button>
-                  </div>
-                </div>
+                   <h3 className="text-xl font-bold text-gray-900 mb-2">{gem.carat}</h3>
+                   <p className="text-gray-600 mb-4">{gem.name}</p>
+                   <div className="flex justify-center">
+                     <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full text-sm font-semibold transition">
+                       {t.viewDetails}
+                     </button>
+                   </div>
+                 </div>
               </div>
             ))}
           </div>
