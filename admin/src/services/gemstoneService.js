@@ -24,13 +24,43 @@ export const gemstoneService = {
 
   // Create new gemstone
   create: async (gemstoneData) => {
-    const response = await api.post('/gemstones', gemstoneData)
+    const formData = new FormData()
+
+    // Add all fields to FormData
+    Object.keys(gemstoneData).forEach(key => {
+      if (key === 'image' && gemstoneData[key] instanceof File) {
+        formData.append('image', gemstoneData[key])
+      } else if (gemstoneData[key] !== null && gemstoneData[key] !== undefined) {
+        formData.append(key, gemstoneData[key])
+      }
+    })
+
+    const response = await api.post('/gemstones', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
     return response.data
   },
 
   // Update gemstone
   update: async (id, gemstoneData) => {
-    const response = await api.put(`/gemstones/${id}`, gemstoneData)
+    const formData = new FormData()
+
+    // Add all fields to FormData
+    Object.keys(gemstoneData).forEach(key => {
+      if (key === 'image' && gemstoneData[key] instanceof File) {
+        formData.append('image', gemstoneData[key])
+      } else if (gemstoneData[key] !== null && gemstoneData[key] !== undefined) {
+        formData.append(key, gemstoneData[key])
+      }
+    })
+
+    const response = await api.put(`/gemstones/${id}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
     return response.data
   },
 

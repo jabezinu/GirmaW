@@ -16,9 +16,10 @@ export default function GemstoneForm() {
     category: 'precious',
     quality: 'affordable',
     hardness: '',
-    image: ''
+    image: null
   })
 
+  const [currentImageUrl, setCurrentImageUrl] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [fetchLoading, setFetchLoading] = useState(isEditing)
@@ -32,8 +33,9 @@ export default function GemstoneForm() {
         category: gemstone.category || 'precious',
         quality: gemstone.quality || 'affordable',
         hardness: gemstone.hardness || '',
-        image: gemstone.image || ''
+        image: null // Don't set the image file for editing, keep it as URL
       })
+      setCurrentImageUrl(gemstone.image || '')
     } catch (err) {
       setError('Failed to fetch gemstone')
       console.error('Error fetching gemstone:', err)
@@ -49,17 +51,32 @@ export default function GemstoneForm() {
   }, [isEditing, fetchGemstone])
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : type === 'number' ? Number(value) : value
-    }))
+    const { name, value, type, checked, files } = e.target
+
+    if (type === 'file' && files) {
+      setFormData(prev => ({
+        ...prev,
+        [name]: files[0] || null
+      }))
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: type === 'checkbox' ? checked : type === 'number' ? Number(value) : value
+      }))
+    }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
     setError(null)
+
+    // Validate image for new gemstones
+    if (!isEditing && !formData.image) {
+      setError('Please select an image file')
+      setLoading(false)
+      return
+    }
 
     try {
       if (isEditing) {
@@ -184,17 +201,30 @@ export default function GemstoneForm() {
 
           <div className="sm:col-span-2">
             <label htmlFor="image" className="block text-sm font-medium text-gray-700">
-              Image URL *
+              Image *
             </label>
+            {isEditing && currentImageUrl && (
+              <div className="mt-2 mb-4">
+                <p className="text-sm text-gray-600 mb-2">Current Image:</p>
+                <img
+                  src={currentImageUrl}
+                  alt="Current gemstone"
+                  className="h-32 w-32 object-cover rounded-md border"
+                />
+              </div>
+            )}
             <input
-              type="url"
+              type="file"
               name="image"
               id="image"
-              required
-              value={formData.image}
+              accept="image/*"
+              required={!isEditing}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
             />
+            <p className="mt-1 text-sm text-gray-500">
+              {isEditing ? 'Upload a new image to replace the current one (optional)' : 'Select an image file for the gemstone'}
+            </p>
           </div>
         </div>
 

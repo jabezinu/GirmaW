@@ -3,6 +3,14 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import 'dotenv/config';
 import gemstonesRouter from './routes/gemstones.js';
+import { v2 as cloudinary } from 'cloudinary';
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: 'dri04iflq',
+  api_key: '265833691256595',
+  api_secret: '_o-_u9uliTngb2CTqkfJssP_mU4'
+});
 
 const app = express();
 const PORT = process.env.PORT || 5000;
