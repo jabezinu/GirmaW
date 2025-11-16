@@ -19,7 +19,7 @@ export default function GemstonHomepage() {
       // Hero Section
       heroTitle: "ጳዝዮን - ለመአድን ንግዶ የታመነ አጋር",
       heroSubtitle: "ከማዕድን ቁፋሮ እስከ አለም አቀፍ ገበያ",
-      heroDescription: "መግዛት፣ መሸጥ፣ መመርመር እና ስልጠና - ከ2009 ጀምሮ የሀገር ውስጥና አለም አቀፍ ገበያዎችን እናገለግላለን",
+      heroDescription: "መግዛት፣ መሸጥ፣ መመርመር እና ስልጠና - ከ2008 ጀምሮ የሀገር ውስጥና አለም አቀፍ ገበያዎችን እናገለግላለን",
       browseGemstones: "መኣድናትን ለማየት",
       
       // Services Section
@@ -91,7 +91,7 @@ export default function GemstonHomepage() {
       // Hero Section
       heroTitle: "Pazion - Shine Like A Gemstone",
       heroSubtitle: "From Mine to International Market",
-      heroDescription: "Buying, Selling, Testing & Training - Serving Local & International Markets Since 2009",
+      heroDescription: "Buying, Selling, Testing & Training - Serving Local & International Markets Since 2015 GC",
       browseGemstones: "Browse Gemstones",
       
       // Services Section

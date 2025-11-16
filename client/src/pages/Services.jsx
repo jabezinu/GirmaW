@@ -92,7 +92,7 @@ export default function Services() {
             { title: "Inventory & Preparation:", desc: "Professional grading, photography, and preparation for international market sales" },
             { title: "Direct Sales & Delivery:", desc: "We sell gemstones directly to international markets with secure transactions and worldwide shipping" }
           ],
-          markets: "We connect clients across North America, Europe, Asia, and the Middle East, giving you access to the world's most active gem markets.",
+          // markets: "We connect clients across North America, Europe, Asia, and the Middle East, giving you access to the world's most active gem markets.",
           guarantee: "30-day satisfaction guarantee • Authenticity verification • Insured shipping • Secure payment processing"
         },
         {
@@ -170,8 +170,7 @@ export default function Services() {
           priceNote: "በ24 ሰዓት ውስጥ ሙሉ የምርመራ ሪፖርት",
           features: [
             "አጠቃላይ የመአድን ዝርያ እና መለያ",
-            "ሙያዊ የጥራት ደረጃ መስጠት (ቀለም፣ ግልጽነት፣ መቁረጥ፣ ክብደት)",
-            "የገበያ ዋጋ አወሳሰን ባለሙያ በማማከር",
+            "ሙያዊ የጥራት ደረጃ መስጠት (መቁረጥ፣ ክብደት)",
             "መአድናትን ማከምና እና ማሻሻል",
             "በላቀ ምርመራ የተገኘበትን ቦታ መለየት",
             "ክብደት እና ጥራት ማረጋገጥ",
@@ -179,13 +178,13 @@ export default function Services() {
           ],
           process: [
             { title: "የመጀመሪያ ምክክር እና እይታ ምርመራ:", desc: "መዐድኑን በዓይን ምርመራ እናደርጋለን" },
-            { title: "መሰረታዊ የመአድን ምርመራ:", desc: "መደበኛ ምርመራዎች ጥንካሬ እና ማለፊያ መረጃ ጠቋሚ መለኪያዎችን በመጠቀም" },
+            { title: "መሰረታዊ የመአድን ምርመራ:", desc: "መረጃ ጠቋሚ መለኪያዎችን በመጠቀም መደበኛ ምርመራዎች" },
             { title: "የላቀ የመሳሪያ ትንተና:", desc: "በስፔክትሮሜትሮች፣ ማለፊያ መለኪያዎች፣ ማይክሮስኮፖች እና ሌሎች ልዩ መሳሪያዎች በመጠቀም ጥልቅ ትንተና" },
             { title: "የባለሙያ ሪፖርት ማዘጋጀት:", desc: "ስለ መአድኑ ግኝቶችን እና ምክሮችን የያዘ አጠቃላይ ሪፖርት እናዘጋጃለን" }
           ],
           processNote: "ማስታወሻ፡ በፎቶግራፍ በመጠቀም ምርመራ አናካሂድም። ሁሉም ግምገማዎች መአድኑን ወደ ቢሮአችን መምጣት ያስፈልጋል።",
           turnaround: "ሁሉም ምርመራዎች በ24 ሰዓት ውስጥ ይጠናቀቃሉ",
-          equipment: "ስፔክትሮሜትር • ማለፊያ መለኪያ • የጌሞሎጂ ማይክሮስኮፕ • የአልትራቫዮሌት ብርሃን • ዲክሮስኮፕ • ፖላሪስኮፕ"
+          // equipment: "ስፔክትሮሜትር • ማለፊያ መለኪያ • የጌሞሎጂ ማይክሮስኮፕ • የአልትራቫዮሌት ብርሃን • ዲክሮስኮፕ • ፖላሪስኮፕ"
         },
         {
           id: "buying-selling",
@@ -373,9 +372,6 @@ export default function Services() {
                       <div className="flex items-center mb-6">
                         <TrendingUp className="w-6 h-6 text-indigo-600 mr-3" />
                         <h3 className="text-2xl font-bold text-gray-900">{t.globalReach}</h3>
-                      </div>
-                      <div className="bg-indigo-50 rounded-lg p-6">
-                        <p className="text-indigo-800">{service.markets}</p>
                       </div>
                     </div>
 
