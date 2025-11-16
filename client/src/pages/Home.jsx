@@ -146,16 +146,16 @@ export default function GemstonHomepage() {
       testimonial3Text: "The training course was excellent! I learned so much about gemstone identification and grading. Worth every penny.",
       
       // Process
-      ourProcess: "Our Process",
-      processSubtitle: "Simple, transparent, and secure",
-      step1Title: "Browse/Contact",
-      step1Desc: "Explore our collection or reach out with your needs",
-      step2Title: "Consultation",
-      step2Desc: "Expert guidance on selection and specifications",
-      step3Title: "Testing",
-      step3Desc: "Professional authentication and certification",
-      step4Title: "Delivery",
-      step4Desc: "Safe and secure shipping worldwide"
+      // ourProcess: "Our Process",
+      // processSubtitle: "Simple, transparent, and secure",
+      // step1Title: "Browse/Contact",
+      // step1Desc: "Explore our collection or reach out with your needs",
+      // step2Title: "Consultation",
+      // step2Desc: "Expert guidance on selection and specifications",
+      // step3Title: "Testing",
+      // step3Desc: "Professional authentication and certification",
+      // step4Title: "Delivery",
+      // step4Desc: "Safe and secure shipping worldwide"
     }
   };
 
@@ -420,7 +420,7 @@ export default function GemstonHomepage() {
       </section>
 
       {/* Process */}
-      <section className="py-20 bg-gray-50">
+      {/* <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">{t.ourProcess}</h2>
@@ -458,7 +458,7 @@ export default function GemstonHomepage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }
