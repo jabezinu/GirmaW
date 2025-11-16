@@ -424,6 +424,78 @@ export default function GemstonHomepage() {
         </div>
       </section>
 
+      {/* TikTok Testimonial Videos */}
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Customer Testimonials</h2>
+            <p className="text-lg text-gray-600">Hear directly from our satisfied customers</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Video 1 */}
+            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
+              <div className="p-2">
+                <iframe
+                  src="https://www.tiktok.com/embed/v2/7572215582343302456?hide_related=1"
+                  width="325"
+                  height="700"
+                  frameBorder="0"
+                  allowFullScreen
+                  className="rounded-xl w-full"
+                  title="TikTok Testimonial Video 1"
+                ></iframe>
+              </div>
+              <div className="p-4 bg-gradient-to-r from-blue-50 to-purple-50">
+                <p className="text-center text-gray-700 font-medium">
+                  Real customer experience shared on TikTok
+                </p>
+              </div>
+            </div>
+
+            {/* Video 2 */}
+            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
+              <div className="p-2">
+                <iframe
+                  src="https://www.tiktok.com/embed/v2/7572958733005786380?hide_related=1"
+                  width="325"
+                  height="700"
+                  frameBorder="0"
+                  allowFullScreen
+                  className="rounded-xl w-full"
+                  title="TikTok Testimonial Video 2"
+                ></iframe>
+              </div>
+              <div className="p-4 bg-gradient-to-r from-blue-50 to-purple-50">
+                <p className="text-center text-gray-700 font-medium">
+                  Real customer experience shared on TikTok
+                </p>
+              </div>
+            </div>
+
+            {/* Video 3 */}
+            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
+              <div className="p-2">
+                <iframe
+                  src="https://www.tiktok.com/embed/v2/7571496642193476875?hide_related=1"
+                  width="325"
+                  height="700"
+                  frameBorder="0"
+                  allowFullScreen
+                  className="rounded-xl w-full"
+                  title="TikTok Testimonial Video 3"
+                ></iframe>
+              </div>
+              <div className="p-4 bg-gradient-to-r from-blue-50 to-purple-50">
+                <p className="text-center text-gray-700 font-medium">
+                  Real customer experience shared on TikTok
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Process */}
       {/* <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
