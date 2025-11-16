@@ -1,4 +1,5 @@
 import { useLanguage } from '../contexts/LanguageContext';
+import { Trophy, Handshake, Sparkles } from 'lucide-react';
 
 export default function About() {
   const { language } = useLanguage();
@@ -12,9 +13,9 @@ export default function About() {
       story: {
         title: 'Our Story',
         paragraphs: [
-          'Founded in 2010, Pazion has been at the forefront of the gemstone industry, serving both local and international markets with unparalleled expertise and integrity.',
+          'Founded in 2015 GC., Pazion has been at the forefront of the gemstone industry, serving both local and international markets with unparalleled expertise and integrity.',
           'Our journey began with a simple mission: to bridge the gap between gemstone enthusiasts, professionals, and the global market. Today, we are recognized as a trusted partner in the gemstone community.',
-          'With years of experience and a team of certified gemologists, we provide comprehensive services that cater to every aspect of the gemstone business.'
+          'With 10+ years of experience and a team of certified gemologists, we provide comprehensive services that cater to every aspect of the gemstone business.'
         ]
       },
       expertise: {
@@ -31,17 +32,14 @@ export default function About() {
         title: 'Why Choose Us?',
         items: [
           {
-            icon: '🏆',
             title: 'Excellence',
             description: 'Committed to the highest standards in everything we do'
           },
           {
-            icon: '🤝',
             title: 'Trust',
             description: 'Building lasting relationships based on integrity and reliability'
           },
           {
-            icon: '🌟',
             title: 'Innovation',
             description: 'Embracing new technologies and methods in gemstone services'
           }
@@ -89,15 +87,15 @@ export default function About() {
       story: {
         title: 'ታሪካችን',
         paragraphs: [
-          'በ2010 የተመሰረተው ጳዝዮን በውድ እንቁ ኢንዱስትሪ ውስጥ ግንባር ቀደም በመሆን ሁለቱንም የሀገር ውስጥና የዓለም አቀፍ ገበያዎችን ላቅ ያለ ብቃትና ታማኝነት አግኝቷል።',
-          'ጉዞአችን የተጀመረው፡ በውድ እንቁ ወዳጆች(ፈላጊዎች)፣ ባለሙያዎች እና በዓለም አቀፍ ገበያ መካከል ያለውን ክፍተት ለመሙላት በሚል ነው። ዛሬ በውድ እንቁ ማህበረሰብ ውስጥ እንደ የታመነ አጋር ተገንዝበናል።',
-          'በዓመታት ልምድ እና በተመሰከረላችው የጂዮሎጂስቶች ቡድን፣ የውድ እንቁ ንግድን በሁሉም ገፅታዎች የሚያገለግሉ አጠቃላይ አገልግሎቶችን እንሰጣለን።'
+          'በ2008 ዓ.ም  የተመሰረተው ቃልጄምስቶን በውድ መአድናት ኢንዱስትሪ ውስጥ ግንባር ቀደም በመሆን ሁለቱንም የሀገር ውስጥና የዓለም አቀፍ ገበያዎችን ላቅ ያለ ብቃትና ታማኝነት አግኝቷል።',
+          'ጉዞአችን የተጀመረው፡ በውድ እንቁ ወዳጆች(ፈላጊዎች)፣ ባለሙያዎች እና በዓለም አቀፍ ገበያ መካከል ያለውን ክፍተት ለመሙላት በሚል ነው። ዛሬ በውድ እንቁ ማህበረሰብ ውስጥ ግንባር ቀደም ነን።',
+          'በዓመታት ልምድ እና በተመሰከረላችው የጂሞሎጂስቶች ቡድን፣ የውድ እንቁ ንግድን በሁሉም ገፅታዎች አጠቃላይ አገልግሎቶችን እንሰጣለን።'
         ]
       },
       expertise: {
         title: 'የስራ ብቃታችን',
         items: [
-          'የተረጋገጠ የውድ እንቁ ምርመራ',
+          'የተረጋገጠ የውድ መአድናት ምርመራ',
           'ዓለም አቀፍ ግዢ እና ሽያጭ',
           'ሙያዊ ስልጠና እና የምስክር ወረቀት ፕሮግራሞች',
           'ዘመናዊ መሳሪያዎች',
@@ -107,19 +105,16 @@ export default function About() {
         title: 'ለምን እኛን ይመርጣሉ?',
         items: [
           {
-            icon: '🏆',
             title: 'ብቃት',
             description: 'በምናደርገው ሁሉ ከፍተኛ ደረጃዎችን ለማሟላት ቆርጥ መሆናችን'
           },
           {
-            icon: '🤝',
             title: 'መተማመን',
             description: 'በታማኝነት እና በአስተማማኝነት ላይ የተመሰረቱ ዘላቂ ግንኙነቶችን መገንባት'
           },
           {
-            icon: '🌟',
             title: 'ፈጠራ',
-            description: 'በውድ እንቁ አገልግሎቶች ውስጥ አዳዲስ ቴክኖሎጂዎችን እና ዘዴዎችን መቀበል'
+            description: 'በውድ መአድን አገልግሎቶች ውስጥ አዳዲስ ቴክኖሎጂዎችን እና ዘዴዎችን ስለምናቀብል'
           }
         ]
       },
@@ -153,7 +148,7 @@ export default function About() {
         ]
       },
       cta: {
-        title: 'ጉዞዎን ለመጀመር ዝግጁ ነዎት?',
+        title: 'ከእኛ ጋር ጉዞዎን ለመጀመር ዝግጁ ነዎት?',
         button: 'ያግኙን'
       }
     }
@@ -238,7 +233,7 @@ export default function About() {
                     index === 1 ? 'from-green-400 to-emerald-500' :
                     'from-purple-400 to-pink-500'
                   } rounded-2xl flex items-center justify-center text-3xl mb-4 shadow-lg mx-auto`}>
-                    {value.icon}
+                    {index === 0 ? <Trophy size={30} className="text-white" /> : index === 1 ? <Handshake size={30} className="text-white" /> : <Sparkles size={30} className="text-white" />}
                   </div>
                   <h3 className="text-xl font-bold mb-3 text-center">{value.title}</h3>
                   <p className="text-blue-100 text-center leading-relaxed">{value.description}</p>
