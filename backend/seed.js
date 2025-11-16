@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Gemstone = require('./models/Gemstone');
+import mongoose from 'mongoose';
+import Gemstone from './models/Gemstone.js';
 
 const gemstonesData = [
   {

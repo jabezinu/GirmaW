@@ -1,7 +1,7 @@
-const Gemstone = require('../models/Gemstone');
+import Gemstone from '../models/Gemstone.js';
 
 // Get all gemstones
-exports.getAllGemstones = async (req, res) => {
+export async function getAllGemstones(req, res) {
   try {
     const gemstones = await Gemstone.find();
     res.json(gemstones);
@@ -11,7 +11,7 @@ exports.getAllGemstones = async (req, res) => {
 };
 
 // Get single gemstone
-exports.getGemstoneById = async (req, res) => {
+export async function getGemstoneById(req, res) {
   try {
     const gemstone = await Gemstone.findById(req.params.id);
     if (!gemstone) {
@@ -24,7 +24,7 @@ exports.getGemstoneById = async (req, res) => {
 };
 
 // Create gemstone
-exports.createGemstone = async (req, res) => {
+export async function createGemstone(req, res) {
   const gemstone = new Gemstone(req.body);
   try {
     const newGemstone = await gemstone.save();
@@ -35,7 +35,7 @@ exports.createGemstone = async (req, res) => {
 };
 
 // Update gemstone
-exports.updateGemstone = async (req, res) => {
+export async function updateGemstone(req, res) {
   try {
     const gemstone = await Gemstone.findByIdAndUpdate(
       req.params.id,
@@ -52,7 +52,7 @@ exports.updateGemstone = async (req, res) => {
 };
 
 // Delete gemstone
-exports.deleteGemstone = async (req, res) => {
+export async function deleteGemstone(req, res) {
   try {
     const gemstone = await Gemstone.findByIdAndDelete(req.params.id);
     if (!gemstone) {
