@@ -78,11 +78,7 @@ export default function Layout({ children }) {
       </aside>
 
       {/* Main content */}
-      <div
-        className={`flex-1 transition-all duration-300 ${
-          isCollapsed ? 'md:ml-16' : 'md:ml-64'
-        }`}
-      >
+      <div className="flex-1 transition-all duration-300">
         {/* Mobile header */}
         <div className="md:hidden bg-white shadow-sm border-b border-gray-200 px-4 py-4 flex items-center">
           <button
