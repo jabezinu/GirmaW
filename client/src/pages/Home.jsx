@@ -359,7 +359,7 @@ export default function GemstonHomepage() {
       </section>
 
       {/* Stats */}
-      <section className="py-16 bg-gradient-to-r from-gray-900 to-gray-800 text-white">
+      {/* <section className="py-16 bg-gradient-to-r from-gray-900 to-gray-800 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, idx) => (
@@ -372,7 +372,7 @@ export default function GemstonHomepage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Testimonials */}
       <section className="py-20 bg-white">

@@ -7,7 +7,6 @@ export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: '',
     message: '',
     rating: 5,
     location: ''
@@ -68,7 +67,7 @@ export default function Contact() {
     try {
       await contactMessageService.create(formData);
       alert(t.successMessage);
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormData({ name: '', email: '', message: '', rating: 5, location: '' });
     } catch (error) {
       console.error('Error submitting contact form:', error);
       alert('Failed to send message. Please try again.');
@@ -162,18 +161,6 @@ export default function Contact() {
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-            <div className="mb-4">
-              <label htmlFor="subject" className="block text-gray-700 font-semibold mb-2">{t.subject}</label>
-              <input
-                type="text"
-                id="subject"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
             <div className="mb-6">
               <label htmlFor="message" className="block text-gray-700 font-semibold mb-2">{t.message}</label>
               <textarea
@@ -185,22 +172,6 @@ export default function Contact() {
                 rows="5"
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               ></textarea>
-            </div>
-            <div className="mb-4">
-              <label htmlFor="rating" className="block text-gray-700 font-semibold mb-2">Rating (1-5)</label>
-              <select
-                id="rating"
-                name="rating"
-                value={formData.rating}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value={5}>5 Stars</option>
-                <option value={4}>4 Stars</option>
-                <option value={3}>3 Stars</option>
-                <option value={2}>2 Stars</option>
-                <option value={1}>1 Star</option>
-              </select>
             </div>
             <div className="mb-6">
               <label htmlFor="location" className="block text-gray-700 font-semibold mb-2">Location (optional)</label>

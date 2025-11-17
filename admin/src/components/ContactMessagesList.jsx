@@ -118,7 +118,7 @@ export default function ContactMessagesList() {
                     <FaEnvelope className="text-blue-500" />
                   )}
                   <div>
-                    <h3 className="text-lg font-medium text-gray-900">{message.subject}</h3>
+                    <h3 className="text-lg font-medium text-gray-900">Testimonial from {message.name}</h3>
                     <p className="text-sm text-gray-500">From: {message.name} ({message.email})</p>
                   </div>
                 </div>
