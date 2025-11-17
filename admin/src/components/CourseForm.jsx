@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { FaSave, FaArrowLeft } from 'react-icons/fa'
+import { FaSave, FaArrowLeft, FaBook, FaClock, FaDollarSign, FaLayerGroup, FaFileAlt, FaImage } from 'react-icons/fa'
 import courseService from '../services/courseService'
 
 const LEVELS = ['Beginner', 'Intermediate', 'Advanced', 'All Levels']
@@ -95,166 +95,195 @@ export default function CourseForm() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <div className="md:flex md:items-center md:justify-between">
-        <div className="min-w-0 flex-1">
-          <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-            {isEditing ? 'Edit Course' : 'Add New Course'}
-          </h2>
-        </div>
-        <div className="mt-4 flex md:mt-0 md:ml-4">
-          <button
-            type="button"
-            onClick={() => navigate('/courses')}
-            className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-          >
-            <FaArrowLeft className="mr-2" />
-            Back to List
-          </button>
-        </div>
-      </div>
-
-      {error && (
-        <div className="mt-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
-          {error}
-        </div>
-      )}
-
-      <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          <div className="sm:col-span-2">
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-              Course Name *
-            </label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              required
-              value={formData.name}
-              onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        <div className="bg-white shadow-xl rounded-2xl overflow-hidden">
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-8">
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-3xl font-bold text-white">
+                  {isEditing ? 'Edit Course' : 'New Course'}
+                </h1>
+              </div>
+              <button
+                type="button"
+                onClick={() => navigate('/courses')}
+                className="inline-flex items-center px-4 py-2 border border-white/20 rounded-lg text-white hover:bg-white/10 transition-colors duration-200"
+              >
+                <FaArrowLeft className="mr-2" />
+                Back
+              </button>
+            </div>
           </div>
 
-          <div>
-            <label htmlFor="duration" className="block text-sm font-medium text-gray-700">
-              Duration *
-            </label>
-            <input
-              type="text"
-              name="duration"
-              id="duration"
-              required
-              value={formData.duration}
-              onChange={handleChange}
-              placeholder="e.g., 4 weeks"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
-          </div>
+          {error && (
+            <div className="mx-6 mt-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+              {error}
+            </div>
+          )}
 
-          <div>
-            <label htmlFor="price" className="block text-sm font-medium text-gray-700">
-              Price *
-            </label>
-            <input
-              type="text"
-              name="price"
-              id="price"
-              required
-              value={formData.price}
-              onChange={handleChange}
-              placeholder="e.g., $299"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="level" className="block text-sm font-medium text-gray-700">
-              Level *
-            </label>
-            <select
-              name="level"
-              id="level"
-              required
-              value={formData.level}
-              onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            >
-              {LEVELS.map(level => (
-                <option key={level} value={level}>
-                  {level}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="sm:col-span-2">
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-              Description *
-            </label>
-            <textarea
-              name="description"
-              id="description"
-              required
-              rows={4}
-              value={formData.description}
-              onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
-          </div>
-
-          <div className="sm:col-span-2">
-            <label htmlFor="image" className="block text-sm font-medium text-gray-700">
-              Image *
-            </label>
-            {isEditing && currentImageUrl && (
-              <div className="mt-2 mb-4">
-                <p className="text-sm text-gray-600 mb-2">Current Image:</p>
-                <img
-                  src={currentImageUrl}
-                  alt="Current course"
-                  className="h-32 w-32 object-cover rounded-md border"
+          <form onSubmit={handleSubmit} className="px-6 py-8 space-y-8">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+              <div className="sm:col-span-2">
+                <label htmlFor="name" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
+                  <FaBook className="mr-2 text-blue-600" />
+                  Course Name *
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  required
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 text-gray-900 placeholder-gray-500"
+                  placeholder="Enter course name"
                 />
               </div>
-            )}
-            <input
-              type="file"
-              name="image"
-              id="image"
-              accept="image/*"
-              required={!isEditing}
-              onChange={handleChange}
-              className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
-            />
-            <p className="mt-1 text-sm text-gray-500">
-              {isEditing ? 'Upload a new image to replace the current one (optional)' : 'Select an image file for the course'}
-            </p>
-          </div>
-        </div>
 
-        <div className="flex justify-end">
-          <button
-            type="button"
-            onClick={() => navigate('/courses')}
-            className="mr-3 inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            disabled={loading}
-            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
-          >
-            {loading ? (
-              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-            ) : (
-              <FaSave className="mr-2" />
-            )}
-            {isEditing ? 'Update' : 'Create'} Course
-          </button>
+              <div>
+                <label htmlFor="duration" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
+                  <FaClock className="mr-2 text-green-600" />
+                  Duration *
+                </label>
+                <input
+                  type="text"
+                  name="duration"
+                  id="duration"
+                  required
+                  value={formData.duration}
+                  onChange={handleChange}
+                  placeholder="e.g., 4 weeks"
+                  className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-200 text-gray-900 placeholder-gray-500"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="price" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
+                  <FaDollarSign className="mr-2 text-yellow-600" />
+                  Price *
+                </label>
+                <input
+                  type="text"
+                  name="price"
+                  id="price"
+                  required
+                  value={formData.price}
+                  onChange={handleChange}
+                  placeholder="e.g., 10,000 ETB"
+                  className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition duration-200 text-gray-900 placeholder-gray-500"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="level" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
+                  <FaLayerGroup className="mr-2 text-purple-600" />
+                  Level *
+                </label>
+                <select
+                  name="level"
+                  id="level"
+                  required
+                  value={formData.level}
+                  onChange={handleChange}
+                  className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-200 text-gray-900 bg-white"
+                >
+                  {LEVELS.map(level => (
+                    <option key={level} value={level}>
+                      {level}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="sm:col-span-2">
+                <label htmlFor="description" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
+                  <FaFileAlt className="mr-2 text-indigo-600" />
+                  Description *
+                </label>
+                <textarea
+                  name="description"
+                  id="description"
+                  required
+                  rows={5}
+                  value={formData.description}
+                  onChange={handleChange}
+                  className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 text-gray-900 placeholder-gray-500 resize-vertical"
+                  placeholder="Describe the course content, objectives, and what students will learn..."
+                />
+              </div>
+
+              <div className="sm:col-span-2">
+                <label htmlFor="image" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
+                  <FaImage className="mr-2 text-pink-600" />
+                  Course Image *
+                </label>
+                {isEditing && currentImageUrl && (
+                  <div className="mt-3 mb-4 p-4 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
+                    <p className="text-sm font-medium text-gray-700 mb-3">Current Image:</p>
+                    <img
+                      src={currentImageUrl}
+                      alt="Current course"
+                      className="h-40 w-40 object-cover rounded-lg shadow-md border-4 border-white"
+                    />
+                  </div>
+                )}
+                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-blue-400 transition-colors duration-200">
+                  <div className="space-y-1 text-center">
+                    <FaImage className="mx-auto h-12 w-12 text-gray-400" />
+                    <div className="flex text-sm text-gray-600">
+                      <label
+                        htmlFor="image"
+                        className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500"
+                      >
+                        <span>Upload a file</span>
+                        <input
+                          id="image"
+                          name="image"
+                          type="file"
+                          accept="image/*"
+                          required={!isEditing}
+                          onChange={handleChange}
+                          className="sr-only"
+                        />
+                      </label>
+                      <p className="pl-1">or drag and drop</p>
+                    </div>
+                    <p className="text-xs text-gray-500">
+                      PNG, JPG, GIF up to 10MB
+                    </p>
+                  </div>
+                </div>
+                <p className="mt-2 text-sm text-gray-600">
+                  {isEditing ? 'Upload a new image to replace the current one (optional)' : 'Select an image file for the course'}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex justify-end space-x-4 pt-8 border-t border-gray-200">
+              <button
+                type="button"
+                onClick={() => navigate('/courses')}
+                className="px-6 py-3 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-200"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={loading}
+                className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition duration-200"
+              >
+                {loading ? (
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                ) : (
+                  <FaSave className="mr-2" />
+                )}
+                {isEditing ? 'Update Course' : 'Create Course'}
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
   )
 }

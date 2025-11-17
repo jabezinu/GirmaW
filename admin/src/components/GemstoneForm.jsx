@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { FaSave, FaArrowLeft } from 'react-icons/fa'
+import { FaSave, FaArrowLeft, FaGem, FaTag, FaStar, FaHammer, FaImage } from 'react-icons/fa'
 import gemstoneService from '../services/gemstoneService'
 
 const CATEGORIES = ['precious', 'semi-precious', 'organic']
@@ -102,154 +102,182 @@ export default function GemstoneForm() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <div className="md:flex md:items-center md:justify-between">
-        <div className="min-w-0 flex-1">
-          <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-            {isEditing ? 'Edit Gemstone' : 'Add New Gemstone'}
-          </h2>
-        </div>
-        <div className="mt-4 flex md:mt-0 md:ml-4">
-          <button
-            type="button"
-            onClick={() => navigate('/')}
-            className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-          >
-            <FaArrowLeft className="mr-2" />
-            Back to List
-          </button>
-        </div>
-      </div>
-
-      {error && (
-        <div className="mt-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
-          {error}
-        </div>
-      )}
-
-      <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          <div>
-            <label htmlFor="nameKey" className="block text-sm font-medium text-gray-700">
-              Name Key *
-            </label>
-            <input
-              type="text"
-              name="nameKey"
-              id="nameKey"
-              required
-              value={formData.nameKey}
-              onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        <div className="bg-white shadow-xl rounded-2xl overflow-hidden">
+          <div className="bg-gradient-to-r from-emerald-600 to-teal-600 px-6 py-8">
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-3xl font-bold text-white">
+                  {isEditing ? 'Edit Gemstone' : 'New Gemstone'}
+                </h1>
+              </div>
+              <button
+                type="button"
+                onClick={() => navigate('/')}
+                className="inline-flex items-center px-4 py-2 border border-white/20 rounded-lg text-white hover:bg-white/10 transition-colors duration-200"
+              >
+                <FaArrowLeft className="mr-2" />
+                Back 
+              </button>
+            </div>
           </div>
 
-          <div>
-            <label htmlFor="category" className="block text-sm font-medium text-gray-700">
-              Category *
-            </label>
-            <select
-              name="category"
-              id="category"
-              required
-              value={formData.category}
-              onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            >
-              {CATEGORIES.map(category => (
-                <option key={category} value={category}>
-                  {category.charAt(0).toUpperCase() + category.slice(1)}
-                </option>
-              ))}
-            </select>
-          </div>
+          {error && (
+            <div className="mx-6 mt-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+              {error}
+            </div>
+          )}
 
-          <div>
-            <label htmlFor="quality" className="block text-sm font-medium text-gray-700">
-              Quality *
-            </label>
-            <select
-              name="quality"
-              id="quality"
-              required
-              value={formData.quality}
-              onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            >
-              {QUALITIES.map(quality => (
-                <option key={quality} value={quality}>
-                  {quality.charAt(0).toUpperCase() + quality.slice(1)}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <label htmlFor="hardness" className="block text-sm font-medium text-gray-700">
-              Hardness *
-            </label>
-            <input
-              type="text"
-              name="hardness"
-              id="hardness"
-              required
-              value={formData.hardness}
-              onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
-          </div>
-
-          <div className="sm:col-span-2">
-            <label htmlFor="image" className="block text-sm font-medium text-gray-700">
-              Image *
-            </label>
-            {isEditing && currentImageUrl && (
-              <div className="mt-2 mb-4">
-                <p className="text-sm text-gray-600 mb-2">Current Image:</p>
-                <img
-                  src={currentImageUrl}
-                  alt="Current gemstone"
-                  className="h-32 w-32 object-cover rounded-md border"
+          <form onSubmit={handleSubmit} className="px-6 py-8 space-y-8">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+              <div>
+                <label htmlFor="nameKey" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
+                  <FaGem className="mr-2 text-emerald-600" />
+                  Name Key *
+                </label>
+                <input
+                  type="text"
+                  name="nameKey"
+                  id="nameKey"
+                  required
+                  value={formData.nameKey}
+                  onChange={handleChange}
+                  className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition duration-200 text-gray-900 placeholder-gray-500"
+                  placeholder="e.g., Diamond"
                 />
               </div>
-            )}
-            <input
-              type="file"
-              name="image"
-              id="image"
-              accept="image/*"
-              required={!isEditing}
-              onChange={handleChange}
-              className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
-            />
-            <p className="mt-1 text-sm text-gray-500">
-              {isEditing ? 'Upload a new image to replace the current one (optional)' : 'Select an image file for the gemstone'}
-            </p>
-          </div>
-        </div>
 
-        <div className="flex justify-end">
-          <button
-            type="button"
-            onClick={() => navigate('/')}
-            className="mr-3 inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            disabled={loading}
-            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
-          >
-            {loading ? (
-              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-            ) : (
-              <FaSave className="mr-2" />
-            )}
-            {isEditing ? 'Update' : 'Create'} Gemstone
-          </button>
+              <div>
+                <label htmlFor="category" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
+                  <FaTag className="mr-2 text-blue-600" />
+                  Category *
+                </label>
+                <select
+                  name="category"
+                  id="category"
+                  required
+                  value={formData.category}
+                  onChange={handleChange}
+                  className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 text-gray-900 bg-white"
+                >
+                  {CATEGORIES.map(category => (
+                    <option key={category} value={category}>
+                      {category.charAt(0).toUpperCase() + category.slice(1)}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label htmlFor="quality" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
+                  <FaStar className="mr-2 text-yellow-600" />
+                  Quality *
+                </label>
+                <select
+                  name="quality"
+                  id="quality"
+                  required
+                  value={formData.quality}
+                  onChange={handleChange}
+                  className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition duration-200 text-gray-900 bg-white"
+                >
+                  {QUALITIES.map(quality => (
+                    <option key={quality} value={quality}>
+                      {quality.charAt(0).toUpperCase() + quality.slice(1)}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label htmlFor="hardness" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
+                  <FaHammer className="mr-2 text-gray-600" />
+                  Hardness *
+                </label>
+                <input
+                  type="text"
+                  name="hardness"
+                  id="hardness"
+                  required
+                  value={formData.hardness}
+                  onChange={handleChange}
+                  className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition duration-200 text-gray-900 placeholder-gray-500"
+                  placeholder="e.g., 10 (Mohs scale)"
+                />
+              </div>
+
+              <div className="sm:col-span-2">
+                <label htmlFor="image" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
+                  <FaImage className="mr-2 text-pink-600" />
+                  Gemstone Image *
+                </label>
+                {isEditing && currentImageUrl && (
+                  <div className="mt-3 mb-4 p-4 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
+                    <p className="text-sm font-medium text-gray-700 mb-3">Current Image:</p>
+                    <img
+                      src={currentImageUrl}
+                      alt="Current gemstone"
+                      className="h-40 w-40 object-cover rounded-lg shadow-md border-4 border-white"
+                    />
+                  </div>
+                )}
+                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-emerald-400 transition-colors duration-200">
+                  <div className="space-y-1 text-center">
+                    <FaImage className="mx-auto h-12 w-12 text-gray-400" />
+                    <div className="flex text-sm text-gray-600">
+                      <label
+                        htmlFor="image"
+                        className="relative cursor-pointer bg-white rounded-md font-medium text-emerald-600 hover:text-emerald-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-emerald-500"
+                      >
+                        <span>Upload a file</span>
+                        <input
+                          id="image"
+                          name="image"
+                          type="file"
+                          accept="image/*"
+                          required={!isEditing}
+                          onChange={handleChange}
+                          className="sr-only"
+                        />
+                      </label>
+                      <p className="pl-1">or drag and drop</p>
+                    </div>
+                    <p className="text-xs text-gray-500">
+                      PNG, JPG, GIF up to 10MB
+                    </p>
+                  </div>
+                </div>
+                <p className="mt-2 text-sm text-gray-600">
+                  {isEditing ? 'Upload a new image to replace the current one (optional)' : 'Select an image file for the gemstone'}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex justify-end space-x-4 pt-8 border-t border-gray-200">
+              <button
+                type="button"
+                onClick={() => navigate('/')}
+                className="px-6 py-3 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition duration-200"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={loading}
+                className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white hover:from-emerald-700 hover:to-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed transition duration-200"
+              >
+                {loading ? (
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                ) : (
+                  <FaSave className="mr-2" />
+                )}
+                {isEditing ? 'Update Gemstone' : 'Create Gemstone'}
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
   )
 }
