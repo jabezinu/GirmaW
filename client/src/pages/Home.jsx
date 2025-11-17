@@ -175,7 +175,15 @@ export default function GemstonHomepage() {
       try {
         const response = await fetch('http://localhost:5001/api/comments');
         const data = await response.json();
-        setTestimonials(data);
+        // Map ContactMessage fields to testimonial format
+        const mappedTestimonials = data.map(comment => ({
+          _id: comment._id,
+          text: comment.message,
+          author: comment.name,
+          location: comment.location || 'Unknown Location',
+          rating: comment.rating || 5
+        }));
+        setTestimonials(mappedTestimonials);
       } catch (error) {
         console.error('Error fetching testimonials:', error);
       } finally {

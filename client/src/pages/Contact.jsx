@@ -8,7 +8,9 @@ export default function Contact() {
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
+    rating: 5,
+    location: ''
   });
 
   const translations = {
@@ -183,6 +185,34 @@ export default function Contact() {
                 rows="5"
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               ></textarea>
+            </div>
+            <div className="mb-4">
+              <label htmlFor="rating" className="block text-gray-700 font-semibold mb-2">Rating (1-5)</label>
+              <select
+                id="rating"
+                name="rating"
+                value={formData.rating}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value={5}>5 Stars</option>
+                <option value={4}>4 Stars</option>
+                <option value={3}>3 Stars</option>
+                <option value={2}>2 Stars</option>
+                <option value={1}>1 Star</option>
+              </select>
+            </div>
+            <div className="mb-6">
+              <label htmlFor="location" className="block text-gray-700 font-semibold mb-2">Location (optional)</label>
+              <input
+                type="text"
+                id="location"
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                placeholder="City, Country"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
             </div>
             <button
               onClick={handleSubmit}

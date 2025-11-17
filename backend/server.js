@@ -6,6 +6,7 @@ import gemstonesRouter from './routes/gemstones.js';
 import coursesRouter from './routes/courses.js';
 import equipmentsRouter from './routes/equipments.js';
 import contactMessagesRouter from './routes/contactMessages.js';
+import commentsRouter from './routes/comments.js';
 import { v2 as cloudinary } from 'cloudinary';
 
 // Configure Cloudinary
@@ -32,6 +33,7 @@ app.use('/api/gemstones', gemstonesRouter);
 app.use('/api/courses', coursesRouter);
 app.use('/api/equipments', equipmentsRouter);
 app.use('/api/contact-messages', contactMessagesRouter);
+app.use('/api/comments', commentsRouter);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

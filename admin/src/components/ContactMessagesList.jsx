@@ -49,6 +49,20 @@ export default function ContactMessagesList() {
     }
   }
 
+  const handleToggleDisplayOnHome = async (id) => {
+    try {
+      const message = messages.find(m => m._id === id)
+      const newDisplayOnHome = !message.displayOnHome
+      await contactMessageService.update(id, { displayOnHome: newDisplayOnHome })
+      setMessages(messages.map(message =>
+        message._id === id ? { ...message, displayOnHome: newDisplayOnHome } : message
+      ))
+    } catch (err) {
+      setError('Failed to update display status')
+      console.error('Error updating display status:', err)
+    }
+  }
+
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -125,6 +139,16 @@ export default function ContactMessagesList() {
                     Mark as Read
                   </button>
                 )}
+                <button
+                  onClick={() => handleToggleDisplayOnHome(message._id)}
+                  className={`inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md transition-colors duration-200 ${
+                    message.displayOnHome
+                      ? 'text-green-700 bg-green-100 hover:bg-green-200 focus:ring-green-500'
+                      : 'text-gray-700 bg-gray-100 hover:bg-gray-200 focus:ring-gray-500'
+                  } focus:outline-none focus:ring-2 focus:ring-offset-2`}
+                >
+                  {message.displayOnHome ? '✓ Display on Home' : 'Display on Home'}
+                </button>
                 <button
                   onClick={() => handleDelete(message._id)}
                   className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200"
