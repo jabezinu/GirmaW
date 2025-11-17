@@ -8,6 +8,7 @@ import CoursesList from './components/CoursesList'
 import CourseForm from './components/CourseForm'
 import EquipmentsList from './components/EquipmentsList'
 import EquipmentForm from './components/EquipmentForm'
+import ContactMessagesList from './components/ContactMessagesList'
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
         <Route path="/equipments" element={<EquipmentsList />} />
         <Route path="/equipments/new" element={<EquipmentForm />} />
         <Route path="/equipments/:id/edit" element={<EquipmentForm />} />
+        <Route path="/contact-messages" element={<ContactMessagesList />} />
       </Routes>
     </Layout>
   )

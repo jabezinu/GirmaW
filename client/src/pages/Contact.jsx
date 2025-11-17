@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import contactMessageService from '../services/contactMessageService';
 
 export default function Contact() {
   const { language } = useLanguage();
@@ -18,7 +19,7 @@ export default function Contact() {
       address: 'Address',
       addressValue: '123 Gem Street, Diamond City, DC 12345',
       phone: 'Phone',
-      phoneValue: '+1 (555) 123-4567',
+      phoneValue: '+251941913877',
       email: 'Email',
       emailValue: 'info@gemstonepro.com',
       businessHours: 'Business Hours',
@@ -37,7 +38,7 @@ export default function Contact() {
       address: 'አድራሻ',
       addressValue: '123 የጌም ጎዳና፣ ዳይመንድ ከተማ፣ ዲሲ 12345',
       phone: 'ስልክ',
-      phoneValue: '+251 92 477 1949',
+      phoneValue: '+251941913877',
       email: 'ኢሜይል',
       emailValue: 'info@gemstonepro.com',
       businessHours: 'የስራ ሰዓት',
@@ -60,11 +61,16 @@ export default function Contact() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert(t.successMessage);
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    try {
+      await contactMessageService.create(formData);
+      alert(t.successMessage);
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (error) {
+      console.error('Error submitting contact form:', error);
+      alert('Failed to send message. Please try again.');
+    }
   };
 
   return (
