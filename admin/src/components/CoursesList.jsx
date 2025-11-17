@@ -62,72 +62,86 @@ export default function CoursesList() {
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
-      <div className="sm:flex sm:items-center">
-        <div className="sm:flex-auto">
-          <h1 className="text-2xl font-semibold text-gray-900">Courses</h1>
-          <p className="mt-2 text-sm text-gray-700">
-            Manage your training courses
-          </p>
-        </div>
-        <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-          <Link
-            to="/courses/new"
-            className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            <FaPlus className="mr-2" />
-            Add Course
-          </Link>
+      {/* Header Section */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+          <div className="mb-4 sm:mb-0">
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Courses</h1>
+            <p className="text-gray-600">
+              Manage your training courses and educational programs
+            </p>
+          </div>
+          <div className="flex-shrink-0">
+            <Link
+              to="/courses/new"
+              className="inline-flex items-center px-4 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-semibold rounded-lg shadow-sm hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 transform hover:scale-105"
+            >
+              <FaPlus className="mr-2 h-4 w-4" />
+              Add Course
+            </Link>
+          </div>
         </div>
       </div>
 
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Courses Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {courses.map((course) => (
-          <div key={course._id} className="bg-white overflow-hidden shadow-lg rounded-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
-            <div className="p-6">
+          <div key={course._id} className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg hover:border-gray-300 transition-all duration-300 overflow-hidden group">
+            {/* Image Section */}
+            <div className="relative overflow-hidden">
               <img
                 src={course.image}
                 alt={course.name}
-                className="w-full h-48 object-cover rounded-md mb-4"
+                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
               />
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">{course.name}</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium text-gray-500">Duration:</span>
-                  <span className="text-sm text-gray-900">{course.duration}</span>
+              <div className="absolute top-3 right-3">
+                <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium shadow-sm ${
+                  course.level === 'Beginner'
+                    ? 'bg-green-100 text-green-800 border border-green-200'
+                    : course.level === 'Intermediate'
+                    ? 'bg-yellow-100 text-yellow-800 border border-yellow-200'
+                    : course.level === 'Advanced'
+                    ? 'bg-red-100 text-red-800 border border-red-200'
+                    : 'bg-blue-100 text-blue-800 border border-blue-200'
+                }`}>
+                  {course.level}
+                </span>
+              </div>
+            </div>
+
+            {/* Content Section */}
+            <div className="p-5">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-700 transition-colors">
+                {course.name}
+              </h3>
+
+              <div className="space-y-2 mb-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-500">Duration</span>
+                  <span className="text-sm font-medium text-gray-900">{course.duration}</span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium text-gray-500">Price:</span>
-                  <span className="text-sm text-gray-900">{course.price}</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium text-gray-500">Level:</span>
-                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                    course.level === 'Beginner'
-                      ? 'bg-green-100 text-green-800'
-                      : course.level === 'Intermediate'
-                      ? 'bg-yellow-100 text-yellow-800'
-                      : course.level === 'Advanced'
-                      ? 'bg-red-100 text-red-800'
-                      : 'bg-blue-100 text-blue-800'
-                  }`}>
-                    {course.level}
-                  </span>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-500">Price</span>
+                  <span className="text-sm font-medium text-gray-900">{course.price}</span>
                 </div>
               </div>
-              <p className="text-sm text-gray-600 mt-4 line-clamp-3">{course.description}</p>
-              <div className="mt-6 flex justify-end space-x-3">
+
+              <p className="text-sm text-gray-600 mb-4 line-clamp-2">{course.description}</p>
+
+              {/* Action Buttons */}
+              <div className="flex space-x-2">
                 <Link
                   to={`/courses/${course._id}/edit`}
-                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200"
+                  className="flex-1 inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-blue-700 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 hover:border-blue-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200"
                 >
-                  <FaEdit className="mr-2" />
+                  <FaEdit className="mr-1.5 h-3.5 w-3.5" />
                   Edit
                 </Link>
                 <button
                   onClick={() => handleDelete(course._id)}
-                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200"
+                  className="flex-1 inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-red-700 bg-red-50 border border-red-200 rounded-lg hover:bg-red-100 hover:border-red-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all duration-200"
                 >
-                  <FaTrash className="mr-2" />
+                  <FaTrash className="mr-1.5 h-3.5 w-3.5" />
                   Delete
                 </button>
               </div>
@@ -136,14 +150,19 @@ export default function CoursesList() {
         ))}
       </div>
 
+      {/* Empty State */}
       {courses.length === 0 && (
-        <div className="text-center py-12">
-          <p className="text-gray-500">No courses found.</p>
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
+          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <FaPlus className="h-8 w-8 text-gray-400" />
+          </div>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">No courses yet</h3>
+          <p className="text-gray-500 mb-6">Get started by adding your first training course.</p>
           <Link
             to="/courses/new"
-            className="mt-4 inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+            className="inline-flex items-center px-4 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-semibold rounded-lg shadow-sm hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200"
           >
-            <FaPlus className="mr-2" />
+            <FaPlus className="mr-2 h-4 w-4" />
             Add your first course
           </Link>
         </div>
