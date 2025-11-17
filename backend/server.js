@@ -3,7 +3,6 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import 'dotenv/config';
 import gemstonesRouter from './routes/gemstones.js';
-import commentsRouter from './routes/comments.js';
 import coursesRouter from './routes/courses.js';
 import equipmentsRouter from './routes/equipments.js';
 import contactMessagesRouter from './routes/contactMessages.js';
@@ -20,10 +19,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:3000'],
-  credentials: true
-}));
+app.use(cors({}));
 app.use(express.json());
 
 // MongoDB connection
@@ -33,7 +29,6 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // Routes
 app.use('/api/gemstones', gemstonesRouter);
-app.use('/api/comments', commentsRouter);
 app.use('/api/courses', coursesRouter);
 app.use('/api/equipments', equipmentsRouter);
 app.use('/api/contact-messages', contactMessagesRouter);
