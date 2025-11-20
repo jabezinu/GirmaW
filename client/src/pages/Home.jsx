@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ChevronRight, Star, Award, Globe, Users, ShoppingBag, TestTube, Wrench, GraduationCap, MessageCircle } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { commentService } from '../services/commentService';
+import { videoService } from '../services/videoService';
 import diamondImg from '../assets/kal_asset/gemstones/Diamond.jpg';
 import rubyImg from '../assets/kal_asset/gemstones/ruby.jpg';
 import sapphireImg from '../assets/kal_asset/gemstones/Sapphire.jpg';
@@ -13,7 +14,43 @@ export default function GemstonHomepage() {
    const [currentTestimonial, setCurrentTestimonial] = useState(0);
    const [testimonials, setTestimonials] = useState([]);
    const [testimonialsLoading, setTestimonialsLoading] = useState(true);
+   const [videos, setVideos] = useState([]);
+   const [videosLoading, setVideosLoading] = useState(true);
    const { language } = useLanguage();
+ 
+   // Function to convert video URLs to embed format
+   const getEmbedUrl = (url) => {
+     if (!url) return '';
+ 
+     // TikTok embed
+     if (url.includes('tiktok.com')) {
+       const match = url.match(/\/video\/(\d+)/);
+       if (match) {
+         return `https://www.tiktok.com/embed/v2/${match[1]}?hide_related=1`;
+       }
+     }
+ 
+     // YouTube embed
+     if (url.includes('youtube.com') || url.includes('youtu.be')) {
+       let videoId = '';
+       if (url.includes('youtube.com/watch?v=')) {
+         videoId = url.split('v=')[1]?.split('&')[0];
+       } else if (url.includes('youtu.be/')) {
+         videoId = url.split('youtu.be/')[1]?.split('?')[0];
+       }
+       if (videoId) {
+         return `https://www.youtube.com/embed/${videoId}`;
+       }
+     }
+ 
+     // If it's already an embed URL, return as is
+     if (url.includes('/embed/') || url.includes('embed/v2/')) {
+       return url;
+     }
+ 
+     // Fallback: return original URL
+     return url;
+   };
 
   const translations = {
     am: {
@@ -191,7 +228,19 @@ export default function GemstonHomepage() {
       }
     };
 
+    const fetchVideos = async () => {
+      try {
+        const data = await videoService.getAll();
+        setVideos(data);
+      } catch (error) {
+        console.error('Error fetching videos:', error);
+      } finally {
+        setVideosLoading(false);
+      }
+    };
+
     fetchTestimonials();
+    fetchVideos();
   }, []);
 
   useEffect(() => {
@@ -432,69 +481,67 @@ export default function GemstonHomepage() {
         </div>
       </section>
 
-      {/* TikTok Testimonial Videos */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+      {/* Customer Videos */}
+      <section className="py-20 bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Customer Testimonials</h2>
-              <p className="text-lg text-gray-600">Hear directly from our satisfied customers</p>
-            </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Video 1 */}
-            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
-              <div className="p-2">
-                <iframe
-                  src="https://www.tiktok.com/embed/v2/7572215582343302456?hide_related=1"
-                  frameBorder="0"
-                  allowFullScreen
-                  className="rounded-xl w-full h-64 sm:h-80 md:h-96"
-                  title="TikTok Testimonial Video 1"
-                ></iframe>
-              </div>
-              <div className="p-4 bg-gradient-to-r from-blue-50 to-purple-50">
-                <p className="text-center text-gray-700 font-medium">
-                  Real customer experience shared on TikTok
-                </p>
-              </div>
-            </div>
-
-            {/* Video 2 */}
-            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
-              <div className="p-2">
-                <iframe
-                  src="https://www.tiktok.com/embed/v2/7572958733005786380?hide_related=1"
-                  frameBorder="0"
-                  allowFullScreen
-                  className="rounded-xl w-full h-64 sm:h-80 md:h-96"
-                  title="TikTok Testimonial Video 2"
-                ></iframe>
-              </div>
-              <div className="p-4 bg-gradient-to-r from-blue-50 to-purple-50">
-                <p className="text-center text-gray-700 font-medium">
-                  Real customer experience shared on TikTok
-                </p>
-              </div>
-            </div>
-
-            {/* Video 3 */}
-            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
-              <div className="p-2">
-                <iframe
-                  src="https://www.tiktok.com/embed/v2/7571496642193476875?hide_related=1"
-                  frameBorder="0"
-                  allowFullScreen
-                  className="rounded-xl w-full h-64 sm:h-80 md:h-96"
-                  title="TikTok Testimonial Video 3"
-                ></iframe>
-              </div>
-              <div className="p-4 bg-gradient-to-r from-blue-50 to-purple-50">
-                <p className="text-center text-gray-700 font-medium">
-                  Real customer experience shared on TikTok
-                </p>
-              </div>
-            </div>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Customer Experiences
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Watch real stories from our satisfied customers sharing their gemstone journey
+            </p>
           </div>
+
+          {videosLoading ? (
+            <div className="flex justify-center items-center h-64">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+            </div>
+          ) : videos.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {videos.map((video, idx) => (
+                <div
+                  key={video._id}
+                  className="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-300 group"
+                >
+                  <div className="relative overflow-hidden">
+                    <div className="p-2">
+                      <iframe
+                        src={getEmbedUrl(video.url)}
+                        frameBorder="0"
+                        allowFullScreen
+                        className="rounded-xl w-full h-64 sm:h-80 md:h-96"
+                        title={video.title}
+                      ></iframe>
+                    </div>
+                    <div className="absolute top-4 right-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
+                      Video {idx + 1}
+                    </div>
+                  </div>
+                  <div className="p-6 bg-gradient-to-r from-purple-50 to-pink-50">
+                    <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-purple-700 transition-colors">
+                      {video.title}
+                    </h3>
+                    {video.description && (
+                      <p className="text-gray-700 text-sm leading-relaxed">
+                        {video.description}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-16">
+              <div className="w-20 h-20 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg className="w-10 h-10 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">No videos available</h3>
+              <p className="text-gray-600">Check back soon for customer testimonials and experiences.</p>
+            </div>
+          )}
         </div>
       </section>
 

@@ -7,6 +7,8 @@ import CourseForm from './components/CourseForm'
 import EquipmentsList from './components/EquipmentsList'
 import EquipmentForm from './components/EquipmentForm'
 import ContactMessagesList from './components/ContactMessagesList'
+import VideosList from './components/VideosList'
+import VideoForm from './components/VideoForm'
 
 export default function App() {
   return (
@@ -22,6 +24,9 @@ export default function App() {
         <Route path="/equipments/new" element={<EquipmentForm />} />
         <Route path="/equipments/:id/edit" element={<EquipmentForm />} />
         <Route path="/contact-messages" element={<ContactMessagesList />} />
+        <Route path="/videos" element={<VideosList />} />
+        <Route path="/videos/new" element={<VideoForm />} />
+        <Route path="/videos/:id/edit" element={<VideoForm />} />
       </Routes>
     </Layout>
   )

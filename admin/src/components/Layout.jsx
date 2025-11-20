@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useState } from 'react'
-import { FaGem, FaBook, FaTools, FaEnvelope, FaChevronLeft, FaChevronRight, FaBars, FaPlus } from 'react-icons/fa'
+import { FaGem, FaBook, FaTools, FaEnvelope, FaVideo, FaChevronLeft, FaChevronRight, FaBars, FaPlus } from 'react-icons/fa'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -25,6 +25,7 @@ export default function Layout({ children }) {
     { to: '/', label: 'Gemstones', icon: FaGem },
     { to: '/courses', label: 'Courses', icon: FaBook },
     { to: '/equipments', label: 'Equipments', icon: FaTools },
+    { to: '/videos', label: 'Videos', icon: FaVideo },
     { to: '/contact-messages', label: 'Contact Messages', icon: FaEnvelope },
   ]
 
