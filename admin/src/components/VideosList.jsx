@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { FaEdit, FaTrash, FaPlus, FaPlay } from 'react-icons/fa'
 import { toast } from 'react-toastify'
+import { useModal } from '../contexts/ModalContext'
 import videoService from '../services/videoService'
 
 export default function VideosList() {
   const [videos, setVideos] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const { showConfirm } = useModal()
 
   // Function to convert video URLs to embed format
   const getEmbedUrl = (url) => {
@@ -63,7 +65,8 @@ export default function VideosList() {
   }
 
   const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this video?')) {
+    const confirmed = await showConfirm('Are you sure you want to delete this video?', 'Delete Video')
+    if (confirmed) {
       try {
         await videoService.delete(id)
         setVideos(videos.filter(video => video._id !== id))

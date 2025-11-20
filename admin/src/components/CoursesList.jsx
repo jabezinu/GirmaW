@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa'
 import { toast } from 'react-toastify'
+import { useModal } from '../contexts/ModalContext'
 import courseService from '../services/courseService'
 
 export default function CoursesList() {
   const [courses, setCourses] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const { showConfirm } = useModal()
 
   useEffect(() => {
     fetchCourses()
@@ -29,7 +31,8 @@ export default function CoursesList() {
   }
 
   const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this course?')) {
+    const confirmed = await showConfirm('Are you sure you want to delete this course?', 'Delete Course')
+    if (confirmed) {
       try {
         await courseService.delete(id)
         setCourses(courses.filter(course => course._id !== id))

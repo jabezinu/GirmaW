@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa'
 import { toast } from 'react-toastify'
+import { useModal } from '../contexts/ModalContext'
 import gemstoneService from '../services/gemstoneService'
 
 export default function GemstonesList() {
   const [gemstones, setGemstones] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const { showConfirm } = useModal()
 
   useEffect(() => {
     fetchGemstones()
@@ -29,7 +31,8 @@ export default function GemstonesList() {
   }
 
   const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this gemstone?')) {
+    const confirmed = await showConfirm('Are you sure you want to delete this gemstone?', 'Delete Gemstone')
+    if (confirmed) {
       try {
         await gemstoneService.delete(id)
         setGemstones(gemstones.filter(gemstone => gemstone._id !== id))

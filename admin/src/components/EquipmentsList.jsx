@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa'
 import { toast } from 'react-toastify'
+import { useModal } from '../contexts/ModalContext'
 import equipmentService from '../services/equipmentService'
 
 export default function EquipmentsList() {
   const [equipments, setEquipments] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const { showConfirm } = useModal()
 
   useEffect(() => {
     fetchEquipments()
@@ -29,7 +31,8 @@ export default function EquipmentsList() {
   }
 
   const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this equipment?')) {
+    const confirmed = await showConfirm('Are you sure you want to delete this equipment?', 'Delete Equipment')
+    if (confirmed) {
       try {
         await equipmentService.delete(id)
         setEquipments(equipments.filter(equipment => equipment._id !== id))
