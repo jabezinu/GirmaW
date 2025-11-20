@@ -4,6 +4,7 @@ import courseService from '../services/courseService'
 import equipmentService from '../services/equipmentService'
 import videoService from '../services/videoService'
 import contactMessageService from '../services/contactMessageService'
+import { createNotificationSound, playNotificationAudio } from '../utils/notificationSound'
 
 const DataContext = createContext(null)
 
@@ -46,6 +47,10 @@ export const DataProvider = ({ children }) => {
   const [equipmentsCached, setEquipmentsCached] = useState(false)
   const [videosCached, setVideosCached] = useState(false)
   const [contactMessagesCached, setContactMessagesCached] = useState(false)
+
+  // Track previous unread message count for notification
+  const previousUnreadCountRef = useRef(null)
+  const notificationAudioRef = useRef(null)
 
   // Gemstones
   const fetchGemstones = useCallback(async (force = false) => {
@@ -174,6 +179,18 @@ export const DataProvider = ({ children }) => {
     try {
       setContactMessagesLoading(true)
       const data = await contactMessageService.getAll()
+      
+      // Check for new unread messages and play notification sound
+      const newUnreadCount = data.filter(m => !m.read).length
+      
+      // Only play sound if we have a previous count and the new count is higher
+      if (previousUnreadCountRef.current !== null && newUnreadCount > previousUnreadCountRef.current) {
+        playNotificationSound()
+      }
+      
+      // Update the previous count
+      previousUnreadCountRef.current = newUnreadCount
+      
       setContactMessages(data)
       setContactMessagesCached(true)
       return data
@@ -184,6 +201,12 @@ export const DataProvider = ({ children }) => {
       setContactMessagesLoading(false)
     }
   }, [contactMessagesCached, contactMessages])
+
+  // Function to play notification sound
+  const playNotificationSound = useCallback(() => {
+    // Try to play audio file first, with fallback to generated sound
+    playNotificationAudio(notificationAudioRef)
+  }, [])
 
   const updateContactMessage = useCallback((id, updates) => {
     setContactMessages(prev => prev.map(m => m._id === id ? { ...m, ...updates } : m))
@@ -209,6 +232,24 @@ export const DataProvider = ({ children }) => {
       globalClearCache = null
     }
   }, [clearCache])
+
+  // Poll for new contact messages every 10 seconds
+  useEffect(() => {
+    // Initial fetch to set the baseline
+    if (!contactMessagesCached) {
+      fetchContactMessages()
+    }
+
+    // Set up polling interval
+    const pollInterval = setInterval(() => {
+      // Force fetch to get latest messages
+      fetchContactMessages(true)
+    }, 10000) // Poll every 10 seconds
+
+    return () => {
+      clearInterval(pollInterval)
+    }
+  }, [fetchContactMessages, contactMessagesCached])
 
   const value = {
     // Gemstones
