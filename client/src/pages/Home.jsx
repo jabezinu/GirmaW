@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, Star, Award, Globe, Users, ShoppingBag, TestTube, Wrench, GraduationCap, MessageCircle } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { commentService } from '../services/commentService';
 import diamondImg from '../assets/kal_asset/gemstones/Diamond.jpg';
 import rubyImg from '../assets/kal_asset/gemstones/ruby.jpg';
 import sapphireImg from '../assets/kal_asset/gemstones/Sapphire.jpg';
@@ -173,8 +174,7 @@ export default function GemstonHomepage() {
   useEffect(() => {
     const fetchTestimonials = async () => {
       try {
-        const response = await fetch('http://localhost:5001/api/comments');
-        const data = await response.json();
+        const data = await commentService.getAll();
         // Map ContactMessage fields to testimonial format
         const mappedTestimonials = data.map(comment => ({
           _id: comment._id,
