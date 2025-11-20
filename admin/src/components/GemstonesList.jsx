@@ -92,7 +92,7 @@ export default function GemstonesList() {
               <img
                 src={gemstone.image}
                 alt={gemstone.nameKey}
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                className="w-full h-32 sm:h-40 md:h-48 object-cover group-hover:scale-105 transition-transform duration-300"
               />
               <div className="absolute top-3 right-3">
                 <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium shadow-sm ${
@@ -133,7 +133,7 @@ export default function GemstonesList() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex space-x-2">
+              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                 <Link
                   to={`/gemstones/${gemstone._id}/edit`}
                   className="flex-1 inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg hover:bg-emerald-100 hover:border-emerald-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-all duration-200"
