@@ -29,7 +29,7 @@ export const LanguageProvider = ({ children }) => {
   const translations = {
     am: {
       // Navigation
-      brandName: "ቃልጄምስቶን",
+      brandName: "GirmaWondimu",
       home: "መነሻ",
       gemstones: "መአድኖች",
       services: "አገልግሎት",
@@ -43,7 +43,7 @@ export const LanguageProvider = ({ children }) => {
     },
     en: {
       // Navigation
-      brandName: "KalGemstone",
+      brandName: "GirmaWondimu",
       home: "Home",
       gemstones: "Gemstones",
       services: "Services",

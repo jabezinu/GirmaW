@@ -8,13 +8,13 @@ export default function About() {
   const content = {
     en: {
       hero: {
-        title: 'About KalGemstone - Shine Like A Gemstone',
+        title: 'About GirmaWondimu - Shine Like A Gemstone',
         subtitle: 'Your Trusted Partner in the World of Precious Gemstones'
       },
       story: {
         title: 'Our Story',
         paragraphs: [
-          'Founded in 2015 GC., KalGemstone has been at the forefront of the gemstone industry, serving both local and international markets with unparalleled expertise and integrity.',
+          'Founded in 2015 GC., GirmaWondimu has been at the forefront of the gemstone industry, serving both local and international markets with unparalleled expertise and integrity.',
           'Our journey began with a simple mission: to bridge the gap between gemstone enthusiasts, professionals, and the global market. Today, we are recognized as a trusted partner in the gemstone community.',
           'With 10+ years of experience and a team of certified gemologists, we provide comprehensive services that cater to every aspect of the gemstone business.'
         ]
@@ -82,13 +82,13 @@ export default function About() {
     },
     am: {
       hero: {
-        title: 'ስለ ቃልጄምስቶን',
+        title: 'ስለ GirmaWondimu',
         // subtitle: 'በከበሩ እንቁዎች አለም ውስጥ የታመነ አጋርዎ'
       },
       story: {
         title: 'ታሪካችን',
         paragraphs: [
-          'በ2008 ዓ.ም  የተመሰረተው ቃልጄምስቶን በውድ መአድናት ኢንዱስትሪ ውስጥ ግንባር ቀደም በመሆን ሁለቱንም የሀገር ውስጥና የዓለም አቀፍ ገበያዎችን ላቅ ያለ ብቃትና ታማኝነት አግኝቷል።',
+          'በ2008 ዓ.ም  የተመሰረተው GirmaWondimu በውድ መአድናት ኢንዱስትሪ ውስጥ ግንባር ቀደም በመሆን ሁለቱንም የሀገር ውስጥና የዓለም አቀፍ ገበያዎችን ላቅ ያለ ብቃትና ታማኝነት አግኝቷል።',
           'ጉዞአችን የተጀመረው፡ በውድ እንቁ ወዳጆች(ፈላጊዎች)፣ ባለሙያዎች እና በዓለም አቀፍ ገበያ መካከል ያለውን ክፍተት ለመሙላት በሚል ነው። ዛሬ በውድ እንቁ ማህበረሰብ ውስጥ ግንባር ቀደም ነን።',
           'በዓመታት ልምድ እና በተመሰከረላችው የጂሞሎጂስቶች ቡድን፣ የውድ እንቁ ንግድን በሁሉም ገፅታዎች አጠቃላይ አገልግሎቶችን እንሰጣለን።'
         ]

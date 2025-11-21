@@ -51,7 +51,7 @@ export default function GemstonHomepage() {
   const translations = {
     am: {
       // Hero Section
-      heroTitle: "ቃልጄምስቶን - ለመአድን ንግዶ የታመነ አጋር",
+      heroTitle: "GirmaWondimu - ለመአድን ንግዶ የታመነ አጋር",
       heroSubtitle: "ከማዕድን ቁፋሮ እስከ አለም አቀፍ ገበያ",
       heroDescription: "መግዛት፣ መሸጥ፣ መመርመር እና ስልጠና - ከ2008 ጀምሮ የሀገር ውስጥና አለም አቀፍ ገበያዎችን እናገለግላለን",
       browseGemstones: "መኣድናትን ለማየት",
@@ -123,7 +123,7 @@ export default function GemstonHomepage() {
     },
     en: {
       // Hero Section
-      heroTitle: "KalGemstone - Shine Like A Gemstone",
+      heroTitle: "GirmaWondimu - Shine Like A Gemstone",
       heroSubtitle: "From Mine to International Market",
       heroDescription: "Buying, Selling, Testing & Training - Serving Local & International Markets Since 2015 GC",
       browseGemstones: "Browse Gemstones",
