@@ -1,12 +1,10 @@
 import { Gem, ShoppingCart, GraduationCap, Wrench, Check, Star, Clock, Award, TrendingUp, Mail, Phone, MapPin } from 'lucide-react';
-import { useLanguage } from '../contexts/LanguageContext';
 import { useData } from '../contexts/DataContext';
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 
 export default function Services() {
-  const { language } = useLanguage();
   const location = useLocation();
   const { courses, equipments, loading, errors } = useData();
   
@@ -31,8 +29,8 @@ export default function Services() {
     }
   }, [errors.courses, errors.equipments]);
 
-  const translations = {
-    en: {
+  // English text constants
+  const t = {
       pageTitle: "Our Services",
       pageSubtitle: "Professional gemstone services backed by certified experts and state-of-the-art technology",
       whatWeOffer: "What We Offer",
@@ -157,120 +155,7 @@ export default function Services() {
           support: "Free installation assistance • Equipment training included • Technical support hotline • Maintenance services • Replacement parts inventory"
         }
       ]
-    },
-    am: {
-      pageTitle: "የምንሰጣቸው አገልግሎቶች",
-      pageSubtitle: "በተረጋገጡ ባለሙያዎች እና በዘመናዊ ቴክኖሎጂ የተደገፉ ሙያዊ አገልግሎቶች",
-      whatWeOffer: "የምናቀርበው",
-      ourProcess: "የምናከናውናቸው ሂደት",
-      turnaroundTime: "የማጠናቀቂያ ጊዜ",
-      globalReach: "ዓለም አቀፍ ተደራሽነት",
-      ourGuarantee: "የእኛ ዋስትና",
-      additionalBenefits: "ተጨማሪ ጥቅሞች",
-      expertInstructors: "ባለሙያ አስተማሪዎች",
-      availableCourses: "ያሉ ኮርሶች",
-      duration: "ቆይታ",
-      equipmentCategories: "የመሳሪያ ምድቦች",
-      trustedBrands: "የምንሸጣቸው የታመኑ ብራንዶች",
-      completeSupportPackage: "ሙሉ የድጋፍ ፓኬጅ",
-      clientTestimonials: "የደንበኛ ምስክርነቶች",
-      callUsButton: "ይደውሉልን ወይም ወደ ቢሮችን ይምጡ",
-      findLocationButton: "አድራሻችንን ይፈልጉ",
-      services: [
-        {
-          id: "gemstone-testing",
-          title: "የመአድን ምርመራ",
-          description: "በዘመናዊ መሳሪያዎች እና በባለሙያ እውቀት የሚደረግ ሙያዊ የመአድን መለያ እና የጥራት ግምገማ።",
-          price: "ከ400 ብር ጀምሮ",
-          priceNote: "በ24 ሰዓት ውስጥ ሙሉ የምርመራ ሪፖርት",
-          features: [
-            "አጠቃላይ የመአድን ዝርያ እና መለያ",
-            "ሙያዊ የጥራት ደረጃ መስጠት (መቁረጥ፣ ክብደት)",
-            "መአድናትን ማከምና እና ማሻሻል",
-            "በላቀ ምርመራ የተገኘበትን ቦታ መለየት",
-            "ክብደት እና ጥራት ማረጋገጥ",
-            "በሙሉ ሽፋን ደህንነቱ የተጠበቀ አያያዝ"
-          ],
-          process: [
-            { title: "የመጀመሪያ ምክክር እና እይታ ምርመራ:", desc: "መዐድኑን በዓይን ምርመራ እናደርጋለን" },
-            { title: "መሰረታዊ የመአድን ምርመራ:", desc: "መረጃ ጠቋሚ መለኪያዎችን በመጠቀም መደበኛ ምርመራዎች" },
-            { title: "የላቀ የመሳሪያ ትንተና:", desc: "በስፔክትሮሜትሮች፣ ማለፊያ መለኪያዎች፣ ማይክሮስኮፖች እና ሌሎች ልዩ መሳሪያዎች በመጠቀም ጥልቅ ትንተና" },
-            { title: "የባለሙያ ሪፖርት ማዘጋጀት:", desc: "ስለ መአድኑ ግኝቶችን እና ምክሮችን የያዘ አጠቃላይ ሪፖርት እናዘጋጃለን" }
-          ],
-          processNote: "ማስታወሻ፡ በፎቶግራፍ በመጠቀም ምርመራ አናካሂድም። ሁሉም ግምገማዎች መአድኑን ወደ ቢሮአችን መምጣት ያስፈልጋል።",
-          turnaround: "ሁሉም ምርመራዎች በ24 ሰዓት ውስጥ ይጠናቀቃሉ",
-          // equipment: "ስፔክትሮሜትር • ማለፊያ መለኪያ • የጌሞሎጂ ማይክሮስኮፕ • የአልትራቫዮሌት ብርሃን • ዲክሮስኮፕ • ፖላሪስኮፕ"
-        },
-        {
-          id: "buying-selling",
-          title: "የመግዛት እና የመሸጥ አገልግሎቶች",
-          description: "የሚኖርዎትን ማንኛውንም ዓይነት ከበረ ዕንቁ እንገዛለን እና እንሸጣለን። ማንኛውንም ዓይነት መአድን ለመግዛት ወይም ለመሸጥ ከፈለጉ ይደውሉልን ወይም ለፈጣን እርዳታ ወደ ቢሮችን ይምጡ። ደህንነቱ የተጠበቀ ግብይት፣ ሙያዊ ግምገማ፣ ዓለም አቀፍ መላኪያ እና ሙሉ ግልጽነት ያለው አገልግሎት እንሰጣለን።",
-          price: "በኮሚሽን ላይ የተመሰረተ",
-          priceNote: "ሻጮች፡ በተሳካ ሽያጭ ላይ 2% ኮሚሽን",
-          features: [
-            "ሙያዊ የገበያ ትንተና እና የዋጋ መመሪያ",
-            "በዓለም ዙሪያ የተረጋገጡ ገዥዎች እና ሻጮች ማገናኘት",
-            "ለግብይት ደህንነቱ የተጠበቀ አገልግሎቱቶች",
-            "አጠቃላይ የኢንሹራንስ እርዳታ እና ሽፋን",
-            "የገበያ አዝማሚያ ትንተና እና ሪፖርቶች",
-          ],
-          process: [
-            { title: "የመጀመሪያ ምክክር እና ግምገማ:", desc: "መአድኑን በአካል እንገመግማለን እና ሙያዊ የገበያ ግምገማ እንሰጣለን" },
-            // { title: "ዝርዝር እና ግብይት:", desc: "ለገዥ አቀራረብ ሙያዊ ፎቶግራፍ እና ዝርዝር መግለጫዎች" },
-            { title: "ድርድር:", desc: "ተገናኝተው ደህንነቱ የተጠበቀ ግብይት ያመቻቹ" },
-            // { title: "ኤስክሮው እና አቅርቦት:", desc: "ደህንነቱ የተጠበቀ የክፍያ ሂደት እና የተረጋገጠ የመላኪያ ቅንጅት" }
-          ],
-          markets: "በሰሜን አሜሪካ፣ አውሮፓ፣ እስያ እና መካከለኛው ምስራቅ ደንበኞችን እናገናኛለን፣ ይህም ወደ የዓለማችን በጣም ንቁ የዕንቁ ገበያዎች ተደራሽነት ይሰጥዎታል።",
-          guarantee: "የ30 ቀን እርካታ ዋስትና • የማረጋገጫ ማረጋገጥ • ኢንሹራንስ • ደህንነቱ የተጠበቀ የክፍያ ሂደት"
-        },
-        {
-          id: "courses",
-          title: "የስልጠና ኮርሶች",
-          description: "ከጀማሪ እስከ አድቫንስድ የሚሆኑ አጠቃላይ ኮርሶች። በዘርፉ ልምድ ካላቸው የኢንዱስትሪ ባለሙያዎች ይማሩ።",
-          features: [
-            "ከጀማሪ እስከ አድቫንስድ ደረጃዎች የሚሆኑ መዋቅራዊ ስርዓተ ትምህርት",
-            "በኦንላይን ላይ እና በአካል የክፍል አማራጮች",
-            "በኢንዱስትሪው የተረጋገጠ የምስክር ወረቀት በማጠናቀቅ ጊዜ",
-            "በእውነተኛ ናሙናዎች ሰፊ ተግባራዊ ስልጠና",
-            "የአንድ-ለ-አንድ አማካሪነት እና የሙያ ድጋፍ",
-            "የስራ ምደባ እርዳታ እና የኢንዱስትሪ ግንኙነቶች"
-          ],
-          courses: [
-            { name: "የጌሞሎጂ መሰረታዊ ነገሮች", duration: "4 ሳምንታት", price: "299 ETB", level: "ጀማሪ", desc: "የዕንቁ መለያ፣ መሰረታዊ ባህሪያት እና የኢንዱስትሪ ቃላት ማስተዋወቂያ" },
-            { name: "የላቀ የዕንቁ መለያ", duration: "8 ሳምንታት", price: "699 ETB", level: "መካከለኛ", desc: "የላቁ የምርመራ ቴክኒኮችን እና የመሳሪያ አሠራርን ይማሩ" },
-            { name: "ሙያዊ የጌሞሎጂስት ምስክር ወረቀት", duration: "16 ሳምንታት", price: "1299 ETB", level: "ላቀ", desc: "በኢንዱስትሪ ምስክር ወረቀት አጠቃላይ ሙያዊ ስልጠና" },
-            { name: "የዕንቁ ንግድ እና ግብይት", duration: "6 ሳምንታት", price: "499 ETB", level: "ሁሉም ደረጃዎች", desc: "የዕንቁ ንግድዎን እንዴት እንደሚጀምሩ እንደሚያሳድጉ ይማሩ" }
-          ],
-          benefits: "ትንሽ ተማሪ ነው ምንቀበለው • የሙያ መሳሪያ መዳረሻ • አዳዲስ የሥራ ሰዎች ሚገኙበት"
-        },
-        {
-          id: "machines",
-          title: "የመሳሪያ ሽያጭ",
-          description: "ጥራት ያላቸው መሳሪያዎች እና ማሽኖች። ለመአድን አውጪዎች እና ለጌጣጌጥ ሠሪዎች መሳሪያዎችን እናቀርባለን። ከባለሙያ መመሪያ እና ሙሉ ድጋፍ ጋር የሚፈልጉትን ሁሉ እናቀርባለን።",
-          price: "ይለያያል",
-          features: [
-            "የላቁ የምርመራ እና የትንተና መሳሪያዎች",
-            "ሙሉ የመቁረጫ እና የፊሴቲንግ መሳሪያ ስርዓቶች",
-            "የኢንዱስትሪ ማቀናበሪያ ማሽኖች እና አቅርቦቶች",
-            "አዲስ እና የተረጋገጠ የተስተካከለ የመሳሪያ አማራጮች",
-            "አጠቃላይ ዋስትና እና ቴክኒካል ድጋፍ",
-            "ነጻ የመሳሪያ ስልጠና እና የማዋቀሪያ እርዳታ",
-            "የንግድ-ግብይት ፕሮግራሞች እና የፋይናንስ እቅዶች"
-          ],
-          categories: [
-            { name: "የምርመራ እና የትንተና መሳሪያዎች", items: "ማለፊያ መለኪያዎች • ስፔክትሮሜትሮች • የአልትራቫዮሌት መብራቶች • ዲክሮስኮፖች • ፖላሪስኮፖች • የሙቀት ማስተላለፊያ መለኪያዎች" },
-            { name: "ማጉላት እና ምልከታ", items: "10x ትሪፕሌት ሉፕስ • ባይኖኩላር ማይክሮስኮፖች • LED ማብራቶች • ዳርክፊልድ ስርዓቶች" },
-            { name: "የመቁረጫ እና ፊሴቲንግ መሳሪያዎች", items: "ፊሴቲንግ ማሽኖች • ካቢንግ መሳሪያዎች • የማሸት ጎማዎች • የአልማዝ ዲስኮች • የኮድ ስርዓቶች" },
-            { name: "የማቀናበሪያ ማሽኖች", items: "የድንጋይ ማሽከርከር ማሽኖች • አልትራሳውንድ ማጽጃዎች • ክፍት ክፍሎች • የመቁረጫ መናጭቶች • የመፍጫ መሳሪያዎች" }
-          ],
-          brands: "የሚከተሉትን ከፍተኛ ብራንዶች እንሸጣለን፡ Zeiss • Presidium • GemOro • Ultra Tec • Grobet • Kassoy • Foredom • Crystalite",
-          support: "ነጻ የመጫኛ እርዳታ • የመሳሪያ ስልጠና የተካተተ • የቴክኒካል ድጋፍ የስልክ መስመር • የጥገና አገልግሎቶች • የመለዋወጫ ክፍሎች ክምችት"
-        }
-      ]
-    }
-  };
-
-  const t = translations[language];
+    };
   const icons = [Gem, ShoppingCart, GraduationCap, Wrench];
 
   return (

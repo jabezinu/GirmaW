@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { useLanguage } from '../contexts/LanguageContext';
 import contactMessageService from '../services/contactMessageService';
 
 export default function Contact() {
-  const { language } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -13,48 +11,26 @@ export default function Contact() {
     location: ''
   });
 
-  const translations = {
-    en: {
-      title: 'Contact Us',
-      getInTouch: 'Get In Touch',
-      description: "Have questions about our services or want to discuss a potential partnership? We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
-      address: 'Address',
-      addressValue: '123 Gem Street, Diamond City, DC 12345',
-      phone: 'Phone',
-      phoneValue: '+251941913877',
-      email: 'Email',
-      emailValue: 'Kalgemston888@gmail.com',
-      businessHours: 'Business Hours',
-      businessHoursValue: 'Monday - Sunday: 9:00 AM - 6:00 PM',
-      name: 'Name',
-      subject: 'Subject',
-      message: 'Message',
-      sendMessage: 'Send Message',
-      successMessage: 'Thank you for your message! We will get back to you soon.',
-      reviewOnGoogleMaps: 'Review us on Google Maps'
-    },
-    am: {
-      title: 'ያግኙን',
-      getInTouch: 'ተገናኝ',
-      description: 'ስለ አገልግሎታችን ጥያቄዎች አሉዎት ወይም ከእኛ ጋር መወያየት ይፈልጋሉ? ከእርስዎ መስማት እንፈልጋለን። መልእክት ይላኩልን እና በተቻለ ፍጥነት እንመልሳለን።',
-      address: 'አድራሻ',
-      addressValue: '123 የጌም ጎዳና፣ ዳይመንድ ከተማ፣ ዲሲ 12345',
-      phone: 'ስልክ',
-      phoneValue: '+251941913877',
-      email: 'ኢሜይል',
-      emailValue: 'Kalgemston888@gmail.com',
-      businessHours: 'የስራ ሰዓት',
-      businessHoursValue: 'ሰኞ - እሁድ፡ ከጠዋቱ 9:00 - ከምሽቱ 6:00',
-      name: 'ስም',
-      subject: 'ርዕሰ ጉዳይ',
-      message: 'መልእክት',
-      sendMessage: 'መልእክት ላክ',
-      successMessage: 'ለመልእክትዎ እናመሰግናለን! በቅርቡ እናገኝዎታለን።',
-      reviewOnGoogleMaps: 'በጉግል ካርታ ላይ አስተያየት ስጡን'
-    }
+  // English text constants
+  const t = {
+    title: 'Contact Us',
+    getInTouch: 'Get In Touch',
+    description: "Have questions about our services or want to discuss a potential partnership? We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
+    address: 'Address',
+    addressValue: '123 Gem Street, Diamond City, DC 12345',
+    phone: 'Phone',
+    phoneValue: '+251941913877',
+    email: 'Email',
+    emailValue: 'Kalgemston888@gmail.com',
+    businessHours: 'Business Hours',
+    businessHoursValue: 'Monday - Sunday: 9:00 AM - 6:00 PM',
+    name: 'Name',
+    subject: 'Subject',
+    message: 'Message',
+    sendMessage: 'Send Message',
+    successMessage: 'Thank you for your message! We will get back to you soon.',
+    reviewOnGoogleMaps: 'Review us on Google Maps'
   };
-
-  const t = translations[language];
 
   const handleChange = (e) => {
     setFormData({

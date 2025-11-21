@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Filter, X, Languages } from 'lucide-react';
-import { useLanguage } from '../contexts/LanguageContext';
+import { Search, Filter, X } from 'lucide-react';
 import { useData } from '../contexts/DataContext';
 import toast from 'react-hot-toast';
 
 export default function GemstonesPage() {
-  const { language } = useLanguage();
   const { gemstones, loading: dataLoading, errors, refreshGemstones } = useData();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -15,118 +13,59 @@ export default function GemstonesPage() {
   const loading = dataLoading.gemstones;
   const error = errors.gemstones;
 
-  const translations = {
-    am: {
-      pageTitle: "የእኛ እንቁዎች ስብስብ",
-      pageSubtitle: "ከመላው አለም የተመረጡ ፕሪሚየም ጥራት ያላቸው እንቁዎችን ያስሱ",
-      searchPlaceholder: "እንቁዎችን ይፈልጉ...",
-      filters: "ማጣሪያዎች",
-      clearFilters: "ማጣሪያዎችን አጽዳ",
-      category: "ምድብ",
-      allCategories: "ሁሉም ምድቦች",
-      precious: "ውድ እንቁዎች",
-      semiPrecious: "ከፊል ውድ እንቁዎች",
-      organic: "ኦርጋኒክ",
-      origin: "መነሻ",
-      allOrigins: "ሁሉም አገሮች",
-      priceRange: "የዋጋ ክልል",
-      allPrices: "ሁሉም ዋጋዎች",
-      under1000: "ከ $1,000 በታች",
-      range1000to3000: "$1,000 - $3,000",
-      range3000to5000: "$3,000 - $5,000",
-      above5000: "ከ $5,000 በላይ",
-      sortBy: "ደርድር በ",
-      featured: "የተመረጡ",
-      priceLowToHigh: "ዋጋ: ዝቅተኛ ወደ ከፍተኛ",
-      priceHighToLow: "ዋጋ: ከፍተኛ ወደ ዝቅተኛ",
-      newest: "አዲስ",
-      resultsFound: "ውጤቶች ተገኝተዋል",
-      viewDetails: "ዝርዝሮችን ይመልከቱ",
-      addToCart: "ወደ ጋሪ አክል",
-      certified: "የተረጋገጠ",
-      new: "አዲስ",
-      // Gemstone names
-      blueSapphire: "ሰማያዊ ሰፋየር",
-      ruby: "ሩቢ",
-      emerald: "ኤመራልድ",
-      pinkTourmaline: "ሮዝ ቱርማሊን",
-      aquamarine: "አኳማሪን",
-      amethyst: "አሜቲስት",
-      yellowSapphire: "ቢጫ ሰፋየር",
-      tanzanite: "ታንዛኒት",
-      garnet: "ጋርኔት",
-      citrine: "ሲትሪን",
-      topaz: "ቶፓዝ",
-      peridot: "ፔሪዶት",
-      // Origins
-      ceylon: "ሲላን",
-      burma: "በርማ",
-      colombia: "ኮሎምቢያ",
-      brazil: "ብራዚል",
-      pakistan: "ፓኪስታን",
-      uruguay: "ኡራጓይ",
-      madagascar: "ማዳጋስካር",
-      tanzania: "ታንዛኒያ",
-      thailand: "ታይላንድ",
-      australia: "አውስትራሊያ"
-    },
-    en: {
-      pageTitle: "Our Gemstone Collection",
-      pageSubtitle: "Explore premium quality gemstones sourced from around the world",
-      searchPlaceholder: "Search gemstones...",
-      filters: "Filters",
-      clearFilters: "Clear Filters",
-      category: "Category",
-      allCategories: "All Categories",
-      precious: "Precious Stones",
-      semiPrecious: "Semi-Precious",
-      organic: "Organic",
-      origin: "Origin",
-      allOrigins: "All Countries",
-      priceRange: "Price Range",
-      allPrices: "All Prices",
-      under1000: "Under $1,000",
-      range1000to3000: "$1,000 - $3,000",
-      range3000to5000: "$3,000 - $5,000",
-      above5000: "Above $5,000",
-      sortBy: "Sort By",
-      featured: "Featured",
-      priceLowToHigh: "Price: Low to High",
-      priceHighToLow: "Price: High to Low",
-      newest: "Newest",
-      resultsFound: "Results Found",
-      viewDetails: "View Details",
-      addToCart: "Add to Cart",
-      certified: "Certified",
-      new: "New",
-      // Gemstone names
-      blueSapphire: "Blue Sapphire",
-      ruby: "Ruby",
-      emerald: "Emerald",
-      pinkTourmaline: "Pink Tourmaline",
-      aquamarine: "Aquamarine",
-      amethyst: "Amethyst",
-      yellowSapphire: "Yellow Sapphire",
-      tanzanite: "Tanzanite",
-      garnet: "Garnet",
-      citrine: "Citrine",
-      topaz: "Blue Topaz",
-      peridot: "Peridot",
-      // Origins
-      ceylon: "Ceylon",
-      burma: "Burma",
-      colombia: "Colombia",
-      brazil: "Brazil",
-      pakistan: "Pakistan",
-      uruguay: "Uruguay",
-      madagascar: "Madagascar",
-      tanzania: "Tanzania",
-      thailand: "Thailand",
-      australia: "Australia"
-    }
+  // English text constants
+  const t = {
+    pageTitle: "Our Gemstone Collection",
+    pageSubtitle: "Explore premium quality gemstones sourced from around the world",
+    searchPlaceholder: "Search gemstones...",
+    filters: "Filters",
+    clearFilters: "Clear Filters",
+    category: "Category",
+    allCategories: "All Categories",
+    precious: "Precious Stones",
+    semiPrecious: "Semi-Precious",
+    organic: "Organic",
+    origin: "Origin",
+    allOrigins: "All Countries",
+    priceRange: "Price Range",
+    allPrices: "All Prices",
+    under1000: "Under $1,000",
+    range1000to3000: "$1,000 - $3,000",
+    range3000to5000: "$3,000 - $5,000",
+    above5000: "Above $5,000",
+    sortBy: "Sort By",
+    featured: "Featured",
+    priceLowToHigh: "Price: Low to High",
+    priceHighToLow: "Price: High to Low",
+    newest: "Newest",
+    resultsFound: "Results Found",
+    viewDetails: "View Details",
+    addToCart: "Add to Cart",
+    certified: "Certified",
+    new: "New",
+    blueSapphire: "Blue Sapphire",
+    ruby: "Ruby",
+    emerald: "Emerald",
+    pinkTourmaline: "Pink Tourmaline",
+    aquamarine: "Aquamarine",
+    amethyst: "Amethyst",
+    yellowSapphire: "Yellow Sapphire",
+    tanzanite: "Tanzanite",
+    garnet: "Garnet",
+    citrine: "Citrine",
+    topaz: "Blue Topaz",
+    peridot: "Peridot",
+    ceylon: "Ceylon",
+    burma: "Burma",
+    colombia: "Colombia",
+    brazil: "Brazil",
+    pakistan: "Pakistan",
+    uruguay: "Uruguay",
+    madagascar: "Madagascar",
+    tanzania: "Tanzania",
+    thailand: "Thailand",
+    australia: "Australia"
   };
-
-  const t = translations[language];
 
   // Show error toast if there's an error
   useEffect(() => {
@@ -285,12 +224,10 @@ export default function GemstonesPage() {
                   <Search className="w-16 h-16 mx-auto" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">
-                  {language === 'am' ? 'ምንም ውጤት አልተገኘም' : 'No Results Found'}
+                  No Results Found
                 </h3>
                 <p className="text-gray-600 mb-6">
-                  {language === 'am'
-                    ? 'እባክዎን የፍለጋ ቃልዎን ይለውጡ ወይም ማጣሪያዎችን ያጽዱ'
-                    : 'Try adjusting your search or filters'}
+                  Try adjusting your search or filters
                 </p>
                 <button
                   onClick={clearAllFilters}

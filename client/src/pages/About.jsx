@@ -1,12 +1,9 @@
-import { useLanguage } from '../contexts/LanguageContext';
 import { Trophy, Handshake, Sparkles } from 'lucide-react';
 import kalImage from '../assets/kal_asset/exprerts/kal.jpg';
 
 export default function About() {
-  const { language } = useLanguage();
-
-  const content = {
-    en: {
+  // English text constants
+  const t = {
       hero: {
         title: 'About GirmaWondimu - Shine Like A Gemstone',
         subtitle: 'Your Trusted Partner in the World of Precious Gemstones'
@@ -79,83 +76,7 @@ export default function About() {
         title: 'Ready to Start Your Journey?',
         button: 'Get in Touch'
       }
-    },
-    am: {
-      hero: {
-        title: 'ስለ GirmaWondimu',
-        // subtitle: 'በከበሩ እንቁዎች አለም ውስጥ የታመነ አጋርዎ'
-      },
-      story: {
-        title: 'ታሪካችን',
-        paragraphs: [
-          'በ2008 ዓ.ም  የተመሰረተው GirmaWondimu በውድ መአድናት ኢንዱስትሪ ውስጥ ግንባር ቀደም በመሆን ሁለቱንም የሀገር ውስጥና የዓለም አቀፍ ገበያዎችን ላቅ ያለ ብቃትና ታማኝነት አግኝቷል።',
-          'ጉዞአችን የተጀመረው፡ በውድ እንቁ ወዳጆች(ፈላጊዎች)፣ ባለሙያዎች እና በዓለም አቀፍ ገበያ መካከል ያለውን ክፍተት ለመሙላት በሚል ነው። ዛሬ በውድ እንቁ ማህበረሰብ ውስጥ ግንባር ቀደም ነን።',
-          'በዓመታት ልምድ እና በተመሰከረላችው የጂሞሎጂስቶች ቡድን፣ የውድ እንቁ ንግድን በሁሉም ገፅታዎች አጠቃላይ አገልግሎቶችን እንሰጣለን።'
-        ]
-      },
-      expertise: {
-        title: 'የስራ ብቃታችን',
-        items: [
-          'የተረጋገጠ የውድ መአድናት ምርመራ',
-          'ዓለም አቀፍ ግዢ እና ሽያጭ',
-          'ሙያዊ ስልጠና እና የምስክር ወረቀት ፕሮግራሞች',
-          'ዘመናዊ መሳሪያዎች',
-        ]
-      },
-      values: {
-        title: 'ለምን እኛን ይመርጣሉ?',
-        items: [
-          {
-            title: 'ብቃት',
-            description: 'በምናደርገው ሁሉ ከፍተኛ ደረጃዎችን ለማሟላት ቆርጥ መሆናችን'
-          },
-          {
-            title: 'መተማመን',
-            description: 'በታማኝነት እና በአስተማማኝነት ላይ የተመሰረቱ ዘላቂ ግንኙነቶችን መገንባት'
-          },
-          {
-            title: 'ፈጠራ',
-            description: 'በውድ መአድን አገልግሎቶች ውስጥ አዳዲስ ቴክኖሎጂዎችን እና ዘዴዎችን ስለምናቀብል'
-          }
-        ]
-      },
-      stats: [
-        { number: '15+', label: 'ዓመታት ልምድ' },
-        { number: '10ሺ+', label: 'የተለያዩ ደንበኞች' },
-        { number: '10+', label: 'የተገለገሉ አገሮች' }
-      ],
-      team: {
-        title: 'ባለሙያዎቻችን',
-        // subtitle: 'የእኛ የተወደዱ ባለሙያዎች ቡድን በውድ እንቁ ኢንዱስትሪ ውስጥ በአሥርተ ዓመታት ልምድ አንድ ላይ ያመጣል።',
-        members: [
-          {
-            name: 'ቃል',
-            role: 'የሥልጠና ዳይሬክተር',
-            description: 'የምስክር ወረቀት ፕሮግራሞቻችንን እና ሙያዊ እድገትን ይመራል።',
-            expertise: ['ጂሞሎጂ', 'ትምህርት', 'የምስክር ወረቀት']
-          },
-          {
-            name: 'ሊዛ ፓርክ',
-            role: 'የደንበኛ ግንኙነት አስተዳዳሪ',
-            description: 'በዓለም ዙሪያ ላሉ ደንበኞቻችን ልዩ አገልግሎት ለመስጠት ቆርጠዋል።',
-            expertise: ['የደንበኛ አገልግሎት', 'ዓለም አቀፍ ገበያዎች', 'ማማከር']
-          },
-          {
-            name: 'ሮበርት ኪም',
-            role: 'ቴክኒካል ስፔሻሊስት',
-            description: 'ዘመናዊ መሳሪያዎቻችንን እና ላቦራቶሪ ስራዎችን ያስተዳድራል።',
-            expertise: ['ላብራቶሪ ስራዎች', 'የውድ እንቁ ምርመራ', 'ምርምር']
-          }
-        ]
-      },
-      cta: {
-        title: 'ከእኛ ጋር ጉዞዎን ለመጀመር ዝግጁ ነዎት?',
-        button: 'ያግኙን'
-      }
-    }
-  };
-
-  const t = content[language];
+    };
 
   const teamImages = [
     kalImage,

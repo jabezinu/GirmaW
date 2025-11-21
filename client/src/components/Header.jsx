@@ -1,13 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { useLanguage } from '../contexts/LanguageContext';
-import { Languages, Menu as MenuIcon, X } from 'lucide-react';
+import { Menu as MenuIcon, X } from 'lucide-react';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-  const { toggleLanguage, translations } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,19 +15,18 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-
   const navigation = [
-    { name: translations.home, id: 'home', path: '/' },
-    { name: translations.gemstones, id: 'gemstones', path: '/gemstones' },
-    { name: translations.services, id: 'services', path: '/services' },
-    { name: translations.about, id: 'about', path: '/about' },
-    { name: translations.contact, id: 'contact', path: '/contact' }
+    { name: 'Home', id: 'home', path: '/' },
+    { name: 'Gemstones', id: 'gemstones', path: '/gemstones' },
+    { name: 'Services', id: 'services', path: '/services' },
+    { name: 'About', id: 'about', path: '/about' },
+    { name: 'Contact', id: 'contact', path: '/contact' }
   ];
 
   // Get active tab from location
   const getActiveTab = () => {
     // Special case: '/' is Home
-    if (location.pathname === '/') return translations.home;
+    if (location.pathname === '/') return 'Home';
     const found = navigation.find((item) => item.path === location.pathname);
     return found ? found.name : '';
   };
@@ -50,7 +47,7 @@ export default function Header() {
               className="flex items-center cursor-pointer transform transition-all duration-300 hover:scale-110"
             >
               <span className="text-2xl font-black bg-gradient-to-r from-blue-600 via-purple-500 to-red-600 bg-clip-text text-transparent">
-                {translations.brandName}
+                GirmaWondimu
               </span>
             </Link>
           </div>
@@ -91,13 +88,6 @@ export default function Header() {
               ))}
             </div>
           </div>
-         <button
-           onClick={toggleLanguage}
-           className="bg-white/80 hover:bg-white text-gray-800 px-4 py-2 rounded-2xl shadow-2xl flex items-center gap-2 transition-all duration-300 hover:scale-105"
-         >
-           <Languages className="w-5 h-5" />
-           <span className="font-semibold">{translations.languageButton}</span>
-         </button>
          {/* Mobile menu button */}
          <div className="md:hidden">
            <button
