@@ -1,7 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import 'dotenv/config';
 import gemstonesRouter from './routes/gemstones.js';
 import coursesRouter from './routes/courses.js';
 import equipmentsRouter from './routes/equipments.js';
@@ -19,14 +18,14 @@ cloudinary.config({
 });
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = 5001;
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
 // MongoDB connection
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect('mongodb://taeemkurt:nQyQZVjUND3xDFZu@ac-znid8xu-shard-00-00.usti5w8.mongodb.net:27017,ac-znid8xu-shard-00-01.usti5w8.mongodb.net:27017,ac-znid8xu-shard-00-02.usti5w8.mongodb.net:27017/yab?ssl=true&replicaSet=atlas-8zhmwz-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0')
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('MongoDB connection error:', err));
 

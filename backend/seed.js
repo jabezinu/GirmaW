@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import mongoose from 'mongoose';
 import Gemstone from './models/Gemstone.js';
 import Course from './models/Course.js';
@@ -127,7 +126,7 @@ const coursesData = [
 
 async function seedDatabase() {
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    await mongoose.connect('mongodb://taeemkurt:nQyQZVjUND3xDFZu@ac-znid8xu-shard-00-00.usti5w8.mongodb.net:27017,ac-znid8xu-shard-00-01.usti5w8.mongodb.net:27017,ac-znid8xu-shard-00-02.usti5w8.mongodb.net:27017/yab?ssl=true&replicaSet=atlas-8zhmwz-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0');
     console.log('Connected to MongoDB');
 
     // Clear existing data

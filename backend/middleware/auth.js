@@ -8,7 +8,7 @@ export const authenticateAdmin = (req, res, next) => {
       return res.status(401).json({ message: 'Authentication required' });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
+    const decoded = jwt.verify(token, 'kalgem_admin_secret_key_2024');
     req.adminId = decoded.adminId;
     next();
   } catch (error) {

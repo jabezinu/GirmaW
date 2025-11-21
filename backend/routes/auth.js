@@ -22,7 +22,7 @@ router.post('/login', async (req, res) => {
 
     const token = jwt.sign(
       { adminId: admin._id, username: admin.username },
-      process.env.JWT_SECRET || 'your-secret-key',
+      'kalgem_admin_secret_key_2024',
       { expiresIn: '7d' }
     );
 
