@@ -67,7 +67,7 @@ export default function Footer() {
                 </div>
                 <div className="flex items-center">
                   <Mail className="w-5 h-5 text-blue-400 mr-3 flex-shrink-0" />
-                  <span>info@kalgemstone.com</span>
+                  <span>Kalgemston888@gmail.com</span>
                 </div>
               </div>
             </div>
