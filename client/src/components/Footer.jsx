@@ -61,13 +61,23 @@ export default function Footer() {
                   <MapPin className="w-5 h-5 text-blue-400 mr-3 mt-1 flex-shrink-0" />
                   <span>123 Gem Street, Diamond City, GD 12345</span>
                 </div>
-                <div className="flex items-center">
-                  <Phone className="w-5 h-5 text-blue-400 mr-3 flex-shrink-0" />
-                  <span>+251941913877</span>
+                <div className="flex flex-col space-y-2">
+                  <div className="flex items-center">
+                    <Phone className="w-5 h-5 text-blue-400 mr-3 flex-shrink-0" />
+                    <span>+251935740257</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Phone className="w-5 h-5 text-blue-400 mr-3 flex-shrink-0" />
+                    <span>+251912407676</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Phone className="w-5 h-5 text-blue-400 mr-3 flex-shrink-0" />
+                    <span>920919720</span>
+                  </div>
                 </div>
                 <div className="flex items-center">
                   <Mail className="w-5 h-5 text-blue-400 mr-3 flex-shrink-0" />
-                  <span>Kalgemston888@gmail.com</span>
+                  <span>info@girmawondimu.com</span>
                 </div>
               </div>
             </div>
