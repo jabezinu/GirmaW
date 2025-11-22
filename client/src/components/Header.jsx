@@ -27,7 +27,7 @@ export default function Header() {
   const navigation = [
     { name: 'Home', id: 'home', path: '/' },
     { name: 'Gemstones', id: 'gemstones', path: '/gemstones' },
-
+    { name: 'FAQ', id: 'faq', path: '/faqs' },
     { name: 'About', id: 'about', path: '/about' },
     { name: 'Contact', id: 'contact', path: '/contact' }
   ];
@@ -43,8 +43,8 @@ export default function Header() {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${(location.pathname === '/' && !scrolled)
-        ? 'bg-transparent'
-        : 'bg-gradient-to-r from-white/90 via-cyan-50/70 to-blue-50/70 backdrop-blur-xl border-b border-cyan-200/40 shadow-lg shadow-cyan-500/10'
+      ? 'bg-transparent'
+      : 'bg-gradient-to-r from-white/90 via-cyan-50/70 to-blue-50/70 backdrop-blur-xl border-b border-cyan-200/40 shadow-lg shadow-cyan-500/10'
       }`}>
       {/* Animated background particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -98,8 +98,8 @@ export default function Header() {
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className={`relative flex items-center space-x-2 rounded-3xl p-3 border-2 shadow-2xl ${(location.pathname === '/' && !scrolled)
-                ? 'bg-gradient-to-r from-cyan-500/15 via-blue-500/15 to-purple-500/15 backdrop-blur-xl border-cyan-300/40 shadow-cyan-500/30'
-                : 'bg-gradient-to-r from-white/95 via-cyan-50/90 to-blue-50/90 backdrop-blur-md border-cyan-200/60 shadow-blue-500/20'
+              ? 'bg-gradient-to-r from-cyan-500/15 via-blue-500/15 to-purple-500/15 backdrop-blur-xl border-cyan-300/40 shadow-cyan-500/30'
+              : 'bg-gradient-to-r from-white/95 via-cyan-50/90 to-blue-50/90 backdrop-blur-md border-cyan-200/60 shadow-blue-500/20'
               }`} style={{ transform: 'perspective(1000px) rotateX(2deg)' }}>
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-cyan-400/10 via-blue-400/10 to-purple-500/10 animate-pulse" />
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-cyan-300/5 via-transparent to-purple-300/5" />
@@ -110,12 +110,12 @@ export default function Header() {
                   to={item.path}
                   onClick={() => setIsOpen(false)}
                   className={`group relative px-6 py-3 rounded-xl text-sm font-bold transition-all duration-500 overflow-hidden ${activeTab === item.name
-                      ? ((location.pathname === '/' && !scrolled)
-                        ? 'bg-gradient-to-br from-cyan-500 via-blue-500 to-purple-600 text-white shadow-2xl shadow-cyan-500/60 transform scale-110'
-                        : 'bg-gradient-to-br from-cyan-600 via-blue-600 to-purple-700 text-white shadow-xl shadow-blue-500/40 transform scale-110')
-                      : ((location.pathname === '/' && !scrolled)
-                        ? 'text-cyan-50 hover:text-white hover:bg-gradient-to-br hover:from-cyan-400/40 hover:via-blue-400/40 hover:to-purple-500/40 hover:scale-110 hover:shadow-xl hover:shadow-cyan-400/30'
-                        : 'text-slate-700 hover:text-cyan-700 hover:bg-gradient-to-br hover:from-cyan-100 hover:via-blue-50 hover:to-purple-50 hover:scale-110 hover:shadow-lg hover:shadow-cyan-300/20')
+                    ? ((location.pathname === '/' && !scrolled)
+                      ? 'bg-gradient-to-br from-cyan-500 via-blue-500 to-purple-600 text-white shadow-2xl shadow-cyan-500/60 transform scale-110'
+                      : 'bg-gradient-to-br from-cyan-600 via-blue-600 to-purple-700 text-white shadow-xl shadow-blue-500/40 transform scale-110')
+                    : ((location.pathname === '/' && !scrolled)
+                      ? 'text-cyan-50 hover:text-white hover:bg-gradient-to-br hover:from-cyan-400/40 hover:via-blue-400/40 hover:to-purple-500/40 hover:scale-110 hover:shadow-xl hover:shadow-cyan-400/30'
+                      : 'text-slate-700 hover:text-cyan-700 hover:bg-gradient-to-br hover:from-cyan-100 hover:via-blue-50 hover:to-purple-50 hover:scale-110 hover:shadow-lg hover:shadow-cyan-300/20')
                     }`}
                   style={{
                     animationDelay: `${index * 0.1}s`,
@@ -161,12 +161,12 @@ export default function Header() {
 
         {/* Mobile Navigation Menu */}
         <div className={`md:hidden transition-all duration-500 ease-out ${isOpen
-            ? 'max-h-96 opacity-100 translate-y-0'
-            : 'max-h-0 opacity-0 -translate-y-4 overflow-hidden'
+          ? 'max-h-96 opacity-100 translate-y-0'
+          : 'max-h-0 opacity-0 -translate-y-4 overflow-hidden'
           }`}>
           <div className={`relative mx-4 mb-4 rounded-2xl border shadow-2xl overflow-hidden ${(location.pathname === '/' && !scrolled)
-              ? 'bg-gradient-to-br from-cyan-500/15 via-blue-500/15 to-purple-500/15 backdrop-blur-2xl border-cyan-300/40 shadow-cyan-500/30'
-              : 'bg-gradient-to-br from-white/98 via-cyan-50/95 to-blue-50/95 backdrop-blur-xl border-cyan-200/60 shadow-blue-500/20'
+            ? 'bg-gradient-to-br from-cyan-500/15 via-blue-500/15 to-purple-500/15 backdrop-blur-2xl border-cyan-300/40 shadow-cyan-500/30'
+            : 'bg-gradient-to-br from-white/98 via-cyan-50/95 to-blue-50/95 backdrop-blur-xl border-cyan-200/60 shadow-blue-500/20'
             }`}>
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 via-blue-400/5 to-purple-500/5 animate-pulse" />
             {navigation.map((item, index) => (
@@ -175,12 +175,12 @@ export default function Header() {
                 to={item.path}
                 onClick={() => setIsOpen(false)}
                 className={`relative w-full flex items-center space-x-3 px-6 py-4 text-left font-bold transition-all duration-500 group ${activeTab === item.name
-                    ? ((location.pathname === '/' && !scrolled)
-                      ? 'bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 text-white shadow-lg shadow-cyan-500/40'
-                      : 'bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-700 text-white shadow-md shadow-blue-500/30')
-                    : ((location.pathname === '/' && !scrolled)
-                      ? 'text-cyan-50 hover:bg-gradient-to-r hover:from-cyan-400/30 hover:via-blue-400/30 hover:to-purple-500/30 hover:text-white'
-                      : 'text-slate-700 hover:bg-gradient-to-r hover:from-cyan-100 hover:via-blue-50 hover:to-purple-50 hover:text-cyan-700')
+                  ? ((location.pathname === '/' && !scrolled)
+                    ? 'bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 text-white shadow-lg shadow-cyan-500/40'
+                    : 'bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-700 text-white shadow-md shadow-blue-500/30')
+                  : ((location.pathname === '/' && !scrolled)
+                    ? 'text-cyan-50 hover:bg-gradient-to-r hover:from-cyan-400/30 hover:via-blue-400/30 hover:to-purple-500/30 hover:text-white'
+                    : 'text-slate-700 hover:bg-gradient-to-r hover:from-cyan-100 hover:via-blue-50 hover:to-purple-50 hover:text-cyan-700')
                   } ${index !== navigation.length - 1 ? 'border-b border-cyan-200/30' : ''}`}
                 style={{
                   animationDelay: `${index * 0.1}s`,

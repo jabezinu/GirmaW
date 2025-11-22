@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { FaGem, FaEnvelope, FaVideo, FaChevronLeft, FaChevronRight, FaBars, FaKey, FaSignOutAlt } from 'react-icons/fa'
+import { FaGem, FaEnvelope, FaVideo, FaChevronLeft, FaChevronRight, FaBars, FaKey, FaSignOutAlt, FaQuestionCircle } from 'react-icons/fa'
 import { ToastContainer } from 'react-toastify'
 import { useAuth } from '../contexts/AuthContext'
 import ChangePasswordModal from './ChangePasswordModal'
@@ -35,6 +35,7 @@ export default function Layout({ children }) {
     { to: '/', label: 'Gemstones', icon: FaGem },
     { to: '/videos', label: 'Videos', icon: FaVideo },
     { to: '/contact-messages', label: 'Contact Messages', icon: FaEnvelope },
+    { to: '/faqs', label: 'FAQs', icon: FaQuestionCircle },
   ]
 
   return (
@@ -75,8 +76,8 @@ export default function Layout({ children }) {
                 onClick={closeMobileSidebar}
                 title={isCollapsed ? item.label : undefined}
                 className={`flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${location.pathname === item.to || (item.to !== '/' && location.pathname.startsWith(item.to))
-                    ? 'bg-indigo-50 text-indigo-700 border-r-2 border-indigo-600 shadow-sm'
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                  ? 'bg-indigo-50 text-indigo-700 border-r-2 border-indigo-600 shadow-sm'
+                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                   } ${isCollapsed ? 'justify-center px-4' : ''}`}
               >
                 <item.icon className={`${isCollapsed ? 'text-xl' : 'text-lg mr-3'}`} />

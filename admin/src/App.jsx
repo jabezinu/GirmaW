@@ -10,6 +10,8 @@ import GemstoneForm from './components/GemstoneForm'
 import ContactMessagesList from './components/ContactMessagesList'
 import VideosList from './components/VideosList'
 import VideoForm from './components/VideoForm'
+import FaqList from './components/FaqList'
+import FaqForm from './components/FaqForm'
 
 export default function App() {
   return (
@@ -31,6 +33,9 @@ export default function App() {
                       <Route path="/videos" element={<VideosList />} />
                       <Route path="/videos/new" element={<VideoForm />} />
                       <Route path="/videos/:id/edit" element={<VideoForm />} />
+                      <Route path="/faqs" element={<FaqList />} />
+                      <Route path="/faqs/new" element={<FaqForm />} />
+                      <Route path="/faqs/:id/edit" element={<FaqForm />} />
                     </Routes>
                   </Layout>
                 </ProtectedRoute>
