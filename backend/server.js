@@ -2,8 +2,6 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import gemstonesRouter from './routes/gemstones.js';
-import coursesRouter from './routes/courses.js';
-import equipmentsRouter from './routes/equipments.js';
 import contactMessagesRouter from './routes/contactMessages.js';
 import commentsRouter from './routes/comments.js';
 import videosRouter from './routes/videos.js';
@@ -32,8 +30,6 @@ mongoose.connect('mongodb://taeemkurt:nQyQZVjUND3xDFZu@ac-znid8xu-shard-00-00.us
 // Routes
 app.use('/api/auth', authRouter);
 app.use('/api/gemstones', gemstonesRouter);
-app.use('/api/courses', coursesRouter);
-app.use('/api/equipments', equipmentsRouter);
 app.use('/api/contact-messages', contactMessagesRouter);
 app.use('/api/comments', commentsRouter);
 app.use('/api/videos', videosRouter);

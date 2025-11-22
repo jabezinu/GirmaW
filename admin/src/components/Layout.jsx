@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { FaGem, FaBook, FaTools, FaEnvelope, FaVideo, FaChevronLeft, FaChevronRight, FaBars, FaKey, FaSignOutAlt } from 'react-icons/fa'
+import { FaGem, FaEnvelope, FaVideo, FaChevronLeft, FaChevronRight, FaBars, FaKey, FaSignOutAlt } from 'react-icons/fa'
 import { ToastContainer } from 'react-toastify'
 import { useAuth } from '../contexts/AuthContext'
 import ChangePasswordModal from './ChangePasswordModal'
@@ -33,8 +33,6 @@ export default function Layout({ children }) {
 
   const navItems = [
     { to: '/', label: 'Gemstones', icon: FaGem },
-    { to: '/courses', label: 'Courses', icon: FaBook },
-    { to: '/equipments', label: 'Equipments', icon: FaTools },
     { to: '/videos', label: 'Videos', icon: FaVideo },
     { to: '/contact-messages', label: 'Contact Messages', icon: FaEnvelope },
   ]
@@ -51,9 +49,8 @@ export default function Layout({ children }) {
 
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 bg-white shadow-xl border-r border-gray-200 transform transition-transform duration-300 ease-in-out md:translate-x-0 ${
-          isMobileOpen ? 'translate-x-0 w-64' : '-translate-x-full'
-        } ${isCollapsed ? 'md:w-20 lg:w-20 xl:w-20' : 'md:w-56 lg:w-64 xl:w-72'}`}
+        className={`fixed inset-y-0 left-0 z-50 bg-white shadow-xl border-r border-gray-200 transform transition-transform duration-300 ease-in-out md:translate-x-0 ${isMobileOpen ? 'translate-x-0 w-64' : '-translate-x-full'
+          } ${isCollapsed ? 'md:w-20 lg:w-20 xl:w-20' : 'md:w-56 lg:w-64 xl:w-72'}`}
       >
         <div className="flex flex-col h-full">
           {/* Header */}
@@ -77,11 +74,10 @@ export default function Layout({ children }) {
                 to={item.to}
                 onClick={closeMobileSidebar}
                 title={isCollapsed ? item.label : undefined}
-                className={`flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  location.pathname === item.to || (item.to !== '/' && location.pathname.startsWith(item.to))
+                className={`flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${location.pathname === item.to || (item.to !== '/' && location.pathname.startsWith(item.to))
                     ? 'bg-indigo-50 text-indigo-700 border-r-2 border-indigo-600 shadow-sm'
                     : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                } ${isCollapsed ? 'justify-center px-4' : ''}`}
+                  } ${isCollapsed ? 'justify-center px-4' : ''}`}
               >
                 <item.icon className={`${isCollapsed ? 'text-xl' : 'text-lg mr-3'}`} />
                 {!isCollapsed && <span>{item.label}</span>}
@@ -97,9 +93,8 @@ export default function Layout({ children }) {
                 closeMobileSidebar()
               }}
               title={isCollapsed ? 'Change Password' : undefined}
-              className={`w-full flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-all duration-200 ${
-                isCollapsed ? 'justify-center' : ''
-              }`}
+              className={`w-full flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-all duration-200 ${isCollapsed ? 'justify-center' : ''
+                }`}
             >
               <FaKey className={`${isCollapsed ? 'text-xl' : 'text-lg mr-3'}`} />
               {!isCollapsed && <span>Change Password</span>}
@@ -110,9 +105,8 @@ export default function Layout({ children }) {
                 closeMobileSidebar()
               }}
               title={isCollapsed ? 'Logout' : undefined}
-              className={`w-full flex items-center px-4 py-3 rounded-lg text-sm font-medium text-red-600 hover:bg-red-50 transition-all duration-200 ${
-                isCollapsed ? 'justify-center' : ''
-              }`}
+              className={`w-full flex items-center px-4 py-3 rounded-lg text-sm font-medium text-red-600 hover:bg-red-50 transition-all duration-200 ${isCollapsed ? 'justify-center' : ''
+                }`}
             >
               <FaSignOutAlt className={`${isCollapsed ? 'text-xl' : 'text-lg mr-3'}`} />
               {!isCollapsed && <span>Logout</span>}
