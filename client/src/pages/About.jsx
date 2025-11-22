@@ -1,4 +1,4 @@
-import { Trophy, Handshake, Sparkles } from 'lucide-react';
+import { Trophy, Handshake, Sparkles, Target, Eye, Globe, CheckCircle, ShieldCheck } from 'lucide-react';
 import kalImage from '../assets/kal_asset/exprerts/kal.jpg';
 
 export default function About() {
@@ -8,38 +8,74 @@ export default function About() {
         title: 'About GirmaWondimu - Shine Like A Gemstone',
         subtitle: 'Your Trusted Partner in the World of Precious Gemstones'
       },
-      story: {
-        title: 'Our Story',
+      about: {
+        title: 'About Us',
         paragraphs: [
-          'Founded in 2015 GC., GirmaWondimu has been at the forefront of the gemstone industry, serving both local and international markets with unparalleled expertise and integrity.',
-          'Our journey began with a simple mission: to bridge the gap between gemstone enthusiasts, professionals, and the global market. Today, we are recognized as a trusted partner in the gemstone community.',
-          'With 10+ years of experience and a team of certified gemologists, we provide comprehensive services that cater to every aspect of the gemstone business.'
+          'Girma Wondimu Mining is a registered Ethiopian company licensed by the Ministry of Mines to export gemstones and industrial minerals.',
+          'Building on a solid background in the construction materials sector, we are expanding into responsible gemstone processing and export. Using Ethiopia’s world-renowned deposits—from Opal and Red Garnet to Agate/Chalcedony—we supply high-quality natural stones to international markets.',
+          'Our focus is on quality, ethical sourcing, and transparent operations to ensure every export represents the beauty and integrity of Ethiopian origin.'
         ]
       },
-      expertise: {
-        title: 'Our Expertise',
-        items: [
-          'Certified gemstone testing',
-          'International buying and selling network',
-          'Professional training and certification programs',
-          'State-of-the-art equipment and tools',
-          'Market analysis and trend forecasting'
-        ]
+      vision: {
+        title: 'Our Vision',
+        description: 'To become one of Ethiopia’s leading and trusted exporters of gemstones and industrial minerals, recognized for high quality and sustainable business practices.'
+      },
+      mission: {
+        title: 'Our Mission',
+        description: 'To connect Ethiopian artisanal and small-scale miners with international markets through responsible trade, reliable partnerships, and consistent quality.'
       },
       values: {
-        title: 'Why Choose Us?',
+        title: 'Why Choose Girma Wondimu Mining',
         items: [
           {
-            title: 'Excellence',
-            description: 'Committed to the highest standards in everything we do'
+            title: 'Legally Licensed Exporter',
+            description: 'We are fully licensed and approved by the Ethiopian Ministry of Mines for the export of natural gemstones and minerals.',
+            icon: <ShieldCheck size={30} className="text-white" />
           },
           {
-            title: 'Trust',
-            description: 'Building lasting relationships based on integrity and reliability'
+            title: 'Ethical & Sustainable Sourcing',
+            description: 'We work closely with local miners and cooperatives, ensuring all operations respect and uplift mining communities.',
+            icon: <Handshake size={30} className="text-white" />
           },
           {
-            title: 'Innovation',
-            description: 'Embracing new technologies and methods in gemstone services'
+            title: 'Quality Commitment',
+            description: 'All gemstones and minerals are professionally inspected and graded before export.',
+            icon: <CheckCircle size={30} className="text-white" />
+          },
+          {
+            title: 'Experience & Trustworthiness',
+            description: 'Our team brings years of experience in minerals and trade, backed by buyers’ trust in the international market.',
+            icon: <Trophy size={30} className="text-white" />
+          },
+          {
+            title: 'Reliable Partnership',
+            description: 'We aim for transparent, long-term cooperation with buyers worldwide.',
+            icon: <Globe size={30} className="text-white" />
+          }
+        ]
+      },
+      products: {
+        title: 'Our Main Export Products',
+        items: [
+          {
+            title: 'Ethiopian Opal',
+            description: 'Admired for its brilliance and play-of-color.'
+          },
+          {
+            title: 'Red Garnet',
+            description: 'Prized for its intense color and high clarity.'
+          },
+          {
+            title: 'Agate & Chalcedony',
+            description: 'Vibrant stones with unique patterns and colors.'
+          },
+          {
+            title: 'Black Obsidian',
+            description: 'Natural volcanic glass used in decorative and craft applications.'
+          },
+          {
+            title: 'Quartz Crystals & Citrine',
+            description: 'Transparent and semi-precious stones for multiple uses.'
           }
         ]
       },
@@ -48,28 +84,13 @@ export default function About() {
         { number: '340+', label: 'Satisfied Clients' },
         { number: '17+', label: 'Countries Served' }
       ],
-      team: {
-        title: 'Meet Our Experts',
-        subtitle: 'Our team of dedicated professionals brings together decades of experience in the gemstone industry.',
-        members: [
-          {
-            name: 'David Thompson',
-            role: 'Training Director',
-            description: 'Leads our certification programs and professional development.',
-            expertise: ['Gemology', 'Marketing', 'Certification']
-          },
-          {
-            name: 'Lisa Park',
-            role: 'Client Relations Manager',
-            description: 'Dedicated to providing exceptional service to our clients worldwide.',
-            expertise: ['Client Service', 'Global Markets', 'Consulting']
-          },
-          {
-            name: 'Robert Kim',
-            role: 'Technical Specialist',
-            description: 'Manages our state-of-the-art equipment and laboratory operations.',
-            expertise: ['Lab Operations', 'Gemstone Testing', 'Research']
-          }
+      founder: {
+        title: 'Who Is Girma Wondimu?',
+        role: 'Founder & CEO',
+        description: [
+          'Girma Wondimu is a visionary leader and a pioneer in the Ethiopian gemstone industry. With a deep-rooted passion for the earth\'s hidden treasures, he has dedicated his life to showcasing the unique beauty of Ethiopian opals and other precious stones to the world.',
+          'Starting his journey over a decade ago, Girma has built a reputation for integrity, expertise, and an unwavering commitment to quality. His hands-on approach ensures that every gemstone that passes through our hands meets the highest standards of excellence.',
+          'Beyond business, Girma is a mentor and an advocate for sustainable mining practices, working tirelessly to uplift local communities and promote ethical sourcing in the industry.'
         ]
       },
       cta: {
@@ -77,12 +98,6 @@ export default function About() {
         button: 'Get in Touch'
       }
     };
-
-  const teamImages = [
-    kalImage,
-    'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=face',
-    'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face'
-  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-blue-50 to-purple-50 relative overflow-hidden">
@@ -111,59 +126,78 @@ export default function About() {
 
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-6xl mx-auto">
-          {/* Story Section */}
+          {/* About Us, Vision, Mission Section */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
+            {/* About Us */}
             <div className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300">
               <div className="flex items-center mb-6">
                 <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4">
                   <span className="text-2xl">📖</span>
                 </div>
-                <h2 className="text-3xl font-bold text-gray-800">{t.story.title}</h2>
+                <h2 className="text-3xl font-bold text-gray-800">{t.about.title}</h2>
               </div>
               <div className="space-y-4 text-gray-600 leading-relaxed">
-                {t.story.paragraphs.map((para, index) => (
+                {t.about.paragraphs.map((para, index) => (
                   <p key={index}>{para}</p>
                 ))}
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300">
-              <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center mr-4">
-                  <span className="text-2xl">💎</span>
+            {/* Vision & Mission */}
+            <div className="space-y-8">
+              <div className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center mr-4">
+                    <Eye className="text-white w-6 h-6" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-gray-800">{t.vision.title}</h2>
                 </div>
-                <h2 className="text-3xl font-bold text-gray-800">{t.expertise.title}</h2>
+                <p className="text-gray-600 leading-relaxed">{t.vision.description}</p>
               </div>
-              <ul className="space-y-4">
-                {t.expertise.items.map((item, index) => (
-                  <li key={index} className="flex items-start group">
-                    <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-blue-600 transition-colors duration-300">
-                      <svg className="w-3 h-3 text-blue-600 group-hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <span className="text-gray-600 flex-1">{item}</span>
-                  </li>
-                ))}
-              </ul>
+
+              <div className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center mr-4">
+                    <Target className="text-white w-6 h-6" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-gray-800">{t.mission.title}</h2>
+                </div>
+                <p className="text-gray-600 leading-relaxed">{t.mission.description}</p>
+              </div>
             </div>
           </div>
 
-          {/* Values Section */}
+          {/* Why Choose Us Section */}
           <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl shadow-2xl p-10 mb-20 text-white">
             <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center">{t.values.title}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {t.values.items.map((value, index) => (
                 <div key={index} className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 hover:bg-white/20 transition-all duration-300 hover:transform hover:scale-105">
                   <div className={`w-16 h-16 bg-gradient-to-br ${
-                    index === 0 ? 'from-yellow-400 to-orange-500' :
-                    index === 1 ? 'from-green-400 to-emerald-500' :
+                    index % 3 === 0 ? 'from-yellow-400 to-orange-500' :
+                    index % 3 === 1 ? 'from-green-400 to-emerald-500' :
                     'from-purple-400 to-pink-500'
                   } rounded-2xl flex items-center justify-center text-3xl mb-4 shadow-lg mx-auto`}>
-                    {index === 0 ? <Trophy size={30} className="text-white" /> : index === 1 ? <Handshake size={30} className="text-white" /> : <Sparkles size={30} className="text-white" />}
+                    {value.icon}
                   </div>
                   <h3 className="text-xl font-bold mb-3 text-center">{value.title}</h3>
                   <p className="text-blue-100 text-center leading-relaxed">{value.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Main Export Products Section */}
+          <div className="mb-20">
+            <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center text-gray-800">{t.products.title}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {t.products.items.map((item, index) => (
+                <div key={index} className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600">
+                    <Sparkles size={24} />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">{item.title}</h3>
+                  <p className="text-gray-600">{item.description}</p>
                 </div>
               ))}
             </div>
@@ -179,54 +213,42 @@ export default function About() {
             ))}
           </div>
 
-          {/* Staff Members Section */}
+          {/* Founder Section */}
           <div className="mb-20">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">{t.team.title}</h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">{t.team.subtitle}</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-              {t.team.members.map((member, index) => (
-                <div key={index} className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
-                  <div className="aspect-w-4 aspect-h-5">
-                    <img 
-                      src={teamImages[index]} 
-                      alt={member.name} 
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
+              <div className="grid grid-cols-1 lg:grid-cols-2">
+                <div className="relative h-96 lg:h-auto">
+                  <img 
+                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face" 
+                    alt="Girma Wondimu" 
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent lg:bg-gradient-to-l"></div>
+                </div>
+                <div className="p-8 md:p-12 flex flex-col justify-center">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Sparkles className="w-6 h-6 text-blue-600" />
+                    <span className="text-blue-600 font-bold tracking-wider uppercase text-sm">{t.founder.role}</span>
                   </div>
-                  
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
-                    <h3 className="text-2xl font-bold mb-2">{member.name}</h3>
-                    <p className="text-blue-300 font-medium mb-3">{member.role}</p>
-                    <p className="text-gray-300 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                      {member.description}
-                    </p>
-                    
-                    <div className="flex flex-wrap gap-2 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
-                      {member.expertise.map((skill, i) => (
-                        <span key={i} className="px-3 py-1 bg-blue-600/30 rounded-full text-sm text-blue-200">
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                    
-                    <div className="flex gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-300">
-                      <a href="#" className="text-white hover:text-blue-400 transition-colors">
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                        </svg>
-                      </a>
-                      <a href="#" className="text-white hover:text-blue-400 transition-colors">
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                          <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
-                        </svg>
-                      </a>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">{t.founder.title}</h2>
+                  <div className="space-y-4 text-gray-600 leading-relaxed">
+                    {t.founder.description.map((paragraph, index) => (
+                      <p key={index}>{paragraph}</p>
+                    ))}
+                  </div>
+                  <div className="mt-8 pt-8 border-t border-gray-100">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
+                        <Trophy size={24} />
+                      </div>
+                      <div>
+                        <p className="font-bold text-gray-800">10+ Years of Excellence</p>
+                        <p className="text-sm text-gray-500">Leading the Industry</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
 
