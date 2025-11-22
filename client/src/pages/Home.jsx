@@ -6,6 +6,7 @@ import diamondImg from '../assets/kal_asset/gemstones/Diamond.jpg';
 import rubyImg from '../assets/kal_asset/gemstones/ruby.jpg';
 import sapphireImg from '../assets/kal_asset/gemstones/Sapphire.jpg';
 import emeraldImg from '../assets/kal_asset/gemstones/Emerald.jpg';
+import opalImg from '../assets/kal_asset/gemstones/opal.jpg';
 import heroVideo from '../assets/kal_asset/video/View of Diamonds Footage l Free Stock Footage _ No Copyright Videos _ Creative Common !.mp4';
 
 export default function GemstonHomepage() {
@@ -182,7 +183,8 @@ export default function GemstonHomepage() {
     { name: t.diamond, carat: "3.0ct", origin: "Botswana", price: "$3,500", image: diamondImg },
     { name: t.ruby, carat: "2.8ct", origin: t.burma, price: "$3,200", image: rubyImg },
     { name: t.sapphire, carat: "3.5ct", origin: t.ceylon, price: "$2,500", image: sapphireImg },
-    { name: t.emerald, carat: "4.2ct", origin: t.colombia, price: "$2,800", image: emeraldImg }
+    { name: t.emerald, carat: "4.2ct", origin: t.colombia, price: "$2,800", image: emeraldImg },
+    { name: "Ethiopian Opal", carat: "2.5ct", origin: "Ethiopia", price: "$2,200", image: opalImg }
   ];
 
   const stats = [
@@ -435,33 +437,33 @@ export default function GemstonHomepage() {
               <p className="text-xl text-slate-600">{t.featuredSubtitle}</p>
             </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
             {featuredGems.map((gem, idx) => (
               <div
                 key={idx}
-                className="relative bg-gradient-to-br from-white via-cyan-50/50 to-purple-50/50 rounded-3xl overflow-hidden border border-cyan-200/60 shadow-2xl hover:shadow-cyan-500/30 transition-all duration-500 transform hover:-translate-y-4 hover:scale-105 cursor-pointer group"
+                className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer border border-gray-100"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 via-blue-400/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative overflow-hidden">
+                {/* Image Container with Aspect Ratio */}
+                <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
                   <img 
                     src={gem.image} 
                     alt={gem.name}
-                    className="w-full h-64 object-cover group-hover:scale-125 transition-transform duration-700"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-cyan-900/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute top-4 right-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg shadow-cyan-500/50 flex items-center gap-1">
-                    <Sparkles className="w-4 h-4" />
-                    {t.newLabel}
-                  </div>
+                  {/* Subtle Overlay on Hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
+                
+                {/* Content */}
+                <ddiv>
                 <div className="relative p-6 z-10">
                    <h3 className="text-xl font-bold bg-gradient-to-r from-cyan-700 via-blue-700 to-purple-800 bg-clip-text text-transparent mb-2">{gem.carat}</h3>
                    <p className="text-slate-600 mb-4 font-semibold">{gem.name}</p>
                    <div className="flex justify-center">
-                     <button className="relative group/btn bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-700 hover:from-cyan-500 hover:via-blue-500 hover:to-purple-600 text-white px-8 py-3 rounded-full text-sm font-bold transition-all duration-500 shadow-lg shadow-cyan-500/30 hover:shadow-xl hover:shadow-blue-500/40 overflow-hidden">
+                     {/* <button className="relative group/btn bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-700 hover:from-cyan-500 hover:via-blue-500 hover:to-purple-600 text-white px-8 py-3 rounded-full text-sm font-bold transition-all duration-500 shadow-lg shadow-cyan-500/30 hover:shadow-xl hover:shadow-blue-500/40 overflow-hidden">
                        <span className="relative z-10">{t.viewDetails}</span>
                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000" />
-                     </button>
+                     </button> */}
                    </div>
                  </div>
               </div>
