@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, Star, Award, ShoppingBag, TestTube, Wrench, GraduationCap, MessageCircle, Sparkles, X } from 'lucide-react';
+import { ChevronRight, Star, Award, Sparkles, X } from 'lucide-react';
 import { useData } from '../contexts/DataContext';
 import diamondImg from '../assets/kal_asset/gemstones/Diamond.jpg';
 import rubyImg from '../assets/kal_asset/gemstones/ruby.jpg';
@@ -177,15 +177,6 @@ export default function GemstonHomepage() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [showHeroText, allowScroll]);
-
-  const services = [
-    { id: "buying-selling", icon: ShoppingBag, title: t.buyGemstones, desc: t.buyDesc },
-    { id: "buying-selling", icon: Award, title: t.sellGemstones, desc: t.sellDesc },
-    { id: "gemstone-testing", icon: TestTube, title: t.gemstoneTesting, desc: t.testingDesc },
-    { id: "machines", icon: Wrench, title: t.equipmentTools, desc: t.equipmentDesc },
-    { id: "courses", icon: GraduationCap, title: t.trainingCourses, desc: t.trainingDesc },
-    { id: "buying-selling", icon: MessageCircle, title: t.consultation, desc: t.consultationDesc }
-  ];
 
   const featuredGems = [
     { name: t.diamond, carat: "3.0ct", origin: "Botswana", price: "$3,500", image: diamondImg },
@@ -427,36 +418,6 @@ export default function GemstonHomepage() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Quick Services Overview */}
-      <section className="py-20 bg-gradient-to-br from-cyan-50 via-blue-50 to-purple-50 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 via-blue-400/5 to-purple-500/5 animate-pulse" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <Sparkles className="w-8 h-8 text-cyan-500 animate-pulse" />
-                <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-700 bg-clip-text text-transparent">{t.ourServices}</h2>
-                <Sparkles className="w-8 h-8 text-purple-500 animate-pulse" />
-              </div>
-              <p className="text-xl text-slate-600">{t.servicesSubtitle}</p>
-            </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, idx) => (
-              <Link key={idx} to={`/services#${service.id}`} className="relative bg-gradient-to-br from-white via-cyan-50/30 to-blue-50/30 p-8 rounded-2xl border border-cyan-200/50 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 cursor-pointer group overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 via-blue-400/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-200/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                <service.icon className="relative z-10 w-14 h-14 text-cyan-600 mb-4 group-hover:scale-125 group-hover:text-blue-600 transition-all duration-500 drop-shadow-lg" />
-                <h3 className="relative z-10 text-xl font-bold bg-gradient-to-r from-cyan-700 via-blue-700 to-purple-800 bg-clip-text text-transparent mb-2">{service.title}</h3>
-                <p className="relative z-10 text-slate-600 mb-4">{service.desc}</p>
-                <div className="relative z-10 flex items-center text-cyan-600 font-bold group-hover:gap-2 transition-all duration-300">
-                  {t.learnMore} <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </Link>
-            ))}
           </div>
         </div>
       </section>
