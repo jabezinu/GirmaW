@@ -1,10 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Menu as MenuIcon, X, Sparkles } from 'lucide-react';
+import { Menu as MenuIcon, X, Sparkles, Gem } from 'lucide-react';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const location = useLocation();
 
   useEffect(() => {
@@ -13,6 +14,14 @@ export default function Header() {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   const navigation = [
@@ -33,39 +42,70 @@ export default function Header() {
   const activeTab = getActiveTab();
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
       (location.pathname === '/' && !scrolled)
         ? 'bg-transparent'
         : 'bg-gradient-to-r from-white/90 via-cyan-50/70 to-blue-50/70 backdrop-blur-xl border-b border-cyan-200/40 shadow-lg shadow-cyan-500/10'
     }`}>
+      {/* Animated background particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl animate-pulse" 
+             style={{ 
+               top: '-10%', 
+               left: `${(mousePosition.x / window.innerWidth) * 20}%`,
+               transition: 'left 0.5s ease-out'
+             }} />
+        <div className="absolute w-96 h-96 bg-blue-400/10 rounded-full blur-3xl animate-pulse" 
+             style={{ 
+               top: '-10%', 
+               right: `${(mousePosition.x / window.innerWidth) * 20}%`,
+               transition: 'right 0.5s ease-out',
+               animationDelay: '1s'
+             }} />
+        <div className="absolute w-96 h-96 bg-purple-400/10 rounded-full blur-3xl animate-pulse" 
+             style={{ 
+               top: '-10%', 
+               left: '50%',
+               transform: 'translateX(-50%)',
+               animationDelay: '2s'
+             }} />
+      </div>
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex-shrink-0 group relative">
             <Link
               to="/"
-              className="flex items-center gap-2 cursor-pointer transform transition-all duration-500 hover:scale-110"
+              className="flex items-center gap-3 cursor-pointer transform transition-all duration-700 hover:scale-110 hover:rotate-1"
             >
               <div className="relative">
-                <Sparkles className="w-8 h-8 text-cyan-400 animate-pulse" />
-                <div className="absolute inset-0 bg-cyan-400 blur-xl opacity-50 animate-pulse" />
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 rounded-full blur-2xl opacity-60 animate-pulse" />
+                <div className="relative bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 p-2 rounded-xl shadow-2xl shadow-cyan-500/50 transform rotate-12 group-hover:rotate-0 transition-transform duration-700">
+                  <Gem className="w-6 h-6 text-white animate-pulse" />
+                </div>
+                <Sparkles className="absolute -top-1 -right-1 w-4 h-4 text-yellow-300 animate-ping" />
               </div>
-              <span className="text-2xl font-black bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent relative">
-                GirmaWondimu
-                <span className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent blur-sm opacity-50">
+              <div className="relative">
+                <span className="text-2xl font-black bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent relative animate-gradient bg-[length:200%_auto]">
                   GirmaWondimu
                 </span>
-              </span>
+                <span className="absolute inset-0 text-2xl font-black bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent blur-md opacity-50 animate-pulse">
+                  GirmaWondimu
+                </span>
+                <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
+              </div>
             </Link>
           </div>
           {/* Desktop Navigation */}
           <div className="hidden md:block">
-            <div className={`relative flex items-center space-x-2 rounded-2xl p-2 border shadow-2xl ${
+            <div className={`relative flex items-center space-x-2 rounded-3xl p-3 border-2 shadow-2xl ${
               (location.pathname === '/' && !scrolled)
-                ? 'bg-gradient-to-r from-cyan-500/15 via-blue-500/15 to-purple-500/15 backdrop-blur-xl border-cyan-300/40 shadow-cyan-500/20'
-                : 'bg-gradient-to-r from-white/95 via-cyan-50/90 to-blue-50/90 backdrop-blur-md border-cyan-200/60 shadow-blue-500/10'
-            }`}>
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-400/5 via-blue-400/5 to-purple-500/5 animate-pulse" />
+                ? 'bg-gradient-to-r from-cyan-500/15 via-blue-500/15 to-purple-500/15 backdrop-blur-xl border-cyan-300/40 shadow-cyan-500/30'
+                : 'bg-gradient-to-r from-white/95 via-cyan-50/90 to-blue-50/90 backdrop-blur-md border-cyan-200/60 shadow-blue-500/20'
+            }`} style={{ transform: 'perspective(1000px) rotateX(2deg)' }}>
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-cyan-400/10 via-blue-400/10 to-purple-500/10 animate-pulse" />
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-cyan-300/5 via-transparent to-purple-300/5" />
+              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 opacity-20 blur-xl animate-pulse" />
               {navigation.map((item, index) => (
                 <Link
                   key={item.name}

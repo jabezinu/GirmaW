@@ -1,4 +1,4 @@
-import { Gem, ShoppingCart, GraduationCap, Wrench, Check, Star, Clock, Award, TrendingUp, Mail, Phone, MapPin } from 'lucide-react';
+import { Gem, ShoppingCart, GraduationCap, Wrench, Check, Star, Clock, Award, TrendingUp, Mail, Phone, MapPin, Sparkles } from 'lucide-react';
 import { useData } from '../contexts/DataContext';
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -159,13 +159,19 @@ export default function Services() {
   const icons = [Gem, ShoppingCart, GraduationCap, Wrench];
 
   return (
-    <div className="container mx-auto px-4 py-16 max-w-7xl">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-blue-50 to-purple-50 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(34,211,238,0.1),transparent_50%),radial-gradient(circle_at_70%_70%,rgba(168,85,247,0.1),transparent_50%)]" />
+      <div className="container mx-auto px-4 py-16 max-w-7xl relative z-10">
 
       <div className="text-center mb-16">
-        <h1 className="text-5xl md:text-6xl font-bold mb-4 text-gray-900 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-          {t.pageTitle}
-        </h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+        <div className="flex items-center justify-center gap-3 mb-4">
+          <Sparkles className="w-12 h-12 text-cyan-500 animate-pulse" />
+          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-700 bg-clip-text text-transparent">
+            {t.pageTitle}
+          </h1>
+          <Sparkles className="w-12 h-12 text-purple-500 animate-pulse" />
+        </div>
+        <p className="text-xl text-slate-600 max-w-3xl mx-auto">
           {t.pageSubtitle}
         </p>
       </div>
@@ -176,14 +182,18 @@ export default function Services() {
           <section key={index} id={service.id} className="mb-20 scroll-mt-20">
             <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 hover:shadow-3xl transition-shadow duration-500">
               {/* Service Header */}
-              <div className="bg-gradient-to-br from-blue-600 via-blue-700 to-purple-700 p-8 md:p-12 text-white">
-                <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-                  <div className="bg-white/20 backdrop-blur-sm p-6 rounded-2xl">
+              <div className="relative bg-gradient-to-br from-cyan-600 via-blue-600 to-purple-700 p-8 md:p-12 text-white overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/10 via-blue-400/10 to-purple-500/10 animate-pulse" />
+                <div className="flex flex-col md:flex-row items-start md:items-center gap-6 relative z-10">
+                  <div className="bg-white/20 backdrop-blur-sm p-6 rounded-2xl shadow-xl">
                     <Icon className="w-12 h-12 md:w-16 md:h-16" />
                   </div>
                   <div className="flex-1">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-3">{service.title}</h2>
-                    <p className="text-lg md:text-xl text-blue-100 leading-relaxed">{service.description}</p>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-3 flex items-center gap-2">
+                      {service.title}
+                      <Sparkles className="w-8 h-8 animate-pulse" />
+                    </h2>
+                    <p className="text-lg md:text-xl text-cyan-100 leading-relaxed">{service.description}</p>
                   </div>
                 </div>
               </div>
@@ -425,6 +435,7 @@ export default function Services() {
           </div>
         </div>
       </section>
+      </div>
     </div>
   );
 }

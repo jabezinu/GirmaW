@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, Star, Award, Globe, Users, ShoppingBag, TestTube, Wrench, GraduationCap, MessageCircle } from 'lucide-react';
+import { ChevronRight, Star, Award, Globe, Users, ShoppingBag, TestTube, Wrench, GraduationCap, MessageCircle, Sparkles } from 'lucide-react';
 import { useData } from '../contexts/DataContext';
 import diamondImg from '../assets/kal_asset/gemstones/Diamond.jpg';
 import rubyImg from '../assets/kal_asset/gemstones/ruby.jpg';
@@ -209,14 +209,30 @@ export default function GemstonHomepage() {
         <div className="relative z-10 h-full flex flex-col justify-between">
           <div className="flex-1 flex items-center">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="max-w-3xl">
-                <h1 
-                  className={`text-5xl md:text-7xl font-bold text-white mb-6 transition-all duration-700 ${
-                    showHeroText ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
-                  }`}
-                >
-                  {t.heroTitle}
-                </h1>
+              <div className="max-w-4xl">
+                <div className={`transition-all duration-700 ${
+                  showHeroText ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+                }`}>
+                  {/* Company Name */}
+                  <div className="flex items-center gap-3 mb-4">
+                    <Sparkles className="w-10 h-10 md:w-12 md:h-12 text-cyan-400 animate-pulse" />
+                    <h1 
+                      className="text-6xl md:text-8xl font-black bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-400 bg-clip-text text-transparent"
+                      style={{ textShadow: '0 0 40px rgba(34, 211, 238, 0.6)' }}
+                    >
+                      GirmaWondimu
+                    </h1>
+                    <Sparkles className="w-10 h-10 md:w-12 md:h-12 text-purple-400 animate-pulse" />
+                  </div>
+                  
+                  {/* Motto */}
+                  <div className="flex items-center gap-3 ml-2">
+                    <div className="h-1 w-12 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"></div>
+                    <p className="text-2xl md:text-4xl font-light text-cyan-100 italic tracking-wide">
+                      We Sell Beauty
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -225,8 +241,13 @@ export default function GemstonHomepage() {
               <div className="max-w-3xl">
                 <div className="flex flex-wrap gap-4">
                   <Link to="/gemstones">
-                    <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 shadow-xl">
-                      {t.browseGemstones}
+                    <button className="relative group bg-gradient-to-br from-cyan-500 via-blue-500 to-purple-600 hover:from-cyan-400 hover:via-blue-400 hover:to-purple-500 text-white px-10 py-5 rounded-full text-lg font-bold transition-all duration-500 transform hover:scale-110 shadow-2xl shadow-cyan-500/50 hover:shadow-cyan-400/70 overflow-hidden">
+                      <span className="relative z-10 flex items-center gap-2">
+                        <Sparkles className="w-5 h-5" />
+                        {t.browseGemstones}
+                      </span>
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                      <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 opacity-30 blur-lg animate-pulse" />
                     </button>
                   </Link>
                 </div>
@@ -237,21 +258,28 @@ export default function GemstonHomepage() {
       </section>
 
       {/* Quick Services Overview */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-gradient-to-br from-cyan-50 via-blue-50 to-purple-50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 via-blue-400/5 to-purple-500/5 animate-pulse" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{t.ourServices}</h2>
-              <p className="text-xl text-gray-600">{t.servicesSubtitle}</p>
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <Sparkles className="w-8 h-8 text-cyan-500 animate-pulse" />
+                <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-700 bg-clip-text text-transparent">{t.ourServices}</h2>
+                <Sparkles className="w-8 h-8 text-purple-500 animate-pulse" />
+              </div>
+              <p className="text-xl text-slate-600">{t.servicesSubtitle}</p>
             </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, idx) => (
-              <Link key={idx} to={`/services#${service.id}`} className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 cursor-pointer group">
-                <service.icon className="w-12 h-12 text-blue-600 mb-4 group-hover:scale-110 transition" />
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{service.title}</h3>
-                <p className="text-gray-600 mb-4">{service.desc}</p>
-                <div className="flex items-center text-blue-600 font-semibold group-hover:gap-2 transition-all">
-                  {t.learnMore} <ChevronRight className="w-5 h-5" />
+              <Link key={idx} to={`/services#${service.id}`} className="relative bg-gradient-to-br from-white via-cyan-50/30 to-blue-50/30 p-8 rounded-2xl border border-cyan-200/50 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 cursor-pointer group overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 via-blue-400/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-200/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                <service.icon className="relative z-10 w-14 h-14 text-cyan-600 mb-4 group-hover:scale-125 group-hover:text-blue-600 transition-all duration-500 drop-shadow-lg" />
+                <h3 className="relative z-10 text-xl font-bold bg-gradient-to-r from-cyan-700 via-blue-700 to-purple-800 bg-clip-text text-transparent mb-2">{service.title}</h3>
+                <p className="relative z-10 text-slate-600 mb-4">{service.desc}</p>
+                <div className="relative z-10 flex items-center text-cyan-600 font-bold group-hover:gap-2 transition-all duration-300">
+                  {t.learnMore} <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </div>
               </Link>
             ))}
@@ -260,35 +288,44 @@ export default function GemstonHomepage() {
       </section>
 
       {/* Featured Gemstones */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-gradient-to-br from-white via-purple-50/30 to-cyan-50/30 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(34,211,238,0.1),transparent_50%),radial-gradient(circle_at_70%_50%,rgba(168,85,247,0.1),transparent_50%)]" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{t.featuredGemstones}</h2>
-              <p className="text-xl text-gray-600">{t.featuredSubtitle}</p>
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <Sparkles className="w-8 h-8 text-purple-500 animate-pulse" />
+                <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">{t.featuredGemstones}</h2>
+                <Sparkles className="w-8 h-8 text-cyan-500 animate-pulse" />
+              </div>
+              <p className="text-xl text-slate-600">{t.featuredSubtitle}</p>
             </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredGems.map((gem, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 cursor-pointer group"
+                className="relative bg-gradient-to-br from-white via-cyan-50/50 to-purple-50/50 rounded-3xl overflow-hidden border border-cyan-200/60 shadow-2xl hover:shadow-cyan-500/30 transition-all duration-500 transform hover:-translate-y-4 hover:scale-105 cursor-pointer group"
               >
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 via-blue-400/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative overflow-hidden">
                   <img 
                     src={gem.image} 
                     alt={gem.name}
-                    className="w-full h-64 object-cover group-hover:scale-110 transition duration-500"
+                    className="w-full h-64 object-cover group-hover:scale-125 transition-transform duration-700"
                   />
-                  <div className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                  <div className="absolute inset-0 bg-gradient-to-t from-cyan-900/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute top-4 right-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg shadow-cyan-500/50 flex items-center gap-1">
+                    <Sparkles className="w-4 h-4" />
                     {t.newLabel}
                   </div>
                 </div>
-                <div className="p-6">
-                   <h3 className="text-xl font-bold text-gray-900 mb-2">{gem.carat}</h3>
-                   <p className="text-gray-600 mb-4">{gem.name}</p>
+                <div className="relative p-6 z-10">
+                   <h3 className="text-xl font-bold bg-gradient-to-r from-cyan-700 via-blue-700 to-purple-800 bg-clip-text text-transparent mb-2">{gem.carat}</h3>
+                   <p className="text-slate-600 mb-4 font-semibold">{gem.name}</p>
                    <div className="flex justify-center">
-                     <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full text-sm font-semibold transition">
-                       {t.viewDetails}
+                     <button className="relative group/btn bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-700 hover:from-cyan-500 hover:via-blue-500 hover:to-purple-600 text-white px-8 py-3 rounded-full text-sm font-bold transition-all duration-500 shadow-lg shadow-cyan-500/30 hover:shadow-xl hover:shadow-blue-500/40 overflow-hidden">
+                       <span className="relative z-10">{t.viewDetails}</span>
+                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000" />
                      </button>
                    </div>
                  </div>
@@ -298,8 +335,13 @@ export default function GemstonHomepage() {
           
           <div className="text-center mt-12">
             <Link to="/gemstones">
-              <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-lg text-white px-10 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105">
-                {t.viewAllGemstones}
+              <button className="relative group bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-700 hover:from-cyan-500 hover:via-blue-500 hover:to-purple-600 text-white px-12 py-5 rounded-full text-lg font-bold transition-all duration-500 transform hover:scale-110 shadow-2xl shadow-cyan-500/40 hover:shadow-blue-500/60 overflow-hidden">
+                <span className="relative z-10 flex items-center gap-2">
+                  {t.viewAllGemstones}
+                  <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 opacity-30 blur-xl animate-pulse" />
               </button>
             </Link>
           </div>
@@ -323,11 +365,16 @@ export default function GemstonHomepage() {
       </section> */}
 
       {/* Testimonials */}
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-gradient-to-br from-cyan-50 via-white to-blue-50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(34,211,238,0.15),transparent_40%),radial-gradient(circle_at_80%_70%,rgba(59,130,246,0.15),transparent_40%)]" />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{t.testimonialTitle}</h2>
-              <p className="text-xl text-gray-600">{t.testimonialSubtitle}</p>
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <Star className="w-8 h-8 text-cyan-500 fill-cyan-500 animate-pulse" />
+                <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-700 bg-clip-text text-transparent">{t.testimonialTitle}</h2>
+                <Star className="w-8 h-8 text-purple-500 fill-purple-500 animate-pulse" />
+              </div>
+              <p className="text-xl text-slate-600">{t.testimonialSubtitle}</p>
             </div>
 
           {testimonialsLoading ? (
@@ -343,18 +390,21 @@ export default function GemstonHomepage() {
                     idx === currentTestimonial ? 'opacity-100' : 'opacity-0 absolute inset-0'
                   }`}
                 >
-                  <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-12 rounded-3xl shadow-xl">
-                    <div className="flex justify-center mb-4">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
-                      ))}
-                    </div>
-                    <p className="text-xl text-gray-700 text-center mb-6 italic">
-                      "{testimonial.text}"
-                    </p>
-                    <div className="text-center">
-                      <p className="font-bold text-gray-900">{testimonial.author}</p>
-                      <p className="text-gray-600">{testimonial.location}</p>
+                  <div className="relative bg-gradient-to-br from-cyan-50 via-blue-50 to-purple-50 p-12 rounded-3xl border border-cyan-200/60 shadow-2xl shadow-cyan-500/20 overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 via-blue-400/5 to-purple-500/5 animate-pulse" />
+                    <div className="relative z-10">
+                      <div className="flex justify-center mb-6 gap-1">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <Star key={i} className="w-7 h-7 text-yellow-400 fill-yellow-400 drop-shadow-lg animate-pulse" style={{ animationDelay: `${i * 0.1}s` }} />
+                        ))}
+                      </div>
+                      <p className="text-xl text-slate-700 text-center mb-6 italic font-medium leading-relaxed">
+                        "{testimonial.text}"
+                      </p>
+                      <div className="text-center">
+                        <p className="font-bold text-lg bg-gradient-to-r from-cyan-700 via-blue-700 to-purple-800 bg-clip-text text-transparent">{testimonial.author}</p>
+                        <p className="text-slate-600 font-medium">{testimonial.location}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -365,8 +415,8 @@ export default function GemstonHomepage() {
                   <button
                     key={idx}
                     onClick={() => setCurrentTestimonial(idx)}
-                    className={`w-3 h-3 rounded-full transition ${
-                      idx === currentTestimonial ? 'bg-blue-600 w-8' : 'bg-gray-300'
+                    className={`h-3 rounded-full transition-all duration-500 ${
+                      idx === currentTestimonial ? 'bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 w-10 shadow-lg shadow-cyan-500/50' : 'bg-slate-300 w-3 hover:bg-slate-400'
                     }`}
                   />
                 ))}
@@ -381,13 +431,18 @@ export default function GemstonHomepage() {
       </section>
 
       {/* Customer Videos */}
-      <section className="py-20 bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-gradient-to-br from-purple-50 via-blue-50 to-cyan-50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(168,85,247,0.1),transparent_50%)]" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Customer Experiences
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Sparkles className="w-8 h-8 text-purple-500 animate-pulse" />
+              <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                Customer Experiences
+              </h2>
+              <Sparkles className="w-8 h-8 text-cyan-500 animate-pulse" />
+            </div>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
               Watch real stories from our satisfied customers sharing their gemstone journey
             </p>
           </div>
@@ -401,28 +456,30 @@ export default function GemstonHomepage() {
               {videos.map((video, idx) => (
                 <div
                   key={video._id}
-                  className="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-300 group"
+                  className="relative bg-gradient-to-br from-white via-purple-50/50 to-cyan-50/50 rounded-3xl border border-purple-200/60 shadow-2xl overflow-hidden transform hover:scale-105 hover:-translate-y-2 hover:shadow-purple-500/30 transition-all duration-500 group"
                 >
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-400/5 via-blue-400/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div className="relative overflow-hidden">
-                    <div className="p-2">
+                    <div className="p-3">
                       <iframe
                         src={getEmbedUrl(video.url)}
                         frameBorder="0"
                         allowFullScreen
-                        className="rounded-xl w-full h-64 sm:h-80 md:h-96"
+                        className="rounded-2xl w-full h-64 sm:h-80 md:h-96 shadow-lg"
                         title={video.title}
                       ></iframe>
                     </div>
-                    <div className="absolute top-4 right-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
+                    <div className="absolute top-6 right-6 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-xl shadow-purple-500/50 flex items-center gap-1">
+                      <Sparkles className="w-4 h-4" />
                       Video {idx + 1}
                     </div>
                   </div>
-                  <div className="p-6 bg-gradient-to-r from-purple-50 to-pink-50">
-                    <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-purple-700 transition-colors">
+                  <div className="relative p-6 bg-gradient-to-r from-purple-50/80 via-blue-50/80 to-cyan-50/80 z-10">
+                    <h3 className="text-lg font-bold bg-gradient-to-r from-purple-700 via-blue-700 to-cyan-700 bg-clip-text text-transparent mb-2 group-hover:scale-105 transition-transform">
                       {video.title}
                     </h3>
                     {video.description && (
-                      <p className="text-gray-700 text-sm leading-relaxed">
+                      <p className="text-slate-700 text-sm leading-relaxed">
                         {video.description}
                       </p>
                     )}

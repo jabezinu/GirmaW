@@ -85,19 +85,24 @@ export default function About() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-50">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-blue-50 to-purple-50 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(34,211,238,0.1),transparent_50%),radial-gradient(circle_at_70%_70%,rgba(168,85,247,0.1),transparent_50%)]" />
 
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 text-white py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-black opacity-20"></div>
+      <div className="relative bg-gradient-to-br from-cyan-900 via-blue-900 to-purple-900 text-white py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-blue-500/10 to-purple-500/10 animate-pulse"></div>
         <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                           radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 50%)`
+          backgroundImage: `radial-gradient(circle at 20% 50%, rgba(34, 211, 238, 0.15) 0%, transparent 50%),
+                           radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 50%)`
         }}></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">{t.hero.title}</h1>
-            <p className="text-xl md:text-2xl text-blue-100 font-light">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <Sparkles className="w-12 h-12 text-cyan-400 animate-pulse" />
+              <h1 className="text-5xl md:text-6xl font-bold tracking-tight bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-400 bg-clip-text text-transparent">{t.hero.title}</h1>
+              <Sparkles className="w-12 h-12 text-purple-400 animate-pulse" />
+            </div>
+            <p className="text-xl md:text-2xl text-cyan-100 font-light">
               {t.hero.subtitle}
             </p>
           </div>
@@ -226,13 +231,21 @@ export default function About() {
           </div>
 
           {/* CTA Section */}
-          <div className="bg-gradient-to-r from-slate-900 to-slate-800 rounded-3xl shadow-2xl p-12 text-center text-white">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">{t.cta.title}</h2>
-            <a href="/contact">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 hover:transform hover:scale-105 shadow-lg">
-                {t.cta.button}
-              </button>
-            </a>
+          <div className="relative bg-gradient-to-br from-cyan-900 via-blue-900 to-purple-900 rounded-3xl shadow-2xl overflow-hidden p-12 text-center text-white">
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-blue-500/10 to-purple-500/10 animate-pulse" />
+            <div className="relative z-10">
+              <h2 className="text-3xl md:text-4xl font-bold mb-8 flex items-center justify-center gap-3">
+                <Sparkles className="w-8 h-8 text-cyan-400 animate-pulse" />
+                {t.cta.title}
+                <Sparkles className="w-8 h-8 text-purple-400 animate-pulse" />
+              </h2>
+              <a href="/contact">
+                <button className="relative group bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-700 hover:from-cyan-500 hover:via-blue-500 hover:to-purple-600 text-white font-bold px-10 py-5 rounded-xl transition-all duration-500 hover:transform hover:scale-110 shadow-2xl shadow-cyan-500/40 overflow-hidden">
+                  <span className="relative z-10">{t.cta.button}</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                </button>
+              </a>
+            </div>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import contactMessageService from '../services/contactMessageService';
+import { Sparkles } from 'lucide-react';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -52,8 +53,14 @@ export default function Contact() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-16">
-      <h1 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">{t.title}</h1>
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-blue-50 to-purple-50 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(34,211,238,0.1),transparent_50%),radial-gradient(circle_at_70%_70%,rgba(168,85,247,0.1),transparent_50%)]" />
+      <div className="container mx-auto px-4 py-16 relative z-10">
+        <div className="flex items-center justify-center gap-3 mb-12">
+          <Sparkles className="w-10 h-10 text-cyan-500 animate-pulse" />
+          <h1 className="text-3xl md:text-4xl font-bold text-center bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-700 bg-clip-text text-transparent">{t.title}</h1>
+          <Sparkles className="w-10 h-10 text-purple-500 animate-pulse" />
+        </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
         <div>
@@ -113,63 +120,71 @@ export default function Contact() {
         </div>
 
         <div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <div className="mb-4">
-              <label htmlFor="name" className="block text-gray-700 font-semibold mb-2">{t.name}</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
+          <div className="relative bg-gradient-to-br from-white via-cyan-50/30 to-blue-50/30 p-8 rounded-2xl border border-cyan-200/50 shadow-2xl overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 via-blue-400/5 to-purple-500/5 animate-pulse" />
+            <div className="relative z-10">
+              <div className="mb-4">
+                <label htmlFor="name" className="block text-slate-700 font-semibold mb-2">{t.name}</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 border border-cyan-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="email" className="block text-slate-700 font-semibold mb-2">{t.email}</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 border border-cyan-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300"
+                />
+              </div>
+              <div className="mb-6">
+                <label htmlFor="message" className="block text-slate-700 font-semibold mb-2">{t.message}</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows="5"
+                  className="w-full px-4 py-3 border border-cyan-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300"
+                ></textarea>
+              </div>
+              <div className="mb-6">
+                <label htmlFor="location" className="block text-slate-700 font-semibold mb-2">Location (optional)</label>
+                <input
+                  type="text"
+                  id="location"
+                  name="location"
+                  value={formData.location}
+                  onChange={handleChange}
+                  placeholder="City, Country"
+                  className="w-full px-4 py-3 border border-cyan-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300"
+                />
+              </div>
+              <button
+                onClick={handleSubmit}
+                className="relative group w-full bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-700 hover:from-cyan-500 hover:via-blue-500 hover:to-purple-600 text-white py-4 px-4 rounded-lg transition-all duration-500 font-bold shadow-lg shadow-cyan-500/30 hover:shadow-xl hover:shadow-blue-500/40 overflow-hidden"
+              >
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  <Sparkles className="w-5 h-5" />
+                  {t.sendMessage}
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+              </button>
             </div>
-            <div className="mb-4">
-              <label htmlFor="email" className="block text-gray-700 font-semibold mb-2">{t.email}</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-            <div className="mb-6">
-              <label htmlFor="message" className="block text-gray-700 font-semibold mb-2">{t.message}</label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                rows="5"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              ></textarea>
-            </div>
-            <div className="mb-6">
-              <label htmlFor="location" className="block text-gray-700 font-semibold mb-2">Location (optional)</label>
-              <input
-                type="text"
-                id="location"
-                name="location"
-                value={formData.location}
-                onChange={handleChange}
-                placeholder="City, Country"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-            <button
-              onClick={handleSubmit}
-              className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-300 font-semibold"
-            >
-              {t.sendMessage}
-            </button>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
