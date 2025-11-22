@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 
 export default function GemstoneDetailModal({ gemstone, onClose }) {
+    const videoRef = useRef(null);
+
+    useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.play().catch(e => console.log("Auto-play failed:", e));
+        }
+    }, [gemstone]);
+
     if (!gemstone) return null;
 
     const handleBackdropClick = (e) => {
@@ -73,11 +81,11 @@ export default function GemstoneDetailModal({ gemstone, onClose }) {
 
                                 {/* Card Image */}
                                 {gemstone.image && (
-                                    <div className="relative group rounded-2xl overflow-hidden shadow-lg">
+                                    <div className="relative group rounded-2xl overflow-hidden shadow-lg bg-gray-50 h-64 flex items-center justify-center">
                                         <img
                                             src={gemstone.image}
                                             alt={`${gemstone.name} - Card View`}
-                                            className="w-full h-64 object-cover"
+                                            className="w-full h-full object-contain p-2"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                                             <div className="absolute bottom-4 left-4 text-white">
@@ -98,6 +106,7 @@ export default function GemstoneDetailModal({ gemstone, onClose }) {
                             </h3>
                             <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden shadow-2xl p-2">
                                 <video
+                                    ref={videoRef}
                                     src={gemstone.video360}
                                     controls
                                     autoPlay
@@ -105,7 +114,7 @@ export default function GemstoneDetailModal({ gemstone, onClose }) {
                                     loop
                                     playsInline
                                     preload="auto"
-                                    className="w-full h-auto rounded-xl"
+                                    className="w-full max-h-[500px] object-contain mx-auto rounded-xl"
                                     poster={gemstone.mainPhoto || gemstone.image}
                                     onError={(e) => console.error('Video load error:', e)}
                                 >

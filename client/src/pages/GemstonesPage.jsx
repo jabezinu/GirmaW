@@ -198,11 +198,11 @@ export default function GemstonesPage() {
                     key={gem._id}
                     className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group relative"
                   >
-                    <div className="relative overflow-hidden">
+                    <div className="relative overflow-hidden bg-gray-50 h-48 sm:h-64 flex items-center justify-center">
                       <img
                         src={gem.image}
                         alt={gem.name}
-                        className="w-full h-48 sm:h-64 object-cover group-hover:scale-110 transition duration-500"
+                        className="w-full h-full object-contain p-2 group-hover:scale-110 transition duration-500"
                         onError={(e) => {
                           // Fallback to a placeholder if image not found
                           e.target.src = `https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&q=80`;
