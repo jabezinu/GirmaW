@@ -22,7 +22,26 @@ const gemstoneSchema = new mongoose.Schema({
   image: {
     type: String,
     required: true
-  }
+  },
+  // Detailed view fields (optional)
+  mainPhoto: {
+    type: String,
+    required: false
+  },
+  video360: {
+    type: String,
+    required: false
+  },
+  detailSections: [{
+    title: {
+      type: String,
+      required: false
+    },
+    content: {
+      type: String,
+      required: false
+    }
+  }]
 }, {
   timestamps: true,
   suppressReservedKeysWarning: true

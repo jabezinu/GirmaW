@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { FaSave, FaArrowLeft, FaGem, FaTag, FaStar, FaHammer, FaImage } from 'react-icons/fa'
+import { FaSave, FaArrowLeft, FaGem, FaTag, FaStar, FaHammer, FaImage, FaVideo, FaBook, FaPlus, FaTrash } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import { useData } from '../contexts/DataContext'
 import gemstoneService from '../services/gemstoneService'
@@ -19,10 +19,15 @@ export default function GemstoneForm() {
     category: 'precious',
     quality: 'affordable',
     hardness: '',
-    image: null
+    image: null,
+    mainPhoto: null,
+    video360: null
   })
 
+  const [detailSections, setDetailSections] = useState([])
   const [currentImageUrl, setCurrentImageUrl] = useState('')
+  const [currentMainPhotoUrl, setCurrentMainPhotoUrl] = useState('')
+  const [currentVideo360Url, setCurrentVideo360Url] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [fetchLoading, setFetchLoading] = useState(isEditing)
@@ -36,9 +41,14 @@ export default function GemstoneForm() {
         category: gemstone.category || 'precious',
         quality: gemstone.quality || 'affordable',
         hardness: gemstone.hardness || '',
-        image: null // Don't set the image file for editing, keep it as URL
+        image: null,
+        mainPhoto: null,
+        video360: null
       })
       setCurrentImageUrl(gemstone.image || '')
+      setCurrentMainPhotoUrl(gemstone.mainPhoto || '')
+      setCurrentVideo360Url(gemstone.video360 || '')
+      setDetailSections(gemstone.detailSections || [])
     } catch (err) {
       setError('Failed to fetch gemstone')
       toast.error('Failed to fetch gemstone')
@@ -70,6 +80,20 @@ export default function GemstoneForm() {
     }
   }
 
+  const handleAddSection = () => {
+    setDetailSections([...detailSections, { title: '', content: '' }])
+  }
+
+  const handleRemoveSection = (index) => {
+    setDetailSections(detailSections.filter((_, i) => i !== index))
+  }
+
+  const handleSectionChange = (index, field, value) => {
+    const newSections = [...detailSections]
+    newSections[index][field] = value
+    setDetailSections(newSections)
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
@@ -83,12 +107,26 @@ export default function GemstoneForm() {
     }
 
     try {
+      // Create FormData for file uploads
+      const submitData = new FormData()
+      submitData.append('nameKey', formData.nameKey)
+      submitData.append('category', formData.category)
+      submitData.append('quality', formData.quality)
+      submitData.append('hardness', formData.hardness)
+
+      if (formData.image) submitData.append('image', formData.image)
+      if (formData.mainPhoto) submitData.append('mainPhoto', formData.mainPhoto)
+      if (formData.video360) submitData.append('video360', formData.video360)
+      if (detailSections.length > 0) {
+        submitData.append('detailSections', JSON.stringify(detailSections))
+      }
+
       if (isEditing) {
-        const updatedGemstone = await gemstoneService.update(id, formData)
+        const updatedGemstone = await gemstoneService.update(id, submitData)
         updateGemstone(id, updatedGemstone)
         toast.success('Gemstone updated successfully')
       } else {
-        const newGemstone = await gemstoneService.create(formData)
+        const newGemstone = await gemstoneService.create(submitData)
         addGemstone(newGemstone)
         toast.success('Gemstone created successfully')
       }
@@ -139,6 +177,7 @@ export default function GemstoneForm() {
           )}
 
           <form onSubmit={handleSubmit} className="px-6 py-8 space-y-8">
+            {/* Basic Fields */}
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
               <div>
                 <label htmlFor="nameKey" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
@@ -216,10 +255,11 @@ export default function GemstoneForm() {
                 />
               </div>
 
+              {/* Card Image */}
               <div className="sm:col-span-2">
                 <label htmlFor="image" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
                   <FaImage className="mr-2 text-pink-600" />
-                  Gemstone Image *
+                  Card Image *
                 </label>
                 {isEditing && currentImageUrl && (
                   <div className="mt-3 mb-4 p-4 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
@@ -231,36 +271,140 @@ export default function GemstoneForm() {
                     />
                   </div>
                 )}
-                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-emerald-400 transition-colors duration-200">
-                  <div className="space-y-1 text-center">
-                    <FaImage className="mx-auto h-12 w-12 text-gray-400" />
-                    <div className="flex text-sm text-gray-600">
-                      <label
-                        htmlFor="image"
-                        className="relative cursor-pointer bg-white rounded-md font-medium text-emerald-600 hover:text-emerald-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-emerald-500"
-                      >
-                        <span>Upload a file</span>
-                        <input
-                          id="image"
-                          name="image"
-                          type="file"
-                          accept="image/*"
-                          required={!isEditing}
-                          onChange={handleChange}
-                          className="sr-only"
-                        />
-                      </label>
-                      <p className="pl-1">or drag and drop</p>
-                    </div>
-                    <p className="text-xs text-gray-500">
-                      PNG, JPG, GIF up to 10MB
-                    </p>
-                  </div>
-                </div>
+                <input
+                  id="image"
+                  name="image"
+                  type="file"
+                  accept="image/*"
+                  required={!isEditing}
+                  onChange={handleChange}
+                  className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100"
+                />
                 <p className="mt-2 text-sm text-gray-600">
-                  {isEditing ? 'Upload a new image to replace the current one (optional)' : 'Select an image file for the gemstone'}
+                  {isEditing ? 'Upload a new image to replace the current one (optional)' : 'Select an image file for the gemstone card'}
                 </p>
               </div>
+
+              {/* Main Photo for Detail View */}
+              <div className="sm:col-span-2">
+                <label htmlFor="mainPhoto" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
+                  <FaImage className="mr-2 text-purple-600" />
+                  Main Detail Photo (Optional)
+                </label>
+                {isEditing && currentMainPhotoUrl && (
+                  <div className="mt-3 mb-4 p-4 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
+                    <p className="text-sm font-medium text-gray-700 mb-3">Current Main Photo:</p>
+                    <img
+                      src={currentMainPhotoUrl}
+                      alt="Current main photo"
+                      className="h-24 w-24 sm:h-32 sm:w-32 md:h-40 md:w-40 object-cover rounded-lg shadow-md border-4 border-white"
+                    />
+                  </div>
+                )}
+                <input
+                  id="mainPhoto"
+                  name="mainPhoto"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleChange}
+                  className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100"
+                />
+                <p className="mt-2 text-sm text-gray-600">
+                  High-quality photo for detail view
+                </p>
+              </div>
+
+              {/* 360 Video */}
+              <div className="sm:col-span-2">
+                <label htmlFor="video360" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
+                  <FaVideo className="mr-2 text-red-600" />
+                  360-Degree Video (Optional)
+                </label>
+                {isEditing && currentVideo360Url && (
+                  <div className="mt-3 mb-4 p-4 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
+                    <p className="text-sm font-medium text-gray-700 mb-3">Current 360 Video:</p>
+                    <video
+                      src={currentVideo360Url}
+                      controls
+                      className="h-40 w-auto rounded-lg shadow-md"
+                    />
+                  </div>
+                )}
+                <input
+                  id="video360"
+                  name="video360"
+                  type="file"
+                  accept="video/*"
+                  onChange={handleChange}
+                  className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100"
+                />
+                <p className="mt-2 text-sm text-gray-600">
+                  Upload a 360-degree video showcasing the gemstone
+                </p>
+              </div>
+            </div>
+
+            {/* Detail Sections */}
+            <div className="pt-6 border-t border-gray-200">
+              <div className="flex items-center justify-between mb-4">
+                <label className="flex items-center text-lg font-semibold text-gray-800">
+                  <FaBook className="mr-2 text-indigo-600" />
+                  Detail Sections
+                </label>
+                <button
+                  type="button"
+                  onClick={handleAddSection}
+                  className="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
+                >
+                  <FaPlus className="mr-2" />
+                  Add Section
+                </button>
+              </div>
+
+              {detailSections.length === 0 && (
+                <p className="text-gray-600 text-sm mb-4">No detail sections yet. Click "Add Section" to create one.</p>
+              )}
+
+              {detailSections.map((section, index) => (
+                <div key={index} className="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                  <div className="flex justify-between items-center mb-4">
+                    <h4 className="font-semibold text-gray-800">Section {index + 1}</h4>
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveSection(index)}
+                      className="text-red-600 hover:text-red-800 transition"
+                    >
+                      <FaTrash />
+                    </button>
+                  </div>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Section Title
+                      </label>
+                      <input
+                        type="text"
+                        value={section.title}
+                        onChange={(e) => handleSectionChange(index, 'title', e.target.value)}
+                        className="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        placeholder="e.g., History"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Section Content
+                      </label>
+                      <textarea
+                        value={section.content}
+                        onChange={(e) => handleSectionChange(index, 'content', e.target.value)}
+                        rows="4"
+                        className="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        placeholder="Enter detailed description..."
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
 
             <div className="flex flex-col sm:flex-row sm:justify-end space-y-4 sm:space-y-0 sm:space-x-4 pt-8 border-t border-gray-200">
@@ -274,7 +418,7 @@ export default function GemstoneForm() {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white hover:from-emerald-700 hover:to-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed transition duration-200 order-1 sm:order-2"
+                className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white hover:from-emerald-700 hover:to-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed transition duration-200 order-1 sm:order-2 inline-flex items-center justify-center"
               >
                 {loading ? (
                   <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>

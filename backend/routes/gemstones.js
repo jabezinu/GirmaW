@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import gemstoneController, { upload } from '../controllers/gemstoneController.js';
+import gemstoneController, { upload, uploadFields } from '../controllers/gemstoneController.js';
 
 // GET /api/gemstones - Get all gemstones
 router.get('/', gemstoneController.getAllGemstones);
@@ -9,10 +9,10 @@ router.get('/', gemstoneController.getAllGemstones);
 router.get('/:id', gemstoneController.getGemstoneById);
 
 // POST /api/gemstones - Create new gemstone
-router.post('/', upload.single('image'), gemstoneController.createGemstone);
+router.post('/', uploadFields, gemstoneController.createGemstone);
 
 // PUT /api/gemstones/:id - Update gemstone
-router.put('/:id', upload.single('image'), gemstoneController.updateGemstone);
+router.put('/:id', uploadFields, gemstoneController.updateGemstone);
 
 // DELETE /api/gemstones/:id - Delete gemstone
 router.delete('/:id', gemstoneController.deleteGemstone);
