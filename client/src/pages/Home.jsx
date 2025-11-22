@@ -6,6 +6,7 @@ import diamondImg from '../assets/kal_asset/gemstones/Diamond.jpg';
 import rubyImg from '../assets/kal_asset/gemstones/ruby.jpg';
 import sapphireImg from '../assets/kal_asset/gemstones/Sapphire.jpg';
 import emeraldImg from '../assets/kal_asset/gemstones/Emerald.jpg';
+import heroVideo from '../assets/kal_asset/video/View of Diamonds Footage l Free Stock Footage _ No Copyright Videos _ Creative Common !.mp4';
 
 export default function GemstonHomepage() {
    const [currentTestimonial, setCurrentTestimonial] = useState(0);
@@ -141,14 +142,25 @@ export default function GemstonHomepage() {
       }
     };
 
+    const handleScroll = () => {
+      // Reset hero text when scrolled back to top
+      if (window.scrollY === 0 && showHeroText) {
+        setShowHeroText(false);
+        setAllowScroll(false);
+      }
+    };
+
     // Prevent scrolling with wheel
     window.addEventListener('wheel', handleWheel, { passive: false });
     // Prevent scrolling with touch
     window.addEventListener('touchmove', handleTouchMove, { passive: false });
+    // Monitor scroll position to reset at top
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
       window.removeEventListener('wheel', handleWheel);
       window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, [showHeroText, allowScroll]);
 
@@ -182,26 +194,42 @@ export default function GemstonHomepage() {
       {/* Hero Section */}
       <section className="relative h-[80vh] md:h-screen overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroImage} alt="Gemstone" className="w-full h-full object-cover" />
+          <video 
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src={heroVideo} type="video/mp4" />
+          </video>
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30" />
         </div>
         
-        <div className="relative z-10 h-full flex items-center">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl">
-              <h1 
-                className={`text-5xl md:text-7xl font-bold text-white mb-6 transition-all duration-700 ${
-                  showHeroText ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
-                }`}
-              >
-                {t.heroTitle}
-              </h1>
-              <div className="flex flex-wrap gap-4">
-                <Link to="/gemstones">
-                  <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 shadow-xl">
-                    {t.browseGemstones}
-                  </button>
-                </Link>
+        <div className="relative z-10 h-full flex flex-col justify-between">
+          <div className="flex-1 flex items-center">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="max-w-3xl">
+                <h1 
+                  className={`text-5xl md:text-7xl font-bold text-white mb-6 transition-all duration-700 ${
+                    showHeroText ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+                  }`}
+                >
+                  {t.heroTitle}
+                </h1>
+              </div>
+            </div>
+          </div>
+          <div className="pb-12 md:pb-16">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="max-w-3xl">
+                <div className="flex flex-wrap gap-4">
+                  <Link to="/gemstones">
+                    <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 shadow-xl">
+                      {t.browseGemstones}
+                    </button>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
