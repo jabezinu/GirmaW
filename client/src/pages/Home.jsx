@@ -8,8 +8,9 @@ import sapphireImg from '../assets/kal_asset/gemstones/Sapphire.jpg';
 import emeraldImg from '../assets/kal_asset/gemstones/Emerald.jpg';
 
 export default function GemstonHomepage() {
-   const [currentHeroImage, setCurrentHeroImage] = useState(0);
    const [currentTestimonial, setCurrentTestimonial] = useState(0);
+   const [showHeroText, setShowHeroText] = useState(false);
+   const [allowScroll, setAllowScroll] = useState(false);
    const { comments, videos, loading } = useData();
  
    // Function to convert video URLs to embed format
@@ -48,10 +49,8 @@ export default function GemstonHomepage() {
 
   // English text constants
   const t = {
-    heroTitle: "GirmaWondimu - Shine Like A Gemstone",
-    heroSubtitle: "From Mine to International Market",
-    heroDescription: "Buying, Selling, Testing & Training - Serving Local & International Markets Since 2015 GC",
-    browseGemstones: "Browse Gemstones",
+    heroTitle: "GirmaWondimu - We Sell Beauty",
+    browseGemstones: "Ethiopian Opal",
     ourServices: "Our Services",
     servicesSubtitle: "Complete solutions for all your gemstone needs",
     buyGemstones: "Buy Gemstones",
@@ -90,11 +89,7 @@ export default function GemstonHomepage() {
     testimonialSubtitle: "Trusted by thousands worldwide"
   };
 
-  const heroImages = [
-    'https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=1920&q=80',
-    'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=1920&q=80',
-    'https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?w=1920&q=80'
-  ];
+  const heroImage = 'https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?w=1920&q=80';
 
   // Map comments to testimonials format
   const testimonials = useMemo(() => {
@@ -111,10 +106,6 @@ export default function GemstonHomepage() {
   const videosLoading = loading.videos;
 
   useEffect(() => {
-    const heroTimer = setInterval(() => {
-      setCurrentHeroImage((prev) => (prev + 1) % heroImages.length);
-    }, 5000);
-
     const testimonialTimer = setInterval(() => {
       if (testimonials.length > 0) {
         setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
@@ -122,10 +113,44 @@ export default function GemstonHomepage() {
     }, 6000);
 
     return () => {
-      clearInterval(heroTimer);
       clearInterval(testimonialTimer);
     };
   }, [testimonials.length]);
+
+  // Handle scroll to show hero text with two-stage behavior
+  useEffect(() => {
+    const handleWheel = (e) => {
+      if (!showHeroText) {
+        // First scroll: prevent default and show hero text
+        e.preventDefault();
+        setShowHeroText(true);
+        // Allow scrolling after animation completes
+        setTimeout(() => {
+          setAllowScroll(true);
+        }, 700); // Match the transition duration
+      } else if (!allowScroll) {
+        // During animation: prevent scrolling
+        e.preventDefault();
+      }
+      // After animation: normal scrolling (no preventDefault)
+    };
+
+    const handleTouchMove = (e) => {
+      if (!showHeroText || !allowScroll) {
+        e.preventDefault();
+      }
+    };
+
+    // Prevent scrolling with wheel
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    // Prevent scrolling with touch
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
+
+    return () => {
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, [showHeroText, allowScroll]);
 
   const services = [
     { id: "buying-selling", icon: ShoppingBag, title: t.buyGemstones, desc: t.buyDesc },
@@ -156,30 +181,21 @@ export default function GemstonHomepage() {
 
       {/* Hero Section */}
       <section className="relative h-[80vh] md:h-screen overflow-hidden">
-        {heroImages.map((img, idx) => (
-          <div
-            key={idx}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              idx === currentHeroImage ? 'opacity-100' : 'opacity-0'
-            }`}
-          >
-            <img src={img} alt="Gemstone" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30" />
-          </div>
-        ))}
+        <div className="absolute inset-0">
+          <img src={heroImage} alt="Gemstone" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30" />
+        </div>
         
         <div className="relative z-10 h-full flex items-center">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl">
-              <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in">
+              <h1 
+                className={`text-5xl md:text-7xl font-bold text-white mb-6 transition-all duration-700 ${
+                  showHeroText ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+                }`}
+              >
                 {t.heroTitle}
               </h1>
-              <p className="text-xl md:text-2xl text-gray-200 mb-8">
-                {t.heroSubtitle}
-              </p>
-              <p className="text-lg text-gray-300 mb-10">
-                {t.heroDescription}
-              </p>
               <div className="flex flex-wrap gap-4">
                 <Link to="/gemstones">
                   <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 shadow-xl">
@@ -189,18 +205,6 @@ export default function GemstonHomepage() {
               </div>
             </div>
           </div>
-        </div>
-
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          {heroImages.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setCurrentHeroImage(idx)}
-              className={`w-3 h-3 rounded-full transition ${
-                idx === currentHeroImage ? 'bg-white w-8' : 'bg-white/50'
-              }`}
-            />
-          ))}
         </div>
       </section>
 
