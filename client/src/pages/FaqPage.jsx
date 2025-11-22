@@ -36,7 +36,7 @@ export default function FaqPage() {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-gray-50 pt-20 py-16 px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto">
                 <div className="text-center mb-12">
                     <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
@@ -78,8 +78,8 @@ export default function FaqPage() {
                                     </button>
                                     <div
                                         className={`px-6 transition-all duration-300 ease-in-out ${openIndex === index
-                                                ? 'max-h-96 py-4 opacity-100'
-                                                : 'max-h-0 py-0 opacity-0'
+                                            ? 'max-h-96 py-4 opacity-100'
+                                            : 'max-h-0 py-0 opacity-0'
                                             }`}
                                     >
                                         <div className="text-gray-600 leading-relaxed border-t border-gray-100 pt-4">

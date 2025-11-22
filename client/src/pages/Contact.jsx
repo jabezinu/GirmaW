@@ -53,7 +53,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-blue-50 to-purple-50 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-blue-50 to-purple-50 relative overflow-hidden pt-20">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(34,211,238,0.1),transparent_50%),radial-gradient(circle_at_70%_70%,rgba(168,85,247,0.1),transparent_50%)]" />
       <div className="container mx-auto px-4 py-16 relative z-10">
         <div className="flex items-center justify-center gap-3 mb-12">

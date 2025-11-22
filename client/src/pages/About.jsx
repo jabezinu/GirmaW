@@ -5,7 +5,7 @@ export default function About() {
   // English text constants
   const t = {
       hero: {
-        title: 'About GirmaWondimu - Shine Like A Gemstone',
+        title: 'About GirmaWondimu',
         subtitle: 'Your Trusted Partner in the World of Precious Gemstones'
       },
       about: {
@@ -100,7 +100,7 @@ export default function About() {
     };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-blue-50 to-purple-50 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-blue-50 to-purple-50 relative overflow-hidden pt-20">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(34,211,238,0.1),transparent_50%),radial-gradient(circle_at_70%_70%,rgba(168,85,247,0.1),transparent_50%)]" />
 
       {/* Hero Section */}
