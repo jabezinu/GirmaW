@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, Star, Award, Globe, Users, ShoppingBag, TestTube, Wrench, GraduationCap, MessageCircle, Sparkles } from 'lucide-react';
+import { ChevronRight, Star, Award, ShoppingBag, TestTube, Wrench, GraduationCap, MessageCircle, Sparkles, X } from 'lucide-react';
 import { useData } from '../contexts/DataContext';
 import diamondImg from '../assets/kal_asset/gemstones/Diamond.jpg';
 import rubyImg from '../assets/kal_asset/gemstones/ruby.jpg';
@@ -12,6 +12,7 @@ export default function GemstonHomepage() {
    const [currentTestimonial, setCurrentTestimonial] = useState(0);
    const [showHeroText, setShowHeroText] = useState(false);
    const [allowScroll, setAllowScroll] = useState(false);
+   const [showOpalModal, setShowOpalModal] = useState(false);
    const { comments, videos, loading } = useData();
  
    // Function to convert video URLs to embed format
@@ -118,6 +119,19 @@ export default function GemstonHomepage() {
     };
   }, [testimonials.length]);
 
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (showOpalModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [showOpalModal]);
+
   // Handle scroll to show hero text with two-stage behavior
   useEffect(() => {
     const handleWheel = (e) => {
@@ -187,9 +201,168 @@ export default function GemstonHomepage() {
     { number: "2,000+", label: t.studentsTrained }
   ];
 
+  // Ethiopian Opal Modal Content
+  const ethiopianOpalInfo = {
+    title: "Ethiopian Opal",
+    subtitle: "The Rainbow Gem of Ancient Kingdoms",
+    history: [
+      {
+        period: "Ancient Times",
+        text: "Ethiopian opals have been treasured since ancient times, though they were officially discovered in the Wollo Province in 1994. These precious stones were believed to possess mystical powers and were used in royal ceremonies."
+      },
+      {
+        period: "Modern Discovery",
+        text: "The modern opal deposits in Ethiopia were discovered in the 1990s, with major finds in Welo (Wollo) Province in 2008. These opals quickly gained international recognition for their exceptional play-of-color and transparency."
+      }
+    ],
+    royalUsage: [
+      {
+        title: "Emperor Haile Selassie",
+        description: "As emperor of Ethiopia (1930–74), Haile Selassie I was known for modernizing his country, for helping to establish the Organization of African Unity (now the African Union) in 1963, for his exile (1936–41), and for being overthrown in 1974.",
+        era: "1837-1901"
+      },
+      {
+        title: "Menelik II",
+        description: "Menelik founded the first modern bank in Ethiopia, the Bank of Abyssinia, introduced the first modern postal system, signed the agreement and initiated work that established the Addis Ababa –Djibouti railway with the French, introduced electricity to Addis Ababa, as well as the telephone, telegraph, the motor",
+        era: "Early 1800s"
+      },
+      {
+        title: "Ethiopian Royalty",
+        description: "Ethiopian emperors and empresses adorned themselves with opals during coronation ceremonies, believing the stones connected them to divine power and brought prosperity to their reign.",
+        era: "Various Dynasties"
+      }
+    ],
+    characteristics: [
+      "Exceptional play-of-color with vibrant flashes",
+      "Hydrophane property - can absorb water",
+      "Ranges from transparent to translucent",
+      "Colors include white, crystal, brown, and rare black",
+      "Found primarily in Wollo and Shewa provinces"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1611955167811-4711904bb9f8?w=800&q=80",
+      "https://images.unsplash.com/photo-1583937443566-6e8a2f6d8e0f?w=800&q=80",
+      "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&q=80"
+    ]
+  };
+
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Ethiopian Opal Modal */}
+      {showOpalModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn">
+          <div className="relative bg-gradient-to-br from-white via-purple-50/30 to-cyan-50/30 rounded-3xl max-w-6xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-purple-200/50">
+            {/* Close Button */}
+            <button
+              onClick={() => setShowOpalModal(false)}
+              className="sticky top-4 right-4 float-right z-10 bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            <div className="p-8 md:p-12">
+              {/* Header */}
+              <div className="text-center mb-12">
+                <div className="flex items-center justify-center gap-3 mb-4">
+                  <Sparkles className="w-10 h-10 text-purple-500 animate-pulse" />
+                  <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text text-transparent">
+                    {ethiopianOpalInfo.title}
+                  </h2>
+                  <Sparkles className="w-10 h-10 text-orange-500 animate-pulse" />
+                </div>
+                <p className="text-xl md:text-2xl text-slate-600 italic">{ethiopianOpalInfo.subtitle}</p>
+              </div>
+
+              {/* Image Gallery */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                {ethiopianOpalInfo.images.map((img, idx) => (
+                  <div key={idx} className="relative group overflow-hidden rounded-2xl shadow-xl">
+                    <img
+                      src={img}
+                      alt={`Ethiopian Opal ${idx + 1}`}
+                      className="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-purple-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  </div>
+                ))}
+              </div>
+
+              {/* History Section */}
+              <div className="mb-12">
+                <h3 className="text-3xl font-bold bg-gradient-to-r from-purple-700 to-pink-700 bg-clip-text text-transparent mb-6 flex items-center gap-2">
+                  <Sparkles className="w-7 h-7 text-purple-600" />
+                  Historical Significance
+                </h3>
+                <div className="space-y-6">
+                  {ethiopianOpalInfo.history.map((period, idx) => (
+                    <div key={idx} className="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-2xl border border-purple-200/50 shadow-lg">
+                      <h4 className="text-xl font-bold text-purple-800 mb-3">{period.period}</h4>
+                      <p className="text-slate-700 leading-relaxed">{period.text}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Royal Usage Section */}
+              <div className="mb-12">
+                <h3 className="text-3xl font-bold bg-gradient-to-r from-pink-700 to-orange-700 bg-clip-text text-transparent mb-6 flex items-center gap-2">
+                  <Star className="w-7 h-7 text-pink-600 fill-pink-600" />
+                  Royal Heritage
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {ethiopianOpalInfo.royalUsage.map((royal, idx) => (
+                    <div key={idx} className="bg-gradient-to-br from-pink-50 via-purple-50 to-orange-50 p-6 rounded-2xl border border-pink-200/50 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
+                      <div className="flex items-center gap-2 mb-3">
+                        <Star className="w-5 h-5 text-orange-500 fill-orange-500" />
+                        <h4 className="text-xl font-bold bg-gradient-to-r from-pink-700 to-orange-700 bg-clip-text text-transparent">
+                          {royal.title}
+                        </h4>
+                      </div>
+                      <p className="text-sm text-purple-600 font-semibold mb-3">{royal.era}</p>
+                      <p className="text-slate-700 leading-relaxed">{royal.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Characteristics Section */}
+              <div className="mb-8">
+                <h3 className="text-3xl font-bold bg-gradient-to-r from-orange-700 to-purple-700 bg-clip-text text-transparent mb-6 flex items-center gap-2">
+                  <Award className="w-7 h-7 text-orange-600" />
+                  Unique Characteristics
+                </h3>
+                <div className="bg-gradient-to-br from-orange-50 via-pink-50 to-purple-50 p-8 rounded-2xl border border-orange-200/50 shadow-xl">
+                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {ethiopianOpalInfo.characteristics.map((char, idx) => (
+                      <li key={idx} className="flex items-start gap-3">
+                        <Sparkles className="w-5 h-5 text-purple-600 mt-1 flex-shrink-0" />
+                        <span className="text-slate-700 font-medium">{char}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Call to Action */}
+              <div className="text-center">
+                <Link to="/gemstones">
+                  <button
+                    onClick={() => setShowOpalModal(false)}
+                    className="relative group bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 hover:from-purple-500 hover:via-pink-500 hover:to-orange-500 text-white px-12 py-5 rounded-full text-lg font-bold transition-all duration-500 transform hover:scale-110 shadow-2xl shadow-purple-500/50 overflow-hidden"
+                  >
+                    <span className="relative z-10 flex items-center gap-2">
+                      Explore Our Opal Collection
+                      <ChevronRight className="w-5 h-5" />
+                    </span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Hero Section */}
       <section className="relative h-[80vh] md:h-screen overflow-hidden">
@@ -240,16 +413,17 @@ export default function GemstonHomepage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="max-w-3xl">
                 <div className="flex flex-wrap gap-4">
-                  <Link to="/gemstones">
-                    <button className="relative group bg-gradient-to-br from-cyan-500 via-blue-500 to-purple-600 hover:from-cyan-400 hover:via-blue-400 hover:to-purple-500 text-white px-10 py-5 rounded-full text-lg font-bold transition-all duration-500 transform hover:scale-110 shadow-2xl shadow-cyan-500/50 hover:shadow-cyan-400/70 overflow-hidden">
-                      <span className="relative z-10 flex items-center gap-2">
-                        <Sparkles className="w-5 h-5" />
-                        {t.browseGemstones}
-                      </span>
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                      <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 opacity-30 blur-lg animate-pulse" />
-                    </button>
-                  </Link>
+                  <button 
+                    onClick={() => setShowOpalModal(true)}
+                    className="relative group bg-gradient-to-br from-cyan-500 via-blue-500 to-purple-600 hover:from-cyan-400 hover:via-blue-400 hover:to-purple-500 text-white px-10 py-5 rounded-full text-lg font-bold transition-all duration-500 transform hover:scale-110 shadow-2xl shadow-cyan-500/50 hover:shadow-cyan-400/70 overflow-hidden"
+                  >
+                    <span className="relative z-10 flex items-center gap-2">
+                      <Sparkles className="w-5 h-5" />
+                      {t.browseGemstones}
+                    </span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                    <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 opacity-30 blur-lg animate-pulse" />
+                  </button>
                 </div>
               </div>
             </div>
