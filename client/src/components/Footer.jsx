@@ -83,7 +83,9 @@ export default function Footer() {
 
         <div className="border-t border-cyan-900/50 pt-8 text-center">
           <p className="text-gray-400 flex items-center justify-center gap-2 flex-wrap">
-            © 2024 Girma Wondimu Export Trade. All rights reserved. | Designed with
+            © 2024 Girma Wondimu Export Trade. All rights reserved. | Developed by
+            <a href="https://akiyasolutions.com" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 transition-colors">akiyasolutions.com</a>
+            | Designed with
             <span className="inline-flex items-center gap-1">
               <Sparkles className="w-4 h-4 text-cyan-400 animate-pulse" />
               <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent font-semibold">love</span>
