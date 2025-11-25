@@ -20,7 +20,7 @@ export default function Contact() {
     address: 'Address',
     addressValue: '123 Gem Street, Diamond City, DC 12345',
     phone: 'Phone',
-    phoneValue: '+251935740257 / +251912407676 / 920919720',
+    phoneValue: '+251935740257 / +251912407676 / +251920919720',
     email: 'Email',
     emailValue: 'info@girmawondimu.com',
     businessHours: 'Business Hours',

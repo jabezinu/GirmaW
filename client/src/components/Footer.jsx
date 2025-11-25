@@ -70,7 +70,7 @@ export default function Footer() {
                 </div>
                 <div className="flex items-center group hover:translate-x-1 transition-transform duration-300">
                   <Phone className="w-5 h-5 text-cyan-400 mr-3 flex-shrink-0 group-hover:text-blue-400 transition-colors" />
-                  <span className="text-gray-400">920919720</span>
+                  <span className="text-gray-400">+251920919720</span>
                 </div>
               </div>
               <div className="flex items-center group hover:translate-x-1 transition-transform duration-300">
