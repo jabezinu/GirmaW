@@ -11,7 +11,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4 group">
               <Sparkles className="w-8 h-8 text-cyan-400 animate-pulse" />
-              <span className="text-xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent">GirmaWondimu</span>
+              <span className="text-xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent" style={{ fontFamily: "'Playball', cursive", paddingRight: '10px' }}>TiletOpal</span>
             </div>
             <p className="text-gray-400 mb-4 leading-relaxed">
               Your trusted partner for premium gemstones since 2009.
@@ -83,7 +83,7 @@ export default function Footer() {
 
         <div className="border-t border-cyan-900/50 pt-8 text-center">
           <p className="text-gray-400 flex items-center justify-center gap-2 flex-wrap">
-            © 2024 GirmaWondimu - GirmaWondimu. All rights reserved. | Designed with
+            © 2024 TiletOpal. All rights reserved. | Designed with
             <span className="inline-flex items-center gap-1">
               <Sparkles className="w-4 h-4 text-cyan-400 animate-pulse" />
               <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent font-semibold">love</span>

@@ -52,7 +52,7 @@ export default function GemstonHomepage() {
 
   // English text constants
   const t = {
-    heroTitle: "GirmaWondimu - We Sell Beauty",
+    heroTitle: "TiletOpal - We Sell Beauty",
     browseGemstones: "Ethiopian Opal",
     ourServices: "Our Services",
     servicesSubtitle: "Complete solutions for all your gemstone needs",
@@ -383,9 +383,9 @@ export default function GemstonHomepage() {
                     <Sparkles className="w-10 h-10 md:w-12 md:h-12 text-cyan-400 animate-pulse" />
                     <h1
                       className="text-6xl md:text-8xl font-black bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-400 bg-clip-text text-transparent"
-                      style={{ textShadow: '0 0 40px rgba(34, 211, 238, 0.6)' }}
+                      style={{ textShadow: '0 0 40px rgba(34, 211, 238, 0.6)', fontFamily: "'Playball', cursive", paddingRight: '20px' }}
                     >
-                      GirmaWondimu
+                      TiletOpal
                     </h1>
                     <Sparkles className="w-10 h-10 md:w-12 md:h-12 text-purple-400 animate-pulse" />
                   </div>

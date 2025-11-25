@@ -5,13 +5,13 @@ export default function About() {
   // English text constants
   const t = {
       hero: {
-        title: 'About GirmaWondimu',
+        title: 'About TiletOpal',
         subtitle: 'Your Trusted Partner in the World of Precious Gemstones'
       },
       about: {
         title: 'About Us',
         paragraphs: [
-          'Girma Wondimu Mining is a registered Ethiopian company licensed by the Ministry of Mines to export gemstones and industrial minerals.',
+          'TiletOpal is a registered Ethiopian company licensed by the Ministry of Mines to export gemstones and industrial minerals.',
           'Building on a solid background in the construction materials sector, we are expanding into responsible gemstone processing and export. Using Ethiopia’s world-renowned deposits—from Opal and Red Garnet to Agate/Chalcedony—we supply high-quality natural stones to international markets.',
           'Our focus is on quality, ethical sourcing, and transparent operations to ensure every export represents the beauty and integrity of Ethiopian origin.'
         ]
@@ -25,7 +25,7 @@ export default function About() {
         description: 'To connect Ethiopian artisanal and small-scale miners with international markets through responsible trade, reliable partnerships, and consistent quality.'
       },
       values: {
-        title: 'Why Choose Girma Wondimu Mining',
+        title: 'Why Choose TiletOpal',
         items: [
           {
             title: 'Legally Licensed Exporter',
@@ -85,12 +85,12 @@ export default function About() {
         { number: '17+', label: 'Countries Served' }
       ],
       founder: {
-        title: 'Who Is Girma Wondimu?',
+        title: 'Who Is TiletOpal?',
         role: 'Founder & CEO',
         description: [
-          'Girma Wondimu is a visionary leader and a pioneer in the Ethiopian gemstone industry. With a deep-rooted passion for the earth\'s hidden treasures, he has dedicated his life to showcasing the unique beauty of Ethiopian opals and other precious stones to the world.',
-          'Starting his journey over a decade ago, Girma has built a reputation for integrity, expertise, and an unwavering commitment to quality. His hands-on approach ensures that every gemstone that passes through our hands meets the highest standards of excellence.',
-          'Beyond business, Girma is a mentor and an advocate for sustainable mining practices, working tirelessly to uplift local communities and promote ethical sourcing in the industry.'
+          'TiletOpal is a visionary leader and a pioneer in the Ethiopian gemstone industry. With a deep-rooted passion for the earth\'s hidden treasures, we have dedicated our life to showcasing the unique beauty of Ethiopian opals and other precious stones to the world.',
+          'Starting our journey over a decade ago, TiletOpal has built a reputation for integrity, expertise, and an unwavering commitment to quality. Our hands-on approach ensures that every gemstone that passes through our hands meets the highest standards of excellence.',
+          'Beyond business, TiletOpal is a mentor and an advocate for sustainable mining practices, working tirelessly to uplift local communities and promote ethical sourcing in the industry.'
         ]
       },
       cta: {
@@ -114,7 +114,7 @@ export default function About() {
           <div className="max-w-4xl mx-auto text-center">
             <div className="flex items-center justify-center gap-4 mb-6">
               <Sparkles className="w-12 h-12 text-cyan-400 animate-pulse" />
-              <h1 className="text-5xl md:text-6xl font-bold tracking-tight bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-400 bg-clip-text text-transparent">{t.hero.title}</h1>
+              <h1 className="text-5xl md:text-6xl font-bold tracking-tight bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-400 bg-clip-text text-transparent" style={{ fontFamily: "'Playball', cursive", paddingRight: '20px' }}>{t.hero.title}</h1>
               <Sparkles className="w-12 h-12 text-purple-400 animate-pulse" />
             </div>
             <p className="text-xl md:text-2xl text-cyan-100 font-light">

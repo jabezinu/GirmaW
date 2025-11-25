@@ -85,11 +85,11 @@ export default function Header() {
                 <Sparkles className="absolute -top-1 -right-1 w-4 h-4 text-yellow-300 animate-ping" />
               </div>
               <div className="relative">
-                <span className="text-2xl font-black bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent relative animate-gradient bg-[length:200%_auto]">
-                  GirmaWondimu
+                <span className="text-2xl font-black bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent relative animate-gradient bg-[length:200%_auto]" style={{ fontFamily: "'Playball', cursive", paddingRight: '10px' }}>
+                  TiletOpal
                 </span>
-                <span className="absolute inset-0 text-2xl font-black bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent blur-md opacity-50 animate-pulse">
-                  GirmaWondimu
+                <span className="absolute inset-0 text-2xl font-black bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent blur-md opacity-50 animate-pulse" style={{ fontFamily: "'Playball', cursive", paddingRight: '10px' }}>
+                  TiletOpal
                 </span>
                 <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
               </div>
