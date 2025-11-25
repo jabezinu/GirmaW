@@ -1,5 +1,7 @@
 import { Trophy, Handshake, Sparkles, Globe, CheckCircle, ShieldCheck } from 'lucide-react';
 import kalImage from '../assets/kal_asset/exprerts/kal.jpg';
+import c1Certificate from '../assets/kal_asset/certificates/c1.jpg';
+import c2Certificate from '../assets/kal_asset/certificates/c2.jpg';
 
 export default function About() {
   // Team images
@@ -12,97 +14,97 @@ export default function About() {
 
   // English text constants
   const t = {
-      hero: {
-        title: 'About TiletOpal',
-        subtitle: 'Your Trusted Partner in the World of Precious Gemstones'
-      },
-      about: {
-        title: 'About Us',
-        paragraphs: [
-          'Girma Wondimu Export Trade is a registered Ethiopian company licensed by the Ministry of Mines to export gemstones and industrial minerals, operating under the brand TiletOpal.',
-          'Building on a solid background in the construction materials sector, we are expanding into responsible gemstone processing and export. Using Ethiopia’s world-renowned deposits—from Opal and Red Garnet to Agate/Chalcedony—we supply high-quality natural stones to international markets.',
-          'Our focus is on quality, ethical sourcing, and transparent operations to ensure every export represents the beauty and integrity of Ethiopian origin.'
-        ]
-      },
-      values: {
-        title: 'Why Choose TiletOpal',
-        items: [
-          {
-            title: 'Legally Licensed Exporter',
-            description: 'We are fully licensed and approved by the Ethiopian Ministry of Mines for the export of natural gemstones and minerals.',
-            icon: <ShieldCheck size={30} className="text-white" />
-          },
-          {
-            title: 'Ethical & Sustainable Sourcing',
-            description: 'We work closely with local miners and cooperatives, ensuring all operations respect and uplift mining communities.',
-            icon: <Handshake size={30} className="text-white" />
-          },
-          {
-            title: 'Quality Commitment',
-            description: 'All gemstones and minerals are professionally inspected and graded before export.',
-            icon: <CheckCircle size={30} className="text-white" />
-          },
-          {
-            title: 'Experience & Trustworthiness',
-            description: 'Our team brings years of experience in minerals and trade, backed by buyers’ trust in the international market.',
-            icon: <Trophy size={30} className="text-white" />
-          },
-          {
-            title: 'Reliable Partnership',
-            description: 'We aim for transparent, long-term cooperation with buyers worldwide.',
-            icon: <Globe size={30} className="text-white" />
-          }
-        ]
-      },
-      stats: [
-        { number: '10+', label: 'Years Experience' },
-        { number: '340+', label: 'Satisfied Clients' },
-        { number: '17+', label: 'Countries Served' }
-      ],
-      founder: {
-        title: 'Who Is Girma Wondimu?',
-        role: 'Founder & CEO',
-        description: [
-          'Girma Wondimu is a visionary leader and a pioneer in the Ethiopian gemstone industry. With a deep-rooted passion for the earth\'s hidden treasures, we have dedicated our life to showcasing the unique beauty of Ethiopian opals and other precious stones to the world.',
-          'Starting our journey over a decade ago, Girma Wondimu has built a reputation for integrity, expertise, and an unwavering commitment to quality. Our hands-on approach ensures that every gemstone that passes through our hands meets the highest standards of excellence.',
-          'Beyond business, Girma Wondimu is a mentor and an advocate for sustainable mining practices, working tirelessly to uplift local communities and promote ethical sourcing in the industry.'
-        ]
-      },
-      team: {
-        title: 'Meet Our Expert Team',
-        subtitle: 'Dedicated professionals committed to excellence in the gemstone industry',
-        members: [
-          {
-            name: 'Kal',
-            role: 'Gemologist',
-            description: 'Specializes in opal identification and grading with over 8 years of experience.',
-            expertise: ['Opal Grading', 'Gemstone Authentication', 'Quality Control']
-          },
-          {
-            name: 'Abebe Kebede',
-            role: 'Mining Operations Manager',
-            description: 'Oversees sustainable mining practices and community partnerships.',
-            expertise: ['Mining Operations', 'Sustainability', 'Community Relations']
-          },
-          {
-            name: 'Tigist Haile',
-            role: 'Quality Control Specialist',
-            description: 'Ensures all gemstones meet international quality standards.',
-            expertise: ['Quality Assurance', 'Standards Compliance', 'Inspection']
-          },
-          {
-            name: 'Dawit Mengistu',
-            role: 'Export Manager',
-            description: 'Manages international trade relations and logistics.',
-            expertise: ['International Trade', 'Logistics', 'Export Compliance']
-          }
-        ]
-      },
-      cta: {
-        title: 'Ready to Start Your Journey?',
-        button: 'Get in Touch'
-      }
-    };
+    hero: {
+      title: 'About TiletOpal',
+      subtitle: 'Your Trusted Partner in the World of Precious Gemstones'
+    },
+    about: {
+      title: 'About Us',
+      paragraphs: [
+        'Girma Wondimu Export Trade is a registered Ethiopian company licensed by the Ministry of Mines to export gemstones and industrial minerals, operating under the brand TiletOpal.',
+        'Building on a solid background in the construction materials sector, we are expanding into responsible gemstone processing and export. Using Ethiopia’s world-renowned deposits—from Opal and Red Garnet to Agate/Chalcedony—we supply high-quality natural stones to international markets.',
+        'Our focus is on quality, ethical sourcing, and transparent operations to ensure every export represents the beauty and integrity of Ethiopian origin.'
+      ]
+    },
+    values: {
+      title: 'Why Choose TiletOpal',
+      items: [
+        {
+          title: 'Legally Licensed Exporter',
+          description: 'We are fully licensed and approved by the Ethiopian Ministry of Mines for the export of natural gemstones and minerals.',
+          icon: <ShieldCheck size={30} className="text-white" />
+        },
+        {
+          title: 'Ethical & Sustainable Sourcing',
+          description: 'We work closely with local miners and cooperatives, ensuring all operations respect and uplift mining communities.',
+          icon: <Handshake size={30} className="text-white" />
+        },
+        {
+          title: 'Quality Commitment',
+          description: 'All gemstones and minerals are professionally inspected and graded before export.',
+          icon: <CheckCircle size={30} className="text-white" />
+        },
+        {
+          title: 'Experience & Trustworthiness',
+          description: 'Our team brings years of experience in minerals and trade, backed by buyers’ trust in the international market.',
+          icon: <Trophy size={30} className="text-white" />
+        },
+        {
+          title: 'Reliable Partnership',
+          description: 'We aim for transparent, long-term cooperation with buyers worldwide.',
+          icon: <Globe size={30} className="text-white" />
+        }
+      ]
+    },
+    stats: [
+      { number: '10+', label: 'Years Experience' },
+      { number: '340+', label: 'Satisfied Clients' },
+      { number: '17+', label: 'Countries Served' }
+    ],
+    founder: {
+      title: 'Who Is Girma Wondimu?',
+      role: 'Founder & CEO',
+      description: [
+        'Girma Wondimu is a visionary leader and a pioneer in the Ethiopian gemstone industry. With a deep-rooted passion for the earth\'s hidden treasures, we have dedicated our life to showcasing the unique beauty of Ethiopian opals and other precious stones to the world.',
+        'Starting our journey over a decade ago, Girma Wondimu has built a reputation for integrity, expertise, and an unwavering commitment to quality. Our hands-on approach ensures that every gemstone that passes through our hands meets the highest standards of excellence.',
+        'Beyond business, Girma Wondimu is a mentor and an advocate for sustainable mining practices, working tirelessly to uplift local communities and promote ethical sourcing in the industry.'
+      ]
+    },
+    team: {
+      title: 'Meet Our Expert Team',
+      subtitle: 'Dedicated professionals committed to excellence in the gemstone industry',
+      members: [
+        {
+          name: 'Kal',
+          role: 'Gemologist',
+          description: 'Specializes in opal identification and grading with over 8 years of experience.',
+          expertise: ['Opal Grading', 'Gemstone Authentication', 'Quality Control']
+        },
+        {
+          name: 'Abebe Kebede',
+          role: 'Mining Operations Manager',
+          description: 'Oversees sustainable mining practices and community partnerships.',
+          expertise: ['Mining Operations', 'Sustainability', 'Community Relations']
+        },
+        {
+          name: 'Tigist Haile',
+          role: 'Quality Control Specialist',
+          description: 'Ensures all gemstones meet international quality standards.',
+          expertise: ['Quality Assurance', 'Standards Compliance', 'Inspection']
+        },
+        {
+          name: 'Dawit Mengistu',
+          role: 'Export Manager',
+          description: 'Manages international trade relations and logistics.',
+          expertise: ['International Trade', 'Logistics', 'Export Compliance']
+        }
+      ]
+    },
+    cta: {
+      title: 'Ready to Start Your Journey?',
+      button: 'Get in Touch'
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-blue-50 to-purple-50 relative overflow-hidden pt-20">
@@ -148,6 +150,56 @@ export default function About() {
               </div>
             </div>
 
+            {/* Certificates Section */}
+            <div className="bg-white rounded-2xl shadow-lg p-8 mt-8 hover:shadow-xl transition-shadow duration-300">
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mr-4">
+                  <ShieldCheck className="w-6 h-6 text-white" />
+                </div>
+                <h2 className="text-3xl font-bold text-gray-800">Our Certifications</h2>
+              </div>
+              <p className="text-gray-600 mb-8">
+                As a legally registered exporter, we hold all necessary certifications and licenses to operate in the gemstone and mineral export industry.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {/* Certificate 1 */}
+                <div className="group">
+                  <div className="relative overflow-hidden rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 mb-4">
+                    <img
+                      src={c1Certificate}
+                      alt="Precious and Semiprecious Minerals Export Certificate"
+                      className="w-full h-auto object-contain bg-gray-50 transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                  <div className="text-center">
+                    <h3 className="text-lg font-bold text-gray-800 mb-2">Export Certificate of Competence</h3>
+                    <p className="text-gray-600 text-sm">
+                      Official certification for the export of precious and semiprecious minerals, issued by the Ethiopian Ministry of Mines.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Certificate 2 */}
+                <div className="group">
+                  <div className="relative overflow-hidden rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 mb-4">
+                    <img
+                      src={c2Certificate}
+                      alt="Business Licence Certificate"
+                      className="w-full h-auto object-contain bg-gray-50 transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                  <div className="text-center">
+                    <h3 className="text-lg font-bold text-gray-800 mb-2">Business Licence</h3>
+                    <p className="text-gray-600 text-sm">
+                      Official business license authorizing Girma Wondimu Export Trade to conduct gemstone and mineral export operations.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
 
           {/* Why Choose Us Section */}
@@ -156,11 +208,10 @@ export default function About() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {t.values.items.map((value, index) => (
                 <div key={index} className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 hover:bg-white/20 transition-all duration-300 hover:transform hover:scale-105">
-                  <div className={`w-16 h-16 bg-gradient-to-br ${
-                    index % 3 === 0 ? 'from-yellow-400 to-orange-500' :
+                  <div className={`w-16 h-16 bg-gradient-to-br ${index % 3 === 0 ? 'from-yellow-400 to-orange-500' :
                     index % 3 === 1 ? 'from-green-400 to-emerald-500' :
-                    'from-purple-400 to-pink-500'
-                  } rounded-2xl flex items-center justify-center text-3xl mb-4 shadow-lg mx-auto`}>
+                      'from-purple-400 to-pink-500'
+                    } rounded-2xl flex items-center justify-center text-3xl mb-4 shadow-lg mx-auto`}>
                     {value.icon}
                   </div>
                   <h3 className="text-xl font-bold mb-3 text-center">{value.title}</h3>
@@ -186,9 +237,9 @@ export default function About() {
             <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
               <div className="grid grid-cols-1 lg:grid-cols-2">
                 <div className="relative h-96 lg:h-auto">
-                  <img 
-                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face" 
-                    alt="Girma Wondimu" 
+                  <img
+                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face"
+                    alt="Girma Wondimu"
                     className="absolute inset-0 w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent lg:bg-gradient-to-l"></div>
