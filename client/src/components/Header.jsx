@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Menu as MenuIcon, X, Sparkles, Gem } from 'lucide-react';
+import { Menu as MenuIcon, X, Sparkles } from 'lucide-react';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -79,9 +79,11 @@ export default function Header() {
             >
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 rounded-full blur-2xl opacity-60 animate-pulse" />
-                <div className="relative bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 p-2 rounded-xl shadow-2xl shadow-cyan-500/50 transform rotate-12 group-hover:rotate-0 transition-transform duration-700">
-                  <Gem className="w-6 h-6 text-white animate-pulse" />
-                </div>
+                <img
+                  src="/favicon.jpg"
+                  alt="TiletOpal Logo"
+                  className="relative w-8 h-8 object-cover rounded-xl shadow-2xl shadow-cyan-500/50 transform rotate-12 group-hover:rotate-0 transition-transform duration-700"
+                />
                 <Sparkles className="absolute -top-1 -right-1 w-4 h-4 text-yellow-300 animate-ping" />
               </div>
               <div className="relative">
