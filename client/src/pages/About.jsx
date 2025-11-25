@@ -296,15 +296,6 @@ export default function About() {
           </div>
 
 
-          {/* Stats Section */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-20">
-            {t.stats.map((stat, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-shadow duration-300">
-                <div className="text-4xl font-bold text-blue-600 mb-2">{stat.number}</div>
-                <div className="text-gray-600 text-sm font-medium">{stat.label}</div>
-              </div>
-            ))}
-          </div>
 
           {/* Founder Section */}
           <div className="mb-20">
