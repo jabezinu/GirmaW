@@ -85,12 +85,12 @@ export default function About() {
         { number: '17+', label: 'Countries Served' }
       ],
       founder: {
-        title: 'Who Is TiletOpal?',
+        title: 'Who Is Girma Wondimu?',
         role: 'Founder & CEO',
         description: [
-          'TiletOpal is a visionary leader and a pioneer in the Ethiopian gemstone industry. With a deep-rooted passion for the earth\'s hidden treasures, we have dedicated our life to showcasing the unique beauty of Ethiopian opals and other precious stones to the world.',
-          'Starting our journey over a decade ago, TiletOpal has built a reputation for integrity, expertise, and an unwavering commitment to quality. Our hands-on approach ensures that every gemstone that passes through our hands meets the highest standards of excellence.',
-          'Beyond business, TiletOpal is a mentor and an advocate for sustainable mining practices, working tirelessly to uplift local communities and promote ethical sourcing in the industry.'
+          'Girma Wondimu is a visionary leader and a pioneer in the Ethiopian gemstone industry. With a deep-rooted passion for the earth\'s hidden treasures, we have dedicated our life to showcasing the unique beauty of Ethiopian opals and other precious stones to the world.',
+          'Starting our journey over a decade ago, Girma Wondimu has built a reputation for integrity, expertise, and an unwavering commitment to quality. Our hands-on approach ensures that every gemstone that passes through our hands meets the highest standards of excellence.',
+          'Beyond business, Girma Wondimu is a mentor and an advocate for sustainable mining practices, working tirelessly to uplift local communities and promote ethical sourcing in the industry.'
         ]
       },
       cta: {

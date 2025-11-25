@@ -2,11 +2,11 @@ import { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, Star, Award, Sparkles, X } from 'lucide-react';
 import { useData } from '../contexts/DataContext';
-import diamondImg from '../assets/kal_asset/gemstones/Diamond.jpg';
-import rubyImg from '../assets/kal_asset/gemstones/ruby.jpg';
-import sapphireImg from '../assets/kal_asset/gemstones/Sapphire.jpg';
-import emeraldImg from '../assets/kal_asset/gemstones/Emerald.jpg';
 import opalImg from '../assets/kal_asset/gemstones/opal.jpg';
+import blackOpalImg from '../assets/kal_asset/gemstones/blackopal.png';
+import boulderOpalImg from '../assets/kal_asset/gemstones/BoulderOpal.png';
+import crystalOpalImg from '../assets/kal_asset/gemstones/CrystalOpal.png';
+import fireOpalImg from '../assets/kal_asset/gemstones/fireopal.png';
 import heroVideo from '../assets/kal_asset/video/View of Diamonds Footage l Free Stock Footage _ No Copyright Videos _ Creative Common !.mp4';
 
 export default function GemstonHomepage() {
@@ -180,11 +180,11 @@ export default function GemstonHomepage() {
   }, [showHeroText, allowScroll]);
 
   const featuredGems = [
-    { name: t.diamond, carat: "3.0ct", origin: "Botswana", price: "$3,500", image: diamondImg },
-    { name: t.ruby, carat: "2.8ct", origin: t.burma, price: "$3,200", image: rubyImg },
-    { name: t.sapphire, carat: "3.5ct", origin: t.ceylon, price: "$2,500", image: sapphireImg },
-    { name: t.emerald, carat: "4.2ct", origin: t.colombia, price: "$2,800", image: emeraldImg },
-    { name: "Ethiopian Opal", carat: "2.5ct", origin: "Ethiopia", price: "$2,200", image: opalImg }
+    { name: "Ethiopian Opal", carat: "2.5ct", origin: "Ethiopia", price: "$2,200", image: opalImg },
+    { name: "Black Opal", carat: "3.0ct", origin: "Australia", price: "$5,000", image: blackOpalImg },
+    { name: "Fire Opal", carat: "2.8ct", origin: "Mexico", price: "$1,800", image: fireOpalImg },
+    { name: "Boulder Opal", carat: "4.2ct", origin: "Australia", price: "$4,200", image: boulderOpalImg },
+    { name: "Crystal Opal", carat: "3.5ct", origin: "Australia", price: "$3,800", image: crystalOpalImg }
   ];
 
   const stats = [
