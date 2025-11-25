@@ -2,6 +2,14 @@ import { Trophy, Handshake, Sparkles, Target, Eye, Globe, CheckCircle, ShieldChe
 import kalImage from '../assets/kal_asset/exprerts/kal.jpg';
 
 export default function About() {
+  // Team images
+  const teamImages = [
+    kalImage,
+    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
+    'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop&crop=face',
+    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face'
+  ];
+
   // English text constants
   const t = {
       hero: {
@@ -91,6 +99,36 @@ export default function About() {
           'Girma Wondimu is a visionary leader and a pioneer in the Ethiopian gemstone industry. With a deep-rooted passion for the earth\'s hidden treasures, we have dedicated our life to showcasing the unique beauty of Ethiopian opals and other precious stones to the world.',
           'Starting our journey over a decade ago, Girma Wondimu has built a reputation for integrity, expertise, and an unwavering commitment to quality. Our hands-on approach ensures that every gemstone that passes through our hands meets the highest standards of excellence.',
           'Beyond business, Girma Wondimu is a mentor and an advocate for sustainable mining practices, working tirelessly to uplift local communities and promote ethical sourcing in the industry.'
+        ]
+      },
+      team: {
+        title: 'Meet Our Expert Team',
+        subtitle: 'Dedicated professionals committed to excellence in the gemstone industry',
+        members: [
+          {
+            name: 'Kal',
+            role: 'Gemologist',
+            description: 'Specializes in opal identification and grading with over 8 years of experience.',
+            expertise: ['Opal Grading', 'Gemstone Authentication', 'Quality Control']
+          },
+          {
+            name: 'Abebe Kebede',
+            role: 'Mining Operations Manager',
+            description: 'Oversees sustainable mining practices and community partnerships.',
+            expertise: ['Mining Operations', 'Sustainability', 'Community Relations']
+          },
+          {
+            name: 'Tigist Haile',
+            role: 'Quality Control Specialist',
+            description: 'Ensures all gemstones meet international quality standards.',
+            expertise: ['Quality Assurance', 'Standards Compliance', 'Inspection']
+          },
+          {
+            name: 'Dawit Mengistu',
+            role: 'Export Manager',
+            description: 'Manages international trade relations and logistics.',
+            expertise: ['International Trade', 'Logistics', 'Export Compliance']
+          }
         ]
       },
       cta: {
@@ -249,6 +287,57 @@ export default function About() {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Team Section */}
+          <div className="mb-20">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">{t.team.title}</h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">{t.team.subtitle}</p>
+            </div>
+            <div className="flex justify-center gap-8 flex-wrap">
+              {t.team.members.map((member, index) => (
+                <div key={index} className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 w-full max-w-md">
+                  <div className="aspect-w-4 aspect-h-5">
+                    <img
+                      src={teamImages[index]}
+                      alt={member.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  </div>
+
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+                    <h3 className="text-2xl font-bold mb-2">{member.name}</h3>
+                    <p className="text-blue-300 font-medium mb-3">{member.role}</p>
+                    <p className="text-gray-300 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                      {member.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
+                      {member.expertise.map((skill, i) => (
+                        <span key={i} className="px-3 py-1 bg-blue-600/30 rounded-full text-sm text-blue-200">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="flex gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-300">
+                      <a href="#" className="text-white hover:text-blue-400 transition-colors">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                        </svg>
+                      </a>
+                      <a href="#" className="text-white hover:text-blue-400 transition-colors">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
