@@ -1,4 +1,4 @@
-import { Trophy, Handshake, Sparkles, Target, Eye, Globe, CheckCircle, ShieldCheck } from 'lucide-react';
+import { Trophy, Handshake, Sparkles, Globe, CheckCircle, ShieldCheck } from 'lucide-react';
 import kalImage from '../assets/kal_asset/exprerts/kal.jpg';
 
 export default function About() {
@@ -19,18 +19,10 @@ export default function About() {
       about: {
         title: 'About Us',
         paragraphs: [
-          'TiletOpal is a registered Ethiopian company licensed by the Ministry of Mines to export gemstones and industrial minerals.',
+          'Girma Wondimu Export Trade is a registered Ethiopian company licensed by the Ministry of Mines to export gemstones and industrial minerals, operating under the brand TiletOpal.',
           'Building on a solid background in the construction materials sector, we are expanding into responsible gemstone processing and export. Using Ethiopia’s world-renowned deposits—from Opal and Red Garnet to Agate/Chalcedony—we supply high-quality natural stones to international markets.',
           'Our focus is on quality, ethical sourcing, and transparent operations to ensure every export represents the beauty and integrity of Ethiopian origin.'
         ]
-      },
-      vision: {
-        title: 'Our Vision',
-        description: 'To become one of Ethiopia’s leading and trusted exporters of gemstones and industrial minerals, recognized for high quality and sustainable business practices.'
-      },
-      mission: {
-        title: 'Our Mission',
-        description: 'To connect Ethiopian artisanal and small-scale miners with international markets through responsible trade, reliable partnerships, and consistent quality.'
       },
       values: {
         title: 'Why Choose TiletOpal',
@@ -59,31 +51,6 @@ export default function About() {
             title: 'Reliable Partnership',
             description: 'We aim for transparent, long-term cooperation with buyers worldwide.',
             icon: <Globe size={30} className="text-white" />
-          }
-        ]
-      },
-      products: {
-        title: 'Our Main Export Products',
-        items: [
-          {
-            title: 'Ethiopian Opal',
-            description: 'Admired for its brilliance and play-of-color.'
-          },
-          {
-            title: 'Red Garnet',
-            description: 'Prized for its intense color and high clarity.'
-          },
-          {
-            title: 'Agate & Chalcedony',
-            description: 'Vibrant stones with unique patterns and colors.'
-          },
-          {
-            title: 'Black Obsidian',
-            description: 'Natural volcanic glass used in decorative and craft applications.'
-          },
-          {
-            title: 'Quartz Crystals & Citrine',
-            description: 'Transparent and semi-precious stones for multiple uses.'
           }
         ]
       },
@@ -164,8 +131,8 @@ export default function About() {
 
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-6xl mx-auto">
-          {/* About Us, Vision, Mission Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
+          {/* About Us Section */}
+          <div className="max-w-4xl mx-auto mb-20">
             {/* About Us */}
             <div className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300">
               <div className="flex items-center mb-6">
@@ -181,28 +148,6 @@ export default function About() {
               </div>
             </div>
 
-            {/* Vision & Mission */}
-            <div className="space-y-8">
-              <div className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300">
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center mr-4">
-                    <Eye className="text-white w-6 h-6" />
-                  </div>
-                  <h2 className="text-2xl font-bold text-gray-800">{t.vision.title}</h2>
-                </div>
-                <p className="text-gray-600 leading-relaxed">{t.vision.description}</p>
-              </div>
-
-              <div className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300">
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center mr-4">
-                    <Target className="text-white w-6 h-6" />
-                  </div>
-                  <h2 className="text-2xl font-bold text-gray-800">{t.mission.title}</h2>
-                </div>
-                <p className="text-gray-600 leading-relaxed">{t.mission.description}</p>
-              </div>
-            </div>
           </div>
 
           {/* Why Choose Us Section */}
@@ -225,21 +170,6 @@ export default function About() {
             </div>
           </div>
 
-          {/* Main Export Products Section */}
-          <div className="mb-20">
-            <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center text-gray-800">{t.products.title}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {t.products.items.map((item, index) => (
-                <div key={index} className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300 border border-gray-100">
-                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600">
-                    <Sparkles size={24} />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">{item.title}</h3>
-                  <p className="text-gray-600">{item.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
 
           {/* Stats Section */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-20">
