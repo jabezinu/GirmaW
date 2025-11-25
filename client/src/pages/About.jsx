@@ -1,9 +1,40 @@
 import { Trophy, Handshake, Sparkles, Globe, CheckCircle, ShieldCheck } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import kalImage from '../assets/kal_asset/exprerts/kal.jpg';
 import c1Certificate from '../assets/kal_asset/certificates/c1.jpg';
 import c2Certificate from '../assets/kal_asset/certificates/c2.jpg';
 
+const API_BASE_URL = 'http://localhost:5001/api';
+
 export default function About() {
+  const [awards, setAwards] = useState([]);
+  const [loadingAwards, setLoadingAwards] = useState(true);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  useEffect(() => {
+    fetchAwards();
+  }, []);
+
+  const fetchAwards = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/awards`);
+      const data = await response.json();
+      setAwards(data);
+    } catch (error) {
+      console.error('Failed to fetch awards:', error);
+    } finally {
+      setLoadingAwards(false);
+    }
+  };
+
+  const openImageModal = (imageUrl) => {
+    setSelectedImage(imageUrl);
+  };
+
+  const closeImageModal = () => {
+    setSelectedImage(null);
+  };
+
   // Team images
   const teamImages = [
     kalImage,
@@ -200,6 +231,49 @@ export default function About() {
               </div>
             </div>
 
+            {/* Awards & Recognition Section */}
+            {!loadingAwards && awards.length > 0 && (
+              <div className="bg-white rounded-2xl shadow-lg p-8 mt-8 hover:shadow-xl transition-shadow duration-300">
+                <div className="flex items-center mb-6">
+                  <div className="w-12 h-12 bg-yellow-600 rounded-lg flex items-center justify-center mr-4">
+                    <Trophy className="w-6 h-6 text-white" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-gray-800">Awards & Recognition</h2>
+                </div>
+                <p className="text-gray-600 mb-8">
+                  Our commitment to excellence and ethical practices has been recognized through various awards and certifications.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {awards.map((award) => (
+                    <div key={award._id} className="group">
+                      <div
+                        className="relative overflow-hidden rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 mb-4 cursor-pointer"
+                        onClick={() => openImageModal(award.image)}
+                      >
+                        <img
+                          src={award.image}
+                          alt={award.title}
+                          className="w-full h-64 object-contain bg-gray-50 transition-transform duration-300 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      </div>
+                      <div className="text-center">
+                        <h3 className="text-lg font-bold text-gray-800 mb-2">{award.title}</h3>
+                        <p className="text-gray-600 text-sm mb-2">{award.description}</p>
+                        <p className="text-xs text-gray-500">
+                          {new Date(award.dateReceived).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                          })}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
           </div>
 
           {/* Why Choose Us Section */}
@@ -341,6 +415,40 @@ export default function About() {
           </div>
         </div>
       </div>
+
+      {/* Fullscreen Image Modal */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-4"
+          onClick={closeImageModal}
+        >
+          <button
+            onClick={closeImageModal}
+            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10"
+            aria-label="Close"
+          >
+            <svg
+              className="w-8 h-8"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+          <img
+            src={selectedImage}
+            alt="Award fullscreen view"
+            className="max-w-full max-h-full object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   );
 }

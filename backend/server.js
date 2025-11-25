@@ -7,6 +7,7 @@ import commentsRouter from './routes/comments.js';
 import videosRouter from './routes/videos.js';
 import authRouter from './routes/auth.js';
 import faqsRouter from './routes/faqs.js';
+import awardsRouter from './routes/awards.js';
 import { v2 as cloudinary } from 'cloudinary';
 
 // Configure Cloudinary
@@ -35,6 +36,7 @@ app.use('/api/contact-messages', contactMessagesRouter);
 app.use('/api/comments', commentsRouter);
 app.use('/api/videos', videosRouter);
 app.use('/api/faqs', faqsRouter);
+app.use('/api/awards', awardsRouter);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

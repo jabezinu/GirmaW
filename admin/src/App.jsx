@@ -12,6 +12,8 @@ import VideosList from './components/VideosList'
 import VideoForm from './components/VideoForm'
 import FaqList from './components/FaqList'
 import FaqForm from './components/FaqForm'
+import AwardsList from './components/AwardsList'
+import AwardForm from './components/AwardForm'
 
 export default function App() {
   return (
@@ -36,6 +38,9 @@ export default function App() {
                       <Route path="/faqs" element={<FaqList />} />
                       <Route path="/faqs/new" element={<FaqForm />} />
                       <Route path="/faqs/:id/edit" element={<FaqForm />} />
+                      <Route path="/awards" element={<AwardsList />} />
+                      <Route path="/awards/new" element={<AwardForm />} />
+                      <Route path="/awards/:id/edit" element={<AwardForm />} />
                     </Routes>
                   </Layout>
                 </ProtectedRoute>

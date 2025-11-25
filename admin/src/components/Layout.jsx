@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { FaGem, FaEnvelope, FaVideo, FaChevronLeft, FaChevronRight, FaBars, FaKey, FaSignOutAlt, FaQuestionCircle } from 'react-icons/fa'
+import { FaGem, FaEnvelope, FaVideo, FaChevronLeft, FaChevronRight, FaBars, FaKey, FaSignOutAlt, FaQuestionCircle, FaTrophy } from 'react-icons/fa'
 import { ToastContainer } from 'react-toastify'
 import { useAuth } from '../contexts/AuthContext'
 import ChangePasswordModal from './ChangePasswordModal'
@@ -36,6 +36,7 @@ export default function Layout({ children }) {
     { to: '/videos', label: 'Videos', icon: FaVideo },
     { to: '/contact-messages', label: 'Contact Messages', icon: FaEnvelope },
     { to: '/faqs', label: 'FAQs', icon: FaQuestionCircle },
+    { to: '/awards', label: 'Awards', icon: FaTrophy },
   ]
 
   return (
