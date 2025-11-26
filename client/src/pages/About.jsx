@@ -194,8 +194,8 @@ export default function About() {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Certificate 1 */}
-                <div className="group">
-                  <div className="relative overflow-hidden rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 mb-4">
+                <div className="group cursor-pointer">
+                  <div className="relative overflow-hidden rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 mb-4" onClick={() => openImageModal(c1Certificate)}>
                     <img
                       src={c1Certificate}
                       alt="Precious and Semiprecious Minerals Export Certificate"
@@ -212,8 +212,8 @@ export default function About() {
                 </div>
 
                 {/* Certificate 2 */}
-                <div className="group">
-                  <div className="relative overflow-hidden rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 mb-4">
+                <div className="group cursor-pointer">
+                  <div className="relative overflow-hidden rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 mb-4" onClick={() => openImageModal(c2Certificate)}>
                     <img
                       src={c2Certificate}
                       alt="Business Licence Certificate"

@@ -75,7 +75,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center group hover:translate-x-1 transition-transform duration-300">
                 <Mail className="w-5 h-5 text-cyan-400 mr-3 flex-shrink-0 group-hover:text-blue-400 transition-colors" />
-                <a href="mailto:info@girmawondimu.com" className="text-gray-400 hover:text-cyan-400 transition-colors">info@girmawondimu.com</a>
+                <a href="mailto:info@tiletopal.com" className="text-gray-400 hover:text-cyan-400 transition-colors">info@tiletopal.com</a>
               </div>
             </div>
           </div>

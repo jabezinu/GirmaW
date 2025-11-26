@@ -22,7 +22,7 @@ export default function Contact() {
     phone: 'Phone',
     phoneValue: '+251935740257 / +251912407676 / +251920919720',
     email: 'Email',
-    emailValue: 'info@girmawondimu.com',
+    emailValue: 'info@tiletopal.com',
     businessHours: 'Business Hours',
     businessHoursValue: 'Monday - Sunday: 9:00 AM - 6:00 PM',
     name: 'Name',
@@ -81,14 +81,20 @@ export default function Contact() {
               <span className="text-blue-600 mr-3">📞</span>
               <div>
                 <p className="font-semibold">{t.phone}</p>
-                <p className="text-gray-600">{t.phoneValue}</p>
+                <p className="text-gray-600">
+                  <a href="tel:+251935740257" className="hover:text-blue-600 transition-colors">+251935740257</a> /{' '}
+                  <a href="tel:+251912407676" className="hover:text-blue-600 transition-colors">+251912407676</a> /{' '}
+                  <a href="tel:+251920919720" className="hover:text-blue-600 transition-colors">+251920919720</a>
+                </p>
               </div>
             </div>
             <div className="flex items-center">
               <span className="text-blue-600 mr-3">✉️</span>
               <div>
                 <p className="font-semibold">{t.email}</p>
-                <p className="text-gray-600">{t.emailValue}</p>
+                <p className="text-gray-600">
+                  <a href="mailto:info@tiletopal.com" className="hover:text-blue-600 transition-colors">{t.emailValue}</a>
+                </p>
               </div>
             </div>
             <div className="flex items-center">

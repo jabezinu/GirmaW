@@ -245,7 +245,7 @@ export default function GemstonHomepage() {
       {/* Ethiopian Opal Modal */}
       {showOpalModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn">
-          <div className="relative bg-gradient-to-br from-white via-purple-50/30 to-cyan-50/30 rounded-3xl max-w-6xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-purple-200/50">
+          <div className="relative bg-gradient-to-br from-white via-purple-50/30 to-cyan-50/30 rounded-3xl max-w-6xl w-full max-h-[90vh] overflow-y-auto hide-scrollbar shadow-2xl border border-purple-200/50">
             {/* Close Button */}
             <button
               onClick={() => setShowOpalModal(false)}
