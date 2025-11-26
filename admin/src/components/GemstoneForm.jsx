@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { FaSave, FaArrowLeft, FaGem, FaTag, FaStar, FaHammer, FaImage, FaVideo, FaBook, FaPlus, FaTrash } from 'react-icons/fa'
+import { FaSave, FaArrowLeft, FaGem, FaTag, FaStar, FaHammer, FaImage, FaBook, FaPlus, FaTrash } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import { useData } from '../contexts/DataContext'
 import gemstoneService from '../services/gemstoneService'
@@ -20,14 +20,12 @@ export default function GemstoneForm() {
     quality: 'affordable',
     hardness: '',
     image: null,
-    mainPhoto: null,
-    video360: null
+    mainPhoto: null
   })
 
   const [detailSections, setDetailSections] = useState([])
   const [currentImageUrl, setCurrentImageUrl] = useState('')
   const [currentMainPhotoUrl, setCurrentMainPhotoUrl] = useState('')
-  const [currentVideo360Url, setCurrentVideo360Url] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [fetchLoading, setFetchLoading] = useState(isEditing)
@@ -42,12 +40,10 @@ export default function GemstoneForm() {
         quality: gemstone.quality || 'affordable',
         hardness: gemstone.hardness || '',
         image: null,
-        mainPhoto: null,
-        video360: null
+        mainPhoto: null
       })
       setCurrentImageUrl(gemstone.image || '')
       setCurrentMainPhotoUrl(gemstone.mainPhoto || '')
-      setCurrentVideo360Url(gemstone.video360 || '')
       setDetailSections(gemstone.detailSections || [])
     } catch (err) {
       setError('Failed to fetch gemstone')
@@ -116,7 +112,6 @@ export default function GemstoneForm() {
 
       if (formData.image) submitData.append('image', formData.image)
       if (formData.mainPhoto) submitData.append('mainPhoto', formData.mainPhoto)
-      if (formData.video360) submitData.append('video360', formData.video360)
       if (detailSections.length > 0) {
         submitData.append('detailSections', JSON.stringify(detailSections))
       }
@@ -314,34 +309,6 @@ export default function GemstoneForm() {
                 </p>
               </div>
 
-              {/* 360 Video */}
-              <div className="sm:col-span-2">
-                <label htmlFor="video360" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
-                  <FaVideo className="mr-2 text-red-600" />
-                  360-Degree Video (Optional)
-                </label>
-                {isEditing && currentVideo360Url && (
-                  <div className="mt-3 mb-4 p-4 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
-                    <p className="text-sm font-medium text-gray-700 mb-3">Current 360 Video:</p>
-                    <video
-                      src={currentVideo360Url}
-                      controls
-                      className="h-40 w-auto rounded-lg shadow-md"
-                    />
-                  </div>
-                )}
-                <input
-                  id="video360"
-                  name="video360"
-                  type="file"
-                  accept="video/*"
-                  onChange={handleChange}
-                  className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100"
-                />
-                <p className="mt-2 text-sm text-gray-600">
-                  Upload a 360-degree video showcasing the gemstone
-                </p>
-              </div>
             </div>
 
             {/* Detail Sections */}

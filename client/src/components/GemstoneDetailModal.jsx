@@ -1,14 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { X } from 'lucide-react';
 
 export default function GemstoneDetailModal({ gemstone, onClose }) {
-    const videoRef = useRef(null);
-
-    useEffect(() => {
-        if (videoRef.current) {
-            videoRef.current.play().catch(e => console.log("Auto-play failed:", e));
-        }
-    }, [gemstone]);
 
     if (!gemstone) return null;
 
@@ -98,34 +91,6 @@ export default function GemstoneDetailModal({ gemstone, onClose }) {
                         </div>
                     )}
 
-                    {/* 360° Video */}
-                    {gemstone.video360 && (
-                        <div className="space-y-4">
-                            <h3 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-                                <span className="text-red-600">🎥</span> 360° Interactive View
-                            </h3>
-                            <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden shadow-2xl p-2">
-                                <video
-                                    ref={videoRef}
-                                    src={gemstone.video360}
-                                    controls
-                                    autoPlay
-                                    muted
-                                    loop
-                                    playsInline
-                                    preload="auto"
-                                    className="w-full max-h-[500px] object-contain mx-auto rounded-xl"
-                                    poster={gemstone.mainPhoto || gemstone.image}
-                                    onError={(e) => console.error('Video load error:', e)}
-                                >
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                            <p className="text-sm text-gray-600 text-center italic">
-                                Use controls to explore the gemstone from all angles
-                            </p>
-                        </div>
-                    )}
 
                     {/* Detail Sections / Description */}
                     {gemstone.detailSections && gemstone.detailSections.length > 0 && (
@@ -160,7 +125,6 @@ export default function GemstoneDetailModal({ gemstone, onClose }) {
 
                     {/* If no detailed information */}
                     {!gemstone.mainPhoto &&
-                        !gemstone.video360 &&
                         (!gemstone.detailSections || gemstone.detailSections.length === 0) && (
                             <div className="text-center py-12 bg-gray-50 rounded-2xl">
                                 <div className="text-gray-400 mb-4">

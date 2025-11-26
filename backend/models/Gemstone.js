@@ -28,10 +28,6 @@ const gemstoneSchema = new mongoose.Schema({
     type: String,
     required: false
   },
-  video360: {
-    type: String,
-    required: false
-  },
   detailSections: [{
     title: {
       type: String,

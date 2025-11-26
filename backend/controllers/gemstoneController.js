@@ -9,8 +9,7 @@ const upload = multer({ storage });
 // Export upload middleware for multiple files
 export const uploadFields = upload.fields([
   { name: 'image', maxCount: 1 },
-  { name: 'mainPhoto', maxCount: 1 },
-  { name: 'video360', maxCount: 1 }
+  { name: 'mainPhoto', maxCount: 1 }
 ]);
 
 // Export single upload for backwards compatibility
@@ -58,7 +57,6 @@ export const createGemstone = async function (req, res) {
   try {
     let imageUrl = '';
     let mainPhotoUrl = '';
-    let video360Url = '';
 
     // Handle multiple file uploads
     if (req.files) {
@@ -67,9 +65,6 @@ export const createGemstone = async function (req, res) {
       }
       if (req.files.mainPhoto && req.files.mainPhoto[0]) {
         mainPhotoUrl = await uploadToCloudinary(req.files.mainPhoto[0].buffer);
-      }
-      if (req.files.video360 && req.files.video360[0]) {
-        video360Url = await uploadToCloudinary(req.files.video360[0].buffer);
       }
     }
 
@@ -89,7 +84,6 @@ export const createGemstone = async function (req, res) {
       ...req.body,
       image: imageUrl,
       mainPhoto: mainPhotoUrl || undefined,
-      video360: video360Url || undefined,
       detailSections: detailSections.length > 0 ? detailSections : undefined
     };
 
@@ -115,10 +109,6 @@ export const updateGemstone = async function (req, res) {
       if (req.files.mainPhoto && req.files.mainPhoto[0]) {
         const mainPhotoUrl = await uploadToCloudinary(req.files.mainPhoto[0].buffer);
         updateData.mainPhoto = mainPhotoUrl;
-      }
-      if (req.files.video360 && req.files.video360[0]) {
-        const video360Url = await uploadToCloudinary(req.files.video360[0].buffer);
-        updateData.video360 = video360Url;
       }
     }
 
