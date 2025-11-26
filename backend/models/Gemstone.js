@@ -28,6 +28,10 @@ const gemstoneSchema = new mongoose.Schema({
     type: String,
     required: false
   },
+  galleryImages: [{
+    type: String,
+    required: false
+  }],
   detailSections: [{
     title: {
       type: String,

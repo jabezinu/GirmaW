@@ -1,14 +1,79 @@
-import React from 'react';
-import { X } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, ChevronLeft, ChevronRight, Expand } from 'lucide-react';
+import FullscreenImageViewer from './FullscreenImageViewer';
 
 export default function GemstoneDetailModal({ gemstone, onClose }) {
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [showFullscreenViewer, setShowFullscreenViewer] = useState(false);
 
     if (!gemstone) return null;
+
+    // Build the complete image gallery: main image first, then detail images
+    const allImages = [];
+
+    // Add main image (the same one shown on the card)
+    if (gemstone.image) {
+        allImages.push({ url: gemstone.image, label: 'Main Image' });
+    }
+
+    // Add detail images (galleryImages uploaded by admin)
+    if (gemstone.galleryImages && gemstone.galleryImages.length > 0) {
+        gemstone.galleryImages.forEach((url, index) => {
+            allImages.push({ url, label: `Detail Image ${index + 1}` });
+        });
+    }
+
+    const hasMultipleImages = allImages.length > 1;
+
+    // Navigation functions
+    const goToPrevious = () => {
+        setCurrentImageIndex((prev) =>
+            prev === 0 ? allImages.length - 1 : prev - 1
+        );
+    };
+
+    const goToNext = () => {
+        setCurrentImageIndex((prev) =>
+            prev === allImages.length - 1 ? 0 : prev + 1
+        );
+    };
+
+    // Add keyboard navigation
+    useEffect(() => {
+        const handleKeyPress = (e) => {
+            // Only handle keyboard navigation if fullscreen viewer is not open
+            if (showFullscreenViewer) return;
+
+            switch (e.key) {
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    goToPrevious();
+                    break;
+                case 'ArrowRight':
+                    e.preventDefault();
+                    goToNext();
+                    break;
+                default:
+                    break;
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyPress);
+        return () => document.removeEventListener('keydown', handleKeyPress);
+    }, [showFullscreenViewer, currentImageIndex, allImages.length, goToPrevious, goToNext]);
 
     const handleBackdropClick = (e) => {
         if (e.target === e.currentTarget) {
             onClose();
         }
+    };
+
+    const openFullscreenViewer = () => {
+        setShowFullscreenViewer(true);
+    };
+
+    const closeFullscreenViewer = () => {
+        setShowFullscreenViewer(false);
     };
 
     return (
@@ -47,50 +112,98 @@ export default function GemstoneDetailModal({ gemstone, onClose }) {
                         </div>
                     </div>
 
-                    {/* Images Gallery */}
-                    {(gemstone.image || gemstone.mainPhoto) && (
+                    {/* Image Gallery - Main Image + Detail Images */}
+                    {allImages.length > 0 && (
                         <div className="space-y-4">
                             <h3 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-                                <span className="text-blue-600">📸</span> Gemstone Gallery
-                            </h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                {/* Main Photo - Larger display */}
-                                {gemstone.mainPhoto && (
-                                    <div className="md:col-span-2">
-                                        <div className="relative group rounded-2xl overflow-hidden shadow-xl">
-                                            <img
-                                                src={gemstone.mainPhoto}
-                                                alt={`${gemstone.name} - High Quality`}
-                                                className="w-full h-auto max-h-[500px] object-contain bg-gray-100"
-                                            />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <div className="absolute bottom-4 left-4 text-white">
-                                                    <p className="text-sm font-semibold">High-Quality View</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <span className="text-blue-600">📸</span> Gemstone Images
+                                {hasMultipleImages && (
+                                    <span className="text-sm font-normal text-gray-500 ml-2">
+                                        ({allImages.length} images)
+                                    </span>
                                 )}
+                            </h3>
+                            
+                            <div className="relative bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden shadow-xl">
+                                {/* Main Image Display */}
+                                <div className="relative h-96 md:h-[500px] flex items-center justify-center bg-gray-50">
+                                    <img
+                                        src={allImages[currentImageIndex]?.url}
+                                        alt={`${gemstone.name} - ${allImages[currentImageIndex]?.label}`}
+                                        className="max-h-full max-w-full object-contain"
+                                    />
+                                    
+                                    {/* Image Label Badge */}
+                                    <div className="absolute top-4 left-4 bg-black/60 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                        {allImages[currentImageIndex]?.label}
+                                    </div>
 
-                                {/* Card Image */}
-                                {gemstone.image && (
-                                    <div className="relative group rounded-2xl overflow-hidden shadow-lg bg-gray-50 h-64 flex items-center justify-center">
-                                        <img
-                                            src={gemstone.image}
-                                            alt={`${gemstone.name} - Card View`}
-                                            className="w-full h-full object-contain p-2"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                                            <div className="absolute bottom-4 left-4 text-white">
-                                                <p className="text-sm font-semibold">Card Preview</p>
-                                            </div>
+                                    {/* Fullscreen Button */}
+                                    <button
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            openFullscreenViewer();
+                                        }}
+                                        className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-colors shadow-lg"
+                                        aria-label="View fullscreen"
+                                    >
+                                        <Expand className="w-6 h-6" />
+                                    </button>
+
+                                    {/* Navigation Arrows */}
+                                    {hasMultipleImages && (
+                                        <>
+                                            <button
+                                                onClick={goToPrevious}
+                                                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-colors shadow-lg"
+                                                aria-label="Previous image"
+                                            >
+                                                <ChevronLeft className="w-6 h-6" />
+                                            </button>
+                                            <button
+                                                onClick={goToNext}
+                                                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-colors shadow-lg"
+                                                aria-label="Next image"
+                                            >
+                                                <ChevronRight className="w-6 h-6" />
+                                            </button>
+                                        </>
+                                    )}
+                                </div>
+
+                                {/* Thumbnail Strip */}
+                                {hasMultipleImages && (
+                                    <div className="bg-gray-800 p-4">
+                                        <div className="flex justify-center space-x-2 overflow-x-auto pb-2">
+                                            {allImages.map((img, index) => (
+                                                <button
+                                                    key={index}
+                                                    onClick={() => setCurrentImageIndex(index)}
+                                                    className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-3 transition-all ${
+                                                        index === currentImageIndex
+                                                            ? 'border-blue-400 shadow-lg ring-2 ring-blue-400'
+                                                            : 'border-gray-600 hover:border-gray-400'
+                                                    }`}
+                                                >
+                                                    <img
+                                                        src={img.url}
+                                                        alt={img.label}
+                                                        className="w-full h-full object-cover"
+                                                    />
+                                                </button>
+                                            ))}
                                         </div>
                                     </div>
                                 )}
                             </div>
+                            
+                            {hasMultipleImages && (
+                                <p className="text-sm text-gray-600 text-center">
+                                    {currentImageIndex + 1} of {allImages.length} images • Use ← → arrow keys, click arrows, or thumbnails to navigate
+                                </p>
+                            )}
                         </div>
                     )}
-
 
                     {/* Detail Sections / Description */}
                     {gemstone.detailSections && gemstone.detailSections.length > 0 && (
@@ -123,8 +236,8 @@ export default function GemstoneDetailModal({ gemstone, onClose }) {
                         </div>
                     )}
 
-                    {/* If no detailed information */}
-                    {!gemstone.mainPhoto &&
+                    {/* If no images and no detailed information */}
+                    {allImages.length === 0 &&
                         (!gemstone.detailSections || gemstone.detailSections.length === 0) && (
                             <div className="text-center py-12 bg-gray-50 rounded-2xl">
                                 <div className="text-gray-400 mb-4">
@@ -153,7 +266,17 @@ export default function GemstoneDetailModal({ gemstone, onClose }) {
                         Close
                     </button>
                 </div>
+
             </div>
+
+            {/* Fullscreen Image Viewer */}
+            {showFullscreenViewer && (
+                <FullscreenImageViewer
+                    images={allImages}
+                    initialIndex={currentImageIndex}
+                    onClose={closeFullscreenViewer}
+                />
+            )}
         </div>
     );
 }

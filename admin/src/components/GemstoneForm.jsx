@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { FaSave, FaArrowLeft, FaGem, FaTag, FaStar, FaHammer, FaImage, FaBook, FaPlus, FaTrash } from 'react-icons/fa'
+import { FaSave, FaArrowLeft, FaGem, FaTag, FaStar, FaHammer, FaImage, FaBook, FaPlus, FaTrash, FaImages } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import { useData } from '../contexts/DataContext'
 import gemstoneService from '../services/gemstoneService'
@@ -19,13 +19,14 @@ export default function GemstoneForm() {
     category: 'precious',
     quality: 'affordable',
     hardness: '',
-    image: null,
-    mainPhoto: null
+    image: null,           // Main image (shown on card + detail modal)
+    galleryImages: []      // New detail images to upload
   })
 
   const [detailSections, setDetailSections] = useState([])
   const [currentImageUrl, setCurrentImageUrl] = useState('')
-  const [currentMainPhotoUrl, setCurrentMainPhotoUrl] = useState('')
+  const [existingGalleryImages, setExistingGalleryImages] = useState([]) // Existing images from database
+  const [imagesToRemove, setImagesToRemove] = useState([]) // URLs of images to remove
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [fetchLoading, setFetchLoading] = useState(isEditing)
@@ -40,10 +41,11 @@ export default function GemstoneForm() {
         quality: gemstone.quality || 'affordable',
         hardness: gemstone.hardness || '',
         image: null,
-        mainPhoto: null
+        galleryImages: []
       })
       setCurrentImageUrl(gemstone.image || '')
-      setCurrentMainPhotoUrl(gemstone.mainPhoto || '')
+      setExistingGalleryImages(gemstone.galleryImages || [])
+      setImagesToRemove([])
       setDetailSections(gemstone.detailSections || [])
     } catch (err) {
       setError('Failed to fetch gemstone')
@@ -64,16 +66,36 @@ export default function GemstoneForm() {
     const { name, value, type, checked, files } = e.target
 
     if (type === 'file' && files) {
-      setFormData(prev => ({
-        ...prev,
-        [name]: files[0] || null
-      }))
+      if (name === 'galleryImages') {
+        // For gallery images, append new files to existing ones
+        setFormData(prev => ({
+          ...prev,
+          [name]: [...prev.galleryImages, ...Array.from(files)]
+        }))
+      } else {
+        setFormData(prev => ({
+          ...prev,
+          [name]: files[0] || null
+        }))
+      }
     } else {
       setFormData(prev => ({
         ...prev,
         [name]: type === 'checkbox' ? checked : type === 'number' ? Number(value) : value
       }))
     }
+  }
+
+  const handleRemoveExistingImage = (imageUrl) => {
+    setExistingGalleryImages(prev => prev.filter(img => img !== imageUrl))
+    setImagesToRemove(prev => [...prev, imageUrl])
+  }
+
+  const handleRemoveNewImage = (index) => {
+    setFormData(prev => ({
+      ...prev,
+      galleryImages: prev.galleryImages.filter((_, i) => i !== index)
+    }))
   }
 
   const handleAddSection = () => {
@@ -110,8 +132,25 @@ export default function GemstoneForm() {
       submitData.append('quality', formData.quality)
       submitData.append('hardness', formData.hardness)
 
+      // Main image (shown on card and as first image in detail modal)
       if (formData.image) submitData.append('image', formData.image)
-      if (formData.mainPhoto) submitData.append('mainPhoto', formData.mainPhoto)
+      
+      // Detail images (additional images shown in detail modal gallery)
+      if (formData.galleryImages && formData.galleryImages.length > 0) {
+        formData.galleryImages.forEach((file) => {
+          submitData.append('galleryImages', file)
+        })
+      }
+
+      // Send existing images to keep (excluding removed ones)
+      if (existingGalleryImages.length > 0) {
+        submitData.append('existingGalleryImages', JSON.stringify(existingGalleryImages))
+      }
+
+      // Send images to remove (for cleanup if needed)
+      if (imagesToRemove.length > 0) {
+        submitData.append('imagesToRemove', JSON.stringify(imagesToRemove))
+      }
       if (detailSections.length > 0) {
         submitData.append('detailSections', JSON.stringify(detailSections))
       }
@@ -250,15 +289,22 @@ export default function GemstoneForm() {
                 />
               </div>
 
-              {/* Card Image */}
+              {/* Main Image - Shown on card AND as first image in detail modal */}
               <div className="sm:col-span-2">
                 <label htmlFor="image" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
                   <FaImage className="mr-2 text-pink-600" />
-                  Card Image *
+                  Main Image * <span className="ml-2 text-xs font-normal text-gray-500">(Displayed on card & detail view)</span>
                 </label>
+                <div className="bg-pink-50 border border-pink-200 rounded-lg p-3 mb-3">
+                  <p className="text-sm text-pink-700">
+                    <strong>📌 This image will be:</strong>
+                    <br />• Shown on the gemstone card in the collection
+                    <br />• Displayed as the main/first image when viewing details
+                  </p>
+                </div>
                 {isEditing && currentImageUrl && (
                   <div className="mt-3 mb-4 p-4 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
-                    <p className="text-sm font-medium text-gray-700 mb-3">Current Image:</p>
+                    <p className="text-sm font-medium text-gray-700 mb-3">Current Main Image:</p>
                     <img
                       src={currentImageUrl}
                       alt="Current gemstone"
@@ -273,42 +319,100 @@ export default function GemstoneForm() {
                   accept="image/*"
                   required={!isEditing}
                   onChange={handleChange}
-                  className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100"
+                  className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-pink-50 file:text-pink-700 hover:file:bg-pink-100"
                 />
                 <p className="mt-2 text-sm text-gray-600">
-                  {isEditing ? 'Upload a new image to replace the current one (optional)' : 'Select an image file for the gemstone card'}
+                  {isEditing ? 'Upload a new image to replace the current one (optional)' : 'Select the main image for this gemstone'}
                 </p>
               </div>
 
-              {/* Main Photo for Detail View */}
-              <div className="sm:col-span-2">
-                <label htmlFor="mainPhoto" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
-                  <FaImage className="mr-2 text-purple-600" />
-                  Main Detail Photo (Optional)
-                </label>
-                {isEditing && currentMainPhotoUrl && (
-                  <div className="mt-3 mb-4 p-4 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
-                    <p className="text-sm font-medium text-gray-700 mb-3">Current Main Photo:</p>
-                    <img
-                      src={currentMainPhotoUrl}
-                      alt="Current main photo"
-                      className="h-24 w-24 sm:h-32 sm:w-32 md:h-40 md:w-40 object-cover rounded-lg shadow-md border-4 border-white"
-                    />
+            </div>
+
+            {/* Detail Images - Additional images shown in detail modal */}
+            <div className="sm:col-span-2 pt-6 border-t border-gray-200">
+              <label htmlFor="galleryImages" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
+                <FaImages className="mr-2 text-green-600" />
+                Detail Images <span className="ml-2 text-xs font-normal text-gray-500">(Additional images for detail view)</span>
+              </label>
+              <div className="bg-green-50 border border-green-200 rounded-lg p-3 mb-3">
+                <p className="text-sm text-green-700">
+                  <strong>📸 These images will:</strong>
+                  <br />• Appear in the image gallery when users click "View Details"
+                  <br />• Be shown alongside the main image in a carousel/gallery
+                  <br />• Allow users to see multiple angles and details of the gemstone
+                </p>
+              </div>
+              {isEditing && existingGalleryImages.length > 0 && (
+                <div className="mt-3 mb-4 p-4 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
+                  <p className="text-sm font-medium text-gray-700 mb-3">Current Detail Images ({existingGalleryImages.length}):</p>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    {existingGalleryImages.map((imageUrl, index) => (
+                      <div key={index} className="relative group">
+                        <img
+                          src={imageUrl}
+                          alt={`Detail image ${index + 1}`}
+                          className="h-20 w-20 object-cover rounded-lg shadow-md border-4 border-white"
+                        />
+                        <span className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-xs text-center py-1 rounded-b-lg">
+                          #{index + 1}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveExistingImage(imageUrl)}
+                          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
+                          title="Remove this image"
+                        >
+                          <FaTrash className="w-3 h-3" />
+                        </button>
+                      </div>
+                    ))}
                   </div>
-                )}
-                <input
-                  id="mainPhoto"
-                  name="mainPhoto"
-                  type="file"
-                  accept="image/*"
-                  onChange={handleChange}
-                  className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100"
-                />
-                <p className="mt-2 text-sm text-gray-600">
-                  High-quality photo for detail view
-                </p>
-              </div>
+                  <p className="text-xs text-gray-500 mt-2">
+                    Click the X button on images to remove them. New images will be added to the existing ones.
+                  </p>
+                </div>
+              )}
 
+              {/* Show newly selected images */}
+              {formData.galleryImages.length > 0 && (
+                <div className="mt-3 mb-4 p-4 bg-blue-50 rounded-lg border-2 border-dashed border-blue-300">
+                  <p className="text-sm font-medium text-blue-700 mb-3">New Images to Add ({formData.galleryImages.length}):</p>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    {formData.galleryImages.map((file, index) => (
+                      <div key={index} className="relative group">
+                        <img
+                          src={URL.createObjectURL(file)}
+                          alt={`New image ${index + 1}`}
+                          className="h-20 w-20 object-cover rounded-lg shadow-md border-4 border-white"
+                        />
+                        <span className="absolute bottom-0 left-0 right-0 bg-blue-600 text-white text-xs text-center py-1 rounded-b-lg">
+                          New #{index + 1}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveNewImage(index)}
+                          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
+                          title="Remove this image"
+                        >
+                          <FaTrash className="w-3 h-3" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              <input
+                id="galleryImages"
+                name="galleryImages"
+                type="file"
+                accept="image/*"
+                multiple
+                onChange={handleChange}
+                className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100"
+              />
+              <p className="mt-2 text-sm text-gray-600">
+                Select multiple images to add to the detail view gallery. New images will be added to existing ones. Hold Ctrl/Cmd to select multiple files.
+              </p>
             </div>
 
             {/* Detail Sections */}

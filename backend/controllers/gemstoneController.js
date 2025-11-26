@@ -9,7 +9,8 @@ const upload = multer({ storage });
 // Export upload middleware for multiple files
 export const uploadFields = upload.fields([
   { name: 'image', maxCount: 1 },
-  { name: 'mainPhoto', maxCount: 1 }
+  { name: 'mainPhoto', maxCount: 1 },
+  { name: 'galleryImages', maxCount: 10 }
 ]);
 
 // Export single upload for backwards compatibility
@@ -57,6 +58,7 @@ export const createGemstone = async function (req, res) {
   try {
     let imageUrl = '';
     let mainPhotoUrl = '';
+    let galleryImageUrls = [];
 
     // Handle multiple file uploads
     if (req.files) {
@@ -65,6 +67,11 @@ export const createGemstone = async function (req, res) {
       }
       if (req.files.mainPhoto && req.files.mainPhoto[0]) {
         mainPhotoUrl = await uploadToCloudinary(req.files.mainPhoto[0].buffer);
+      }
+      if (req.files.galleryImages && req.files.galleryImages.length > 0) {
+        galleryImageUrls = await Promise.all(
+          req.files.galleryImages.map(file => uploadToCloudinary(file.buffer))
+        );
       }
     }
 
@@ -84,6 +91,7 @@ export const createGemstone = async function (req, res) {
       ...req.body,
       image: imageUrl,
       mainPhoto: mainPhotoUrl || undefined,
+      galleryImages: galleryImageUrls.length > 0 ? galleryImageUrls : undefined,
       detailSections: detailSections.length > 0 ? detailSections : undefined
     };
 
@@ -109,6 +117,28 @@ export const updateGemstone = async function (req, res) {
       if (req.files.mainPhoto && req.files.mainPhoto[0]) {
         const mainPhotoUrl = await uploadToCloudinary(req.files.mainPhoto[0].buffer);
         updateData.mainPhoto = mainPhotoUrl;
+      }
+      if (req.files.galleryImages && req.files.galleryImages.length > 0) {
+        // Upload new gallery images
+        const newGalleryImageUrls = await Promise.all(
+          req.files.galleryImages.map(file => uploadToCloudinary(file.buffer))
+        );
+
+        // Get existing images to keep
+        let existingGalleryImages = [];
+        if (req.body.existingGalleryImages) {
+          try {
+            existingGalleryImages = typeof req.body.existingGalleryImages === 'string'
+              ? JSON.parse(req.body.existingGalleryImages)
+              : req.body.existingGalleryImages;
+          } catch (e) {
+            console.error('Error parsing existingGalleryImages:', e);
+            existingGalleryImages = [];
+          }
+        }
+
+        // Combine existing images with new ones
+        updateData.galleryImages = [...existingGalleryImages, ...newGalleryImageUrls];
       }
     }
 

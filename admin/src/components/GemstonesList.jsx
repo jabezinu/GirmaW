@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa'
+import { FaEdit, FaTrash, FaPlus, FaImages } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import { useModal } from '../contexts/ModalContext'
 import { useData } from '../contexts/DataContext'
@@ -12,7 +12,7 @@ export default function GemstonesList() {
   const { showConfirm } = useModal()
 
   useEffect(() => {
-    fetchGemstones().catch(err => {
+    fetchGemstones().catch(() => {
       setError('Failed to fetch gemstones')
       toast.error('Failed to fetch gemstones')
     })
@@ -35,7 +35,7 @@ export default function GemstonesList() {
 
   const handleRetry = () => {
     setError(null)
-    fetchGemstones(true).catch(err => {
+    fetchGemstones(true).catch(() => {
       setError('Failed to fetch gemstones')
       toast.error('Failed to fetch gemstones')
     })
@@ -132,6 +132,17 @@ export default function GemstonesList() {
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-500">Hardness</span>
                   <span className="text-sm font-medium text-gray-900">{gemstone.hardness}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-500">Detail Images</span>
+                  <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
+                    gemstone.galleryImages && gemstone.galleryImages.length > 0
+                      ? 'bg-green-100 text-green-800'
+                      : 'bg-gray-100 text-gray-500'
+                  }`}>
+                    <FaImages className="mr-1 h-3 w-3" />
+                    {gemstone.galleryImages?.length || 0}
+                  </span>
                 </div>
               </div>
 

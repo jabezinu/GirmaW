@@ -3,6 +3,7 @@ import { Search, Filter, X } from 'lucide-react';
 import { useData } from '../contexts/DataContext';
 import toast from 'react-hot-toast';
 import GemstoneDetailModal from '../components/GemstoneDetailModal';
+import FullscreenImageViewer from '../components/FullscreenImageViewer';
 
 export default function GemstonesPage() {
   const { gemstones, loading: dataLoading, errors, refreshGemstones } = useData();
@@ -12,6 +13,9 @@ export default function GemstonesPage() {
   const [showFilters, setShowFilters] = useState(false);
   const [selectedGemstone, setSelectedGemstone] = useState(null);
   const [showDetailModal, setShowDetailModal] = useState(false);
+  const [fullscreenImages, setFullscreenImages] = useState([]);
+  const [fullscreenInitialIndex, setFullscreenInitialIndex] = useState(0);
+  const [showFullscreenViewer, setShowFullscreenViewer] = useState(false);
 
   const loading = dataLoading.gemstones;
   const error = errors.gemstones;
@@ -110,6 +114,41 @@ export default function GemstonesPage() {
     setSelectedGemstone(null);
   };
 
+  const openFullscreenViewer = (gemstone, startIndex = 0) => {
+    // Build the complete image gallery: main image first, then detail images
+    const allImages = [];
+
+    // Add main image (the same one shown on the card)
+    if (gemstone.image) {
+      allImages.push({
+        url: gemstone.image,
+        alt: `${gemstone.name} - Main Image`,
+        label: 'Main Image'
+      });
+    }
+
+    // Add detail images (galleryImages uploaded by admin)
+    if (gemstone.galleryImages && gemstone.galleryImages.length > 0) {
+      gemstone.galleryImages.forEach((url, index) => {
+        allImages.push({
+          url,
+          alt: `${gemstone.name} - Detail Image ${index + 1}`,
+          label: `Detail Image ${index + 1}`
+        });
+      });
+    }
+
+    setFullscreenImages(allImages);
+    setFullscreenInitialIndex(startIndex);
+    setShowFullscreenViewer(true);
+  };
+
+  const closeFullscreenViewer = () => {
+    setShowFullscreenViewer(false);
+    setFullscreenImages([]);
+    setFullscreenInitialIndex(0);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 pt-20">
 
@@ -202,7 +241,8 @@ export default function GemstonesPage() {
                       <img
                         src={gem.image}
                         alt={gem.name}
-                        className="w-full h-full object-contain p-2 group-hover:scale-110 transition duration-500"
+                        className="w-full h-full object-contain p-2 group-hover:scale-110 transition duration-500 cursor-pointer"
+                        onClick={() => openFullscreenViewer(gem, 0)}
                         onError={(e) => {
                           // Fallback to a placeholder if image not found
                           e.target.src = `https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&q=80`;
@@ -217,6 +257,11 @@ export default function GemstonesPage() {
                         >
                           {t.viewDetails}
                         </button>
+                      </div>
+
+                      {/* Click to enlarge hint */}
+                      <div className="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                        Click to enlarge
                       </div>
                     </div>
 
@@ -266,6 +311,15 @@ export default function GemstonesPage() {
         <GemstoneDetailModal
           gemstone={selectedGemstone}
           onClose={closeDetailModal}
+        />
+      )}
+
+      {/* Fullscreen Image Viewer */}
+      {showFullscreenViewer && (
+        <FullscreenImageViewer
+          images={fullscreenImages}
+          initialIndex={fullscreenInitialIndex}
+          onClose={closeFullscreenViewer}
         />
       )}
 
